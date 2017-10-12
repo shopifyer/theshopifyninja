@@ -1,0 +1,90 @@
+/*Color Variables*/
+/*Color Variables*/
+body {
+  font-size: 16px;
+}
+
+button:focus, button:hover, button:active {
+  outline: 0;
+}
+
+.text-shadow {
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+header {
+  background-color: #E31E25;
+}
+header a {
+  font-size: 14px;
+}
+header .navbar-dark .navbar-toggler {
+  border: 0;
+  color: #fff;
+}
+
+/*Banner*/
+.banner .carousel-caption {
+  top: 15%;
+}
+.banner .carousel-caption .card {
+  position: absolute;
+  transition: all 0.6s ease-in-out;
+  top: -60px;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.4);
+  border: 0;
+}
+.banner .carousel-caption .card:nth-child(1) {
+  left: 40px;
+  z-index: 4;
+  transform: scale(0.9);
+}
+.banner .carousel-caption .card:nth-child(2) {
+  left: 80px;
+  z-index: 3;
+  transform: scale(0.8);
+}
+.banner .carousel-caption .card:nth-child(3) {
+  left: 120px;
+  z-index: 2;
+  transform: scale(0.7);
+}
+.banner .carousel-caption .card:hover {
+  margin-top: -3rem;
+}
+
+/*//Banner*/
+/*tours*/
+.tours .card {
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.tours .card:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.4);
+}
+.tours .card h5 {
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+/*//tours*/
+.footer h5:after {
+  content: " ";
+  display: block;
+  height: 3px;
+  width: 40px;
+  background-color: #E31E25;
+  margin-top: 15px;
+}
+.footer nav a {
+  color: #4b4c4d;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .navbar-brand img {
+    width: 200px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
