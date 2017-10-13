@@ -14,3 +14,35 @@
         }
     }
 }
+
+
+/*product page*/
+.product-header{
+    height: 50px; 
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    border-bottom: 1px solid #ececec;
+        .h5,h5{
+        margin: 0;
+    }
+}
+.product-detail{
+    .nav-tabs {
+        a {
+         color: #212529;
+         height: 50px;
+         border: 0;
+         line-height: 34px;
+         
+         
+         &.active{
+             border: 0;
+             border-bottom: 1px solid #ececec;
+             color:  $theme_color;
+         }
+             
+        }
+    }
+}
