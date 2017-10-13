@@ -51,6 +51,7 @@ header{
     }
 }
 /*//tours*/
+
 .footer {
     h5{
         &:after{
@@ -69,6 +70,7 @@ header{
         }
     }   
 }
+
 @media(max-width: 767px){
     .navbar-brand img{
         width: 200px;
