@@ -1,7 +1,7 @@
 /*Color Variables*/
 /*Color Variables*/
 body {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 button:focus, button:hover, button:active {
@@ -10,6 +10,19 @@ button:focus, button:hover, button:active {
 
 .text-shadow {
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.bg-danger {
+  background-color: #E31E25;
+}
+
+.btn-danger {
+  background-color: #E31E25;
+  border-color: #E31E25;
+}
+
+.text-danger {
+  color: #E31E25 !important;
 }
 
 header {
@@ -55,16 +68,47 @@ header .navbar-dark .navbar-toggler {
 
 /*//Banner*/
 /*tours*/
-.tours .card {
+.tours-card {
   margin-bottom: 10px;
   transition: all 0.3s ease-in-out;
 }
-.tours .card:hover {
+.tours-card:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.4);
 }
-.tours .card h5 {
+.tours-card h5 {
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+.tours-card .discount-offer {
+  background-color: #E31E25;
+  color: #fff;
+  padding: 0 20px;
+  position: absolute;
+  top: 10px;
+  left: -9px;
+  line-height: 30px;
+  height: 30px;
+}
+.tours-card .discount-offer:after {
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 15px;
+  border-color: #E31E25;
+  border-right-color: transparent;
+  position: absolute;
+  right: -15px;
+  top: 0;
+}
+.tours-card .discount-offer:before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -10px;
+  border-style: solid;
+  border-color: #8a1115 transparent transparent transparent;
+  left: 0;
+  border-width: 10px 0 0 9px;
 }
 
 /*//tours*/
@@ -85,6 +129,18 @@ header .navbar-dark .navbar-toggler {
   .navbar-brand img {
     width: 200px;
   }
+}
+.checkout {
+  border-bottom: 1px solid #ddd;
+}
+
+.shopping-cart table thead th {
+  padding-top: 0;
+}
+.shopping-cart table td, .shopping-cart table th {
+  font-size: 14px;
+  vertical-align: middle;
+  border: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
