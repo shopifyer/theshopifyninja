@@ -46,3 +46,19 @@
         }
     }
 }
+/*categories*/
+.category-card { 
+    overflow: hidden; 
+    cursor: pointer ;
+    border: 0;
+}
+.category-nav .nav-link { 
+    padding-left: 0;
+    color: $theme_color;
+    width: 100%;
+    &:hover{
+        color: #777;
+    }
+}
+
+/*categories*/

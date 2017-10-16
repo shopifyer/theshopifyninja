@@ -168,4 +168,22 @@ header .navbar-dark .navbar-toggler {
   color: #E31E25;
 }
 
+/*categories*/
+.category-card {
+  overflow: hidden;
+  cursor: pointer;
+  border: 0;
+}
+
+.category-nav .nav-link {
+  padding-left: 0;
+  color: #E31E25;
+  width: 100%;
+}
+.category-nav .nav-link:hover {
+  color: #777;
+}
+
+/*categories*/
+
 /*# sourceMappingURL=style.css.map */
