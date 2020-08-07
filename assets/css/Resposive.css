@@ -1,0 +1,144 @@
+@media screen and (max-width: 1200px) {
+    .container {
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 50px;
+        margin: 0 auto;
+    }
+    .section {
+        padding: 100px 0;
+    }
+    .section-sm {
+        padding: 60px 0;
+    }
+    h1 {
+        font-size: 50px;
+        font-weight: 800;
+    }
+    .banner-head .banner-discription {
+        margin: 20px 0;
+        max-width: 495px;
+    }
+    .video {
+        top: 15px;
+        width: 500px;
+        height: 290px;
+        right: 40px;
+    }
+    .laptop-video::after {
+        height: 650px;
+        width: 650px;
+        left: -90px;
+        top: 0;
+    }
+    .brand-title h2 {
+        font-size: 46px;
+    }
+    .checklist-heading,
+    .checklist-heading span,
+    .bg-h2 {
+        font-size: 46px;
+        font-weight: 600;
+    }
+    .check-info h3 {
+        margin-bottom: 25px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .checklist-left-side {
+        padding-right: 50px;
+    }
+    .checklist-discription,
+    .discription {
+        font-size: 18px;
+    }
+    .Scalability-left-side {
+        padding-left: 0;
+    }
+    @keyframes third {
+        to {
+            height: 350px;
+            width: 350px;
+            opacity: 1;
+        }
+    }
+    @keyframes second {
+        to {
+            height: 250px;
+            width: 250px;
+            opacity: 1;
+        }
+    }
+    @keyframes first {
+        to {
+            height: 150px;
+            width: 150px;
+            opacity: 1;
+        }
+    }
+    .mobile-section-left-side {
+        padding-right: 50px;
+    }
+    .client-name {
+        margin-bottom: 5px;
+    }
+    .inverted-comma {
+        height: 45px;
+        width: 45px;
+    }
+    .ecommerce {
+        align-items: center;
+    }
+    .ecommerce-left-side {
+        padding-right: 70px;
+    }
+    .icon {
+        height: 45px;
+        width: 45px;
+    }
+    .social-icon {
+        grid-template-columns: 80px 80px 80px;
+        grid-template-rows: 80px 80px 80px;
+        column-gap: 20px;
+    }
+    .card {
+        width: 400px;
+        padding: 25px;
+    }
+    .cards {
+        right: 200px;
+        top: 180px;
+    }
+    .svg-blue-line {
+        position: relative;
+        right: 145px;
+    }
+    .rihgt-side-Ecommerce-automation {
+        padding: 100px 0 100px 70px;
+        width: 60%;
+    }
+    .product {
+        margin-left: 100px;
+    }
+    .product-cols {
+        width: 33%;
+        margin: 45px 0 0 0;
+    }
+    .Reliability-head {
+        margin: 0 0 0 100px;
+    }
+    .product-discription {
+        width: 72%;
+    }
+    .product-title {
+        margin: 15px 0 16px;
+    }
+    .bussines-main-heading {
+        font-size: 46px;
+        font-weight: 600;
+        padding-bottom: 50px;
+    }
+    .client-heading {
+        font-size: 130px;
+    }
+}

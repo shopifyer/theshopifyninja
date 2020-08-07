@@ -310,8 +310,8 @@ h1 {
     padding-top: 40px;
 }
 
-.brand-title {
-    font-size: 40px;
+.brand-title h2 {
+    font-size: 56px;
     font-weight: 700;
     text-align: center;
 }
@@ -507,8 +507,8 @@ h1 {
 .inverted-comma {
     fill: #000;
     stroke: #000;
-    height: 57px;
-    width: 57px;
+    height: 55px;
+    width: 55px;
     margin-top: 10px;
     stroke-width: 10px;
     transform: rotate(180deg);
@@ -555,15 +555,15 @@ h1 {
 
 .social-icon {
     display: grid;
-    grid-template-columns: 118px 118px 118px;
-    grid-template-rows: 118px 118px 118px;
+    grid-template-columns: 120px 120px 120px;
+    grid-template-rows: 120px 120px 120px;
     row-gap: 40px;
     column-gap: 30px;
 }
 
 .icon {
-    height: 58px;
-    width: 58px;
+    height: 55px;
+    width: 55px;
 }
 
 
@@ -607,7 +607,7 @@ h1 {
 
 .cards {
     position: absolute;
-    top: 175px;
+    top: 170px;
     list-style: none;
 }
 
@@ -747,7 +747,6 @@ h1 {
     margin: 24px 0 16px;
     font-weight: 600;
     font-size: 20px;
-    margin-right: 100px;
 }
 
 .product-cols {
@@ -784,16 +783,14 @@ h1 {
 }
 
 .client-heading {
-    width: 450px;
     font-size: 200px;
     line-height: 1;
     font-weight: 100;
-    display: inline-block;
     font-family: 'Fjalla One', sans-serif;
 }
 
 .client-info {
-    margin: 16px 0 24px;
+    margin-top: 16px;
     font-weight: 800;
     line-height: 1.5;
 }
