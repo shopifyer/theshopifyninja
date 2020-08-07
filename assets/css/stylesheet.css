@@ -80,6 +80,10 @@ body {
     margin-bottom: 16px;
 }
 
+.txt-dec-none {
+    text-decoration: none;
+}
+
 
 /*---------------common classes end---------------*/
 
@@ -134,6 +138,11 @@ body {
     align-items: center;
 }
 
+.navbar li a {
+    cursor: pointer;
+    overflow: hidden;
+}
+
 .navbar li {
     padding: 4px 8px;
     font-weight: 700;
@@ -147,9 +156,50 @@ body {
     font-size: 1rem;
 }
 
+.nav-items-hover a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
 .nav-item {
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.nav-items-hover {
+    color: #000;
+    padding: 10px 20px!important;
+}
+
+.nav-items-hover a {
+    opacity: 0;
+    transition: all 1s ease 0s;
+}
+
+.nav-items-hover:hover {
+    background: #dbdcdc;
+}
+
+.navbar-hover {
+    list-style: none;
+    position: absolute;
+    top: 45px;
+    min-width: 240px;
+    background-color: #fff;
+    max-height: 0;
+    box-shadow: 0 6px 11px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease 0s;
+    overflow: hidden;
+}
+
+.nav-item:hover .navbar-hover {
+    max-height: 1000px;
+}
+
+.nav-item:hover .nav-items-hover a {
+    opacity: 1;
 }
 
 .svg-icon {
@@ -157,9 +207,15 @@ body {
     height: 10px;
     width: 10px;
     stroke: #fff;
-    stroke-width: 70px;
+    stroke-width: 50px;
     transform: rotate(90deg);
     fill: #ffffff;
+}
+
+.nav-item:hover .svg-icon {
+    position: relative;
+    top: 5px;
+    transition: all 0.8s;
 }
 
 
@@ -724,7 +780,7 @@ h1 {
 .bussines-main-heading {
     font-size: 56px;
     font-weight: 800;
-    padding-bottom: 24px;
+    padding-bottom: 70px;
 }
 
 .client-heading {
@@ -748,15 +804,24 @@ h1 {
 
 /* footer start */
 
-.footer {
-    padding: 100px;
-}
-
 .footer-head {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    border-bottom: 2px solid #8d9091;
+    justify-content: space-between;
+    padding-top: 24px;
+}
+
+.footer-rows {
+    display: flex;
+    list-style: none;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.social-link svg:hover {
+    fill: #fff;
 }
 
 .other-page-link {
@@ -768,7 +833,7 @@ h1 {
     text-decoration: none;
     color: #8d9091;
     font-weight: 700;
-    padding-left: 10px;
+    padding-right: 15px;
 }
 
 .footer-icon {
@@ -783,6 +848,59 @@ h1 {
 
 .social-link a {
     text-decoration: none;
+    margin-left: 15px;
+}
+
+.footer-nav {
+    list-style: none;
+}
+
+.footer-item a,
+.footer-bottom a {
+    text-decoration: none;
+    color: #8d9091;
+}
+
+.menu-title {
+    margin: 24PX 0;
+}
+
+.footer-item {
+    padding-bottom: 16PX;
+}
+
+.footer-cols {
+    padding-right: 16PX;
+    flex-basis: 17%;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 48px 0;
+}
+
+.terms-conditions a {
+    margin-left: 15px;
+}
+
+.first-hr {
+    margin: 24px 0 48px;
+    border: none;
+    height: 1px;
+    background-color: #3d3f40;
+}
+
+.second-hr {
+    margin-top: 48px;
+    border: none;
+    height: 1px;
+    background-color: #3d3f40;
+}
+
+.footer-bottom .logo a {
+    color: #fff;
 }
 
 
