@@ -142,3 +142,60 @@
         font-size: 130px;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding: 0 15px;
+    }
+    .section {
+        padding: 80px 0;
+    }
+    .header {
+        padding: 15px 0;
+    }
+    .nav {
+        display: none;
+    }
+    .video-wrapper {
+        display: none;
+    }
+    .banner {
+        background-image: none;
+    }
+    .banner-head {
+        min-width: 240px;
+    }
+    h1 {
+        font-size: 40px;
+        font-weight: 900;
+    }
+    .banner-discription {
+        font-size: 16px;
+        margin: 24px 0;
+        line-height: 1.5;
+    }
+    .brand-title h2 {
+        font-size: 32px;
+        font-weight: 800;
+        text-align: left;
+    }
+    .brand-img {
+        flex-wrap: wrap;
+        margin: 0 auto;
+    }
+    .svg-logo {
+        width: 50%;
+        height: 150px;
+        width: 100px;
+    }
+    .title {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .checklist-left-side {
+        padding-right: 0;
+    }
+    .bg-h2 {
+        font-size: 32px;
+    }
+}

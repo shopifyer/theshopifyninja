@@ -728,6 +728,48 @@ h1 {
 }
 
 
+/* ==========animation========== */
+
+.svg-blue-line {
+    max-height: 0;
+    animation: svg-line 1s linear 0s forwards;
+}
+
+@keyframes svg-line {
+    100% {
+        max-height: 600px;
+    }
+}
+
+.card-one,
+.card-second,
+.card-third {
+    opacity: 0;
+    animation: card 1s linear 0s forwards;
+}
+
+.card-one {
+    animation-delay: 1s;
+}
+
+.card-second {
+    animation-delay: 1.5s;
+}
+
+.card-third {
+    animation-delay: 2s;
+}
+
+@keyframes card {
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* ==========animation========== */
+
+
 /* Ecommerce automation information section end */
 
 
