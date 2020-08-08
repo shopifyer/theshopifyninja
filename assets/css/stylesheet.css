@@ -339,6 +339,7 @@ h1 {
 .checklist {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .checklist-left-side {
