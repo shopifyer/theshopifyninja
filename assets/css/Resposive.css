@@ -5,56 +5,69 @@
         padding: 0 50px;
         margin: 0 auto;
     }
+
     .section {
         padding: 100px 0;
     }
+
     .section-sm {
         padding: 60px 0;
     }
+
     h1 {
         font-size: 50px;
         font-weight: 800;
     }
+
     .banner-head .banner-discription {
         margin: 20px 0;
         max-width: 495px;
     }
+
     .video {
         top: 15px;
         width: 500px;
         height: 290px;
         right: 40px;
     }
+
     .laptop-video::after {
         height: 650px;
         width: 650px;
         left: -90px;
         top: 0;
     }
+
     .brand-title h2 {
         font-size: 46px;
     }
+
     .checklist-heading,
     .checklist-heading span,
     .bg-h2 {
         font-size: 46px;
         font-weight: 600;
     }
+
     .check-info h3 {
         margin-bottom: 25px;
         font-size: 18px;
         font-weight: 600;
     }
+
     .checklist-left-side {
         padding-right: 50px;
     }
+
     .checklist-discription,
     .discription {
         font-size: 18px;
     }
+
     .Scalability-left-side {
         padding-left: 0;
     }
+
     @keyframes third {
         to {
             height: 350px;
@@ -62,6 +75,7 @@
             opacity: 1;
         }
     }
+
     @keyframes second {
         to {
             height: 250px;
@@ -69,6 +83,7 @@
             opacity: 1;
         }
     }
+
     @keyframes first {
         to {
             height: 150px;
@@ -76,68 +91,86 @@
             opacity: 1;
         }
     }
+
     .mobile-section-left-side {
         padding-right: 50px;
     }
+
     .client-name {
         margin-bottom: 5px;
     }
+
     .inverted-comma {
         height: 45px;
         width: 45px;
     }
+
     .ecommerce {
         align-items: center;
     }
+
     .ecommerce-left-side {
         padding-right: 70px;
     }
+
     .icon {
         height: 45px;
         width: 45px;
     }
+
     .social-icon {
         grid-template-columns: 80px 80px 80px;
         grid-template-rows: 80px 80px 80px;
         column-gap: 20px;
     }
+
     .card {
         width: 400px;
         padding: 25px;
     }
+
     .cards {
         right: 200px;
         top: 180px;
     }
+
     .svg-blue-line {
         position: relative;
         right: 145px;
     }
+
     .rihgt-side-Ecommerce-automation {
         padding: 100px 0 100px 70px;
         width: 60%;
     }
+
     .product {
         margin-left: 100px;
     }
+
     .product-cols {
         width: 33%;
         margin: 45px 0 0 0;
     }
+
     .Reliability-head {
         margin: 0 0 0 100px;
     }
+
     .product-discription {
         width: 72%;
     }
+
     .product-title {
         margin: 15px 0 16px;
     }
+
     .bussines-main-heading {
         font-size: 46px;
         font-weight: 600;
         padding-bottom: 50px;
     }
+
     .client-heading {
         font-size: 130px;
     }
@@ -147,101 +180,157 @@
     .container {
         padding: 0 15px;
     }
+
     .section {
         padding: 80px 0;
     }
+
     .section-sm {
         padding: 50px 0;
     }
+
     .header {
         padding: 15px 0;
     }
+
     .nav {
         display: none;
     }
+
     .video-wrapper {
         display: none;
     }
+
     .banner {
         background-image: none;
     }
+
     .banner-head {
         min-width: 240px;
     }
+
     h1 {
         font-size: 40px;
         font-weight: 900;
     }
+
     .banner-discription {
         font-size: 16px;
         margin: 24px 0;
         line-height: 1.5;
     }
+
     .brand-title h2 {
         font-size: 30px;
         font-weight: 800;
         text-align: left;
     }
+
     .brand-img {
         display: grid;
-        grid-template-columns: 1fr 1fr ;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: 100px 100px;
         margin-left: 30px;
     }
+
     .svg-logo {
         width: 120px;
         height: 150px;
         width: 100px;
-     
+
     }
+
     .title {
         font-size: 16px;
         font-weight: 700;
     }
+
     .checklist-left-side {
         padding-right: 0;
     }
+
     .bg-h2 {
         font-size: 30px;
     }
- 
+
     .checklist-left-side {
         width: 100%;
         margin-bottom: 25px;
     }
+
     .checklist-right-side {
         width: 100%;
     }
-    .Scalability{
+
+    .Scalability {
         flex-wrap: wrap;
     }
+
     .Scalability-left-side {
         width: 75%;
         order: 2;
         margin-top: 400px;
     }
+
     .Scalability-right-side {
         width: 100%;
         margin-bottom: 25px;
     }
+
     .mobile-section-right-side {
         display: none;
     }
+
     .mobile-section-left-side {
         width: 100%;
         padding: 80px 0;
     }
+
     .mobile-heading {
         line-height: 1.3;
     }
+
     .ecommerce-left-side {
         width: 110%;
         padding-right: 0;
     }
-    .ecommerce-right-side{
+
+    .ecommerce-right-side {
         width: 90%;
     }
-    .ecommerce-left-side br{
+
+    .ecommerce-left-side br {
         display: none;
     }
+
+    @keyframes third {
+        to {
+            height: 300px;
+            width: 300px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes second {
+        to {
+            height: 200px;
+            width: 200px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes first {
+        to {
+            height: 100px;
+            width: 100px;
+            opacity: 1;
+        }
+    }
+
+    .toggle-icon {
+        display: block;
+    }
+
+
+
 }
