@@ -249,7 +249,7 @@ a {
 .toggle-first,
 .toggle-second,
 .toggle-third {
-    transition: all 1s;
+    transition: all 0.5s;
 }
 
 .toggle-icon:active .toggle-first {
@@ -627,7 +627,7 @@ h1 {
 .expand-title {
     font-size: 40px;
     font-weight: 800;
-    margin-bottom: 48px;
+    margin-bottom: 50px;
     width: 65%;
 }
 
@@ -806,6 +806,7 @@ h1 {
 
 .card-second {
     animation-delay: 1.5s;
+    margin: 15px 0;
 }
 
 .card-third {
@@ -854,6 +855,7 @@ h1 {
     stroke-width: 5px;
 }
 
+
 .product-discription {
     line-height: 1.5;
     width: 65%;
@@ -899,7 +901,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 24px;
+    padding-top: 25px;
 }
 
 .footer-rows {
@@ -977,14 +979,14 @@ h1 {
 }
 
 .first-hr {
-    margin: 24px 0 48px;
+    margin: 25px 0 50px;
     border: none;
     height: 1px;
     background-color: #3d3f40;
 }
 
 .second-hr {
-    margin-top: 48px;
+    margin-top: 50px;
     border: none;
     height: 1px;
     background-color: #3d3f40;

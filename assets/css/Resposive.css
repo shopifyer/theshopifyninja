@@ -206,7 +206,7 @@
     }
 
     .banner-head {
-        min-width: 240px;
+        min-width: 300px;
     }
 
     h1 {
@@ -331,6 +331,174 @@
         display: block;
     }
 
+    .ecommerce {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
+    .ecommerce-right-side {
+        margin: 50px 0 0 30px;
+    }
 
+    .expand-title {
+        width: 100%;
+    }
+
+    .Ecommerce-automation {
+        flex-wrap: wrap;
+        padding: 80px 0;
+    }
+
+    .left-side-Ecommerce-automation {
+        order: 2;
+        width: 100%;
+        position: relative;
+        z-index: 10;
+        margin-top: 50px;
+        right: 0;
+        padding: 0;
+    }
+
+    .cards {
+        position: absolute;
+        top: 25px;
+    }
+
+    .rihgt-side-Ecommerce-automation {
+        width: 100%;
+        background-color: transparent;
+        padding: 0;
+
+    }
+
+    .cards {
+        right: 25px;
+    }
+
+    .card {
+        width: 300px;
+        padding: 10px;
+    }
+
+    .svg-blue-line {
+        right: 70px;
+    }
+
+    @keyframes svg-line {
+        100% {
+            max-height: 400px;
+        }
+    }
+
+    .automation::after {
+        display: none;
+    }
+
+    .Reliability-head {
+        margin: 0;
+    }
+
+    .product {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .product-cols {
+        width: 100%;
+        margin: 45px 0 0 0;
+    }
+
+    .product-discription {
+        width: 90%;
+        font-size: 18px;
+
+    }
+
+    .product-discription a {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    .product-cols-second {
+        width: 85%;
+    }
+
+    .clients-sale {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .client-info br {
+        display: none;
+    }
+
+    .client-info {
+        margin: 15px 0 50px;
+    }
+
+    .client-heading {
+        font-size: 110px;
+    }
+
+    .expand-title {
+        font-size: 27px;
+        margin-bottom: 25px;
+    }
+
+    .footer-head {
+        display: block;
+        padding-top: 24px;
+    }
+
+    .other-page-link {
+        flex-basis: 25%;
+        flex-wrap: wrap;
+    }
+
+    .social-link {
+        margin-top: 10px;
+    }
+
+    .footer-rows {
+        flex-wrap: wrap;
+    }
+
+    .social-link a {
+        margin: 0 10px 0 0;
+    }
+
+    .footer-cols {
+        /* padding-right: 22PX; */
+        flex-basis: 50%;
+    }
+
+    .footer-cols-fifth {
+        order: 2;
+    }
+
+    .footer-cols-second {
+        order: 6;
+    }
+
+    .terms-conditions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-bottom {
+        display: inline-block;
+        line-height: 2;
+    }
+
+    .terms-conditions a {
+        margin-left: 0;
+    }
+
+    .first-hr {
+        margin: 20px 0 30px;
+    }
+
+    .second-hr {
+        margin-top: 35px;
+    }
 }
