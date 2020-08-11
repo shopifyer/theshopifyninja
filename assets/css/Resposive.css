@@ -2,7 +2,7 @@
     .container {
         max-width: 970px;
         width: 100%;
-        padding: 0 50px;
+        padding: 0 15px;
         margin: 0 auto;
     }
 
@@ -15,26 +15,25 @@
     }
 
     h1 {
-        font-size: 50px;
+        font-size: 45px;
         font-weight: 800;
     }
 
     .banner-head .banner-discription {
         margin: 20px 0;
-        max-width: 495px;
+        max-width: 385px;
     }
 
     .video {
-        top: 15px;
-        width: 500px;
-        height: 290px;
-        right: 40px;
+        top: 0;
+        width: 475px;
+        height: 265px;
+        right: 5px;
     }
 
     .laptop-video::after {
-        height: 650px;
-        width: 650px;
-        left: -90px;
+        height: 605px;
+        width: 600px;
         top: 0;
     }
 
@@ -65,7 +64,7 @@
     }
 
     .Scalability-left-side {
-        padding-left: 0;
+        padding-left: 45px;
     }
 
     @keyframes third {
@@ -125,16 +124,16 @@
     }
 
     .card {
-        width: 400px;
-        padding: 25px;
+        width: 350px;
+        padding: 20px;
     }
 
     .cards {
-        top: 25px;
+        top: 45px;
     }
 
     .rihgt-side-Ecommerce-automation {
-        padding: 100px 0 100px 50px;
+        padding: 100px 0 100px 40px;
         width: 60%;
     }
 
@@ -156,7 +155,7 @@
     }
 
     .product-discription {
-        width: 72%;
+        width: 85%;
     }
 
     .product-title {

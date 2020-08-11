@@ -869,6 +869,10 @@ ul.cards li {
     width: 65%;
 }
 
+.product-discription a {
+    text-decoration: underline;
+    color: blue;
+}
 
 /* 7 Reliability and support information section end */
 
