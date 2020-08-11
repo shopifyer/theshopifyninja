@@ -23,7 +23,7 @@ body {
 }
 
 .section {
-    padding: 144px 0;
+    padding: 145px 0;
 }
 
 .section-sm {
@@ -647,8 +647,12 @@ h1 {
     background-color: #f5f5f5;
     position: relative;
     width: 50%;
-    right: -135px;
-    padding: 144px 0px;
+    padding: 145px 0px;
+}
+
+.svg-line {
+    display: flex;
+    justify-content: center;
 }
 
 .rihgt-side-Ecommerce-automation {
@@ -658,8 +662,8 @@ h1 {
 }
 
 .cards {
-    position: absolute;
-    top: 170px;
+    position: relative;
+    top: 1%;
     list-style: none;
 }
 
@@ -685,6 +689,10 @@ h1 {
 .rihgt-side-Ecommerce-automation {
     position: relative;
     z-index: 5;
+}
+
+ul.cards li {
+    margin: 15px auto;
 }
 
 .automation::after {
@@ -784,6 +792,7 @@ h1 {
 
 .svg-blue-line {
     max-height: 0;
+    position: absolute;
     animation: svg-line 1s linear 0s forwards;
 }
 
@@ -797,7 +806,7 @@ h1 {
 .card-second,
 .card-third {
     opacity: 0;
-    animation: card 1s linear 0s forwards;
+    animation: card 0.4s linear 0s forwards;
 }
 
 .card-one {
@@ -806,7 +815,6 @@ h1 {
 
 .card-second {
     animation-delay: 1.5s;
-    margin: 15px 0;
 }
 
 .card-third {
