@@ -333,7 +333,7 @@ h1 {
     display: block;
     position: absolute;
     top: 25px;
-    left: -70px;
+    left: -75px;
     background-image: url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20846%20436.28%22%3E%3Cg%20data-name=%22Layer%202%22%3E%3Cg%20data-name=%22Layer%201%22%3E%3Cpath%20fill=%22%23f5f5f5%22%20d=%22M780%20409.11v-399A10.05%2010.05%200%200%200%20769.94%200H76.06A10.05%2010.05%200%200%200%2066%2010.06v399.05H0v14.09a13.08%2013.08%200%200%200%2013.08%2013.08h819.84A13.08%2013.08%200%200%200%20846%20423.2v-14.09z%22/%3E%3Cpath%20fill=%22%23bbbcbd%22%20d=%22M369.18%20408.11h107.64a10.06%2010.06%200%200%201-10.06%2010.06h-87.52a10.06%2010.06%200%200%201-10.06-10.06z%22/%3E%3Ccircle%20cx=%22425%22%20cy=%227%22%20r=%223%22%20fill=%22%233d3f40%22/%3E%3Cpath%20fill=%22%23bbbcbd%22%20d=%22M66%20406.72h714v2H66z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E);
     background-repeat: no-repeat;
     overflow: hidden;

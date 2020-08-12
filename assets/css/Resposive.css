@@ -1,6 +1,6 @@
-@media screen and (max-width: 1199gitpx) {
+@media screen and (max-width: 1350px) {
     .container {
-        max-width: 970px;
+        max-width: 1140px;
         width: 100%;
         padding: 0 15px;
         margin: 0 auto;
@@ -19,6 +19,10 @@
         font-weight: 800;
     }
 
+    .banner-title {
+        width: 80%;
+    }
+
     .banner-head .banner-discription {
         margin: 20px 0;
         max-width: 385px;
@@ -28,7 +32,7 @@
         top: 0;
         width: 475px;
         height: 265px;
-        right: 5px;
+        right: 53px;
     }
 
     .laptop-video::after {
@@ -133,7 +137,7 @@
     }
 
     .rihgt-side-Ecommerce-automation {
-        padding: 100px 0 100px 40px;
+        padding: 100px 0 100px 75px;
         width: 60%;
     }
 
@@ -155,7 +159,7 @@
     }
 
     .product-discription {
-        width: 85%;
+        width: 74%;
     }
 
     .product-title {
@@ -170,6 +174,14 @@
 
     .client-heading {
         font-size: 130px;
+    }
+
+    .expand-title {
+        width: 60%;
+    }
+
+    .checklist-heading {
+        width: 85%;
     }
 }
 
@@ -198,6 +210,10 @@
         display: none;
     }
 
+    .banner-title {
+        width: 100%;
+    }
+
     .banner {
         background-image: none;
     }
@@ -208,7 +224,7 @@
 
     h1 {
         font-size: 40px;
-        font-weight: 900;
+        font-weight: 700;
     }
 
     .banner-discription {
@@ -218,7 +234,7 @@
     }
 
     .brand-title h2 {
-        font-size: 30px;
+        font-size: 32px;
         font-weight: 800;
         text-align: left;
     }
@@ -246,13 +262,22 @@
         padding-right: 0;
     }
 
-    .bg-h2 {
-        font-size: 30px;
+    .bg-h2 h2,
+    .checklist-heading span,
+    .bg-h2,
+    .mobile-heading,
+    .bussines-main-heading {
+        font-size: 32px;
     }
 
     .checklist-left-side {
         width: 100%;
         margin-bottom: 25px;
+    }
+
+    .inverted-comma {
+        height: 35px;
+        width: 35px;
     }
 
     .checklist-right-side {
@@ -261,12 +286,14 @@
 
     .Scalability {
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .Scalability-left-side {
         width: 75%;
         order: 2;
-        margin-top: 400px;
+        margin-top: 280px;
+        padding: 0;
     }
 
     .Scalability-right-side {
@@ -334,7 +361,7 @@
     }
 
     .ecommerce-right-side {
-        margin: 50px 0 0 30px;
+        margin: 50px 50px 0;
     }
 
     .expand-title {
@@ -380,6 +407,30 @@
     @keyframes svg-line {
         100% {
             max-height: 400px;
+        }
+    }
+
+    @keyframes third {
+        to {
+            height: 250px;
+            width: 250px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes second {
+        to {
+            height: 150px;
+            width: 150px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes first {
+        to {
+            height: 75px;
+            width: 75px;
+            opacity: 1;
         }
     }
 
@@ -434,7 +485,7 @@
     }
 
     .client-heading {
-        font-size: 95px;
+        font-size: 75px;
     }
 
     .expand-title {
@@ -450,6 +501,7 @@
     .other-page-link {
         flex-basis: 25%;
         flex-wrap: wrap;
+        line-height: 1.7;
     }
 
     .social-link {
@@ -465,7 +517,6 @@
     }
 
     .footer-cols {
-        /* padding-right: 22PX; */
         flex-basis: 50%;
     }
 
