@@ -408,6 +408,7 @@ h1 {
 
 .checklist-heading,
 .checklist-heading span,
+.bg-h2 h2,
 .bg-h2 {
     font-size: 56px;
     font-weight: 800;
@@ -440,6 +441,11 @@ h1 {
     font-size: 20px;
 }
 
+.bold--txt {
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+}
 
 /*---------------checklist section end---------------*/
 
@@ -837,7 +843,7 @@ ul.cards li {
 /* 7 Reliability and support information section srart */
 
 .Reliability-head {
-    margin: 0 0 80px 100px;
+    margin: 0 0 35px 100px;
 }
 
 .product {
@@ -854,19 +860,18 @@ ul.cards li {
 
 .product-cols {
     width: 25%;
-    margin: 0 0 48px 100px;
+    margin: 45px 0 0 100px;
+    text-align: center;
 }
 
 .product-icon {
     fill: #8d9091;
-    stroke: #8d9091;
     stroke-width: 5px;
 }
 
 
 .product-discription {
     line-height: 1.5;
-    width: 65%;
 }
 
 .product-discription a {
@@ -975,7 +980,7 @@ ul.cards li {
 }
 
 .footer-cols {
-    padding-right: 16PX;
+    padding-right: 15PX;
     flex-basis: 17%;
 }
 
