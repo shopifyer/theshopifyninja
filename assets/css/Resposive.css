@@ -1,552 +1,628 @@
+/*  FOR LAPTOP SECREEN */
 @media screen and (max-width: 1440px) {
-    .container {
-        max-width: 1140px;
-        width: 100%;
-        padding: 0 15px;
-        margin: 0 auto;
-    }
+  .container {
+    max-width: 1140px;
+  }
 
-    .section {
-        padding: 100px 0;
-    }
+  .section {
+    padding: 100px 0;
+  }
 
-    .section-sm {
-        padding: 60px 0;
-    }
+  .section-sm {
+    padding: 60px 0;
+  }
 
-    h1 {
-        font-size: 45px;
-        font-weight: 800;
-    }
+  .banner-title {
+    width: 80%;
+  }
 
-    .banner-title {
-        width: 80%;
-    }
+  .banner-head .banner-discription {
+    margin: 20px 0;
+    max-width: 385px;
+  }
 
-    .banner-head .banner-discription {
-        margin: 20px 0;
-        max-width: 385px;
-    }
+  .video {
+    top: 0;
+    width: 475px;
+    height: 265px;
+    right: 53px;
+  }
 
-    .video {
-        top: 0;
-        width: 475px;
-        height: 265px;
-        right: 53px;
-    }
+  .laptop-video::after {
+    height: 605px;
+    width: 600px;
+    top: 0;
+  }
 
-    .laptop-video::after {
-        height: 605px;
-        width: 600px;
-        top: 0;
-    }
+  .checklist-heading,
+  .checklist-heading span,
+  .bg-h2,
+  .brand-title h2,
+  h1 {
+    font-size: 45px;
+    font-weight: 600;
+  }
 
-    .brand-title h2 {
-        font-size: 46px;
-    }
+  .check-info h3 {
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: 600;
+  }
 
-    .checklist-heading,
-    .checklist-heading span,
-    .bg-h2 {
-        font-size: 46px;
-        font-weight: 600;
-    }
+  .checklist-left-side {
+    padding-right: 50px;
+  }
 
-    .check-info h3 {
-        margin-bottom: 25px;
-        font-size: 18px;
-        font-weight: 600;
-    }
+  .checklist-discription,
+  .discription {
+    font-size: 18px;
+  }
 
-    .checklist-left-side {
-        padding-right: 50px;
-    }
+  .Scalability-left-side {
+    padding-left: 45px;
+  }
 
-    .checklist-discription,
-    .discription {
-        font-size: 18px;
+  @keyframes third {
+    to {
+      height: 350px;
+      width: 350px;
+      opacity: 1;
     }
+  }
 
-    .Scalability-left-side {
-        padding-left: 45px;
+  @keyframes second {
+    to {
+      height: 250px;
+      width: 250px;
+      opacity: 1;
     }
+  }
 
-    @keyframes third {
-        to {
-            height: 350px;
-            width: 350px;
-            opacity: 1;
-        }
+  @keyframes first {
+    to {
+      height: 150px;
+      width: 150px;
+      opacity: 1;
     }
+  }
 
-    @keyframes second {
-        to {
-            height: 250px;
-            width: 250px;
-            opacity: 1;
-        }
-    }
+  .mobile-section-left-side {
+    padding-right: 50px;
+  }
 
-    @keyframes first {
-        to {
-            height: 150px;
-            width: 150px;
-            opacity: 1;
-        }
-    }
+  .client-name {
+    margin-bottom: 5px;
+  }
 
-    .mobile-section-left-side {
-        padding-right: 50px;
-    }
+  .inverted-comma {
+    height: 45px;
+    width: 45px;
+  }
 
-    .client-name {
-        margin-bottom: 5px;
-    }
+  .ecommerce {
+    align-items: center;
+  }
 
-    .inverted-comma {
-        height: 45px;
-        width: 45px;
-    }
+  .ecommerce-left-side {
+    padding-right: 70px;
+  }
 
-    .ecommerce {
-        align-items: center;
-    }
+  .icon {
+    height: 45px;
+    width: 45px;
+  }
 
-    .ecommerce-left-side {
-        padding-right: 70px;
-    }
+  .social-icon {
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+    column-gap: 20px;
+  }
 
-    .icon {
-        height: 45px;
-        width: 45px;
-    }
+  .card {
+    width: 350px;
+    padding: 20px;
+  }
 
-    .social-icon {
-        grid-template-columns: 80px 80px 80px;
-        grid-template-rows: 80px 80px 80px;
-        column-gap: 20px;
-    }
+  .cards {
+    top: 45px;
+  }
 
-    .card {
-        width: 350px;
-        padding: 20px;
-    }
+  .rihgt-side-Ecommerce-automation {
+    padding: 100px 0 100px 75px;
+    width: 60%;
+  }
 
-    .cards {
-        top: 45px;
-    }
+  .left-side-Ecommerce-automation {
+    padding: 100px 0px;
+  }
 
-    .rihgt-side-Ecommerce-automation {
-        padding: 100px 0 100px 75px;
-        width: 60%;
-    }
+  .product {
+    margin-left: 100px;
+  }
 
-    .left-side-Ecommerce-automation {
-        padding: 100px 0px;
-    }
+  .product-cols {
+    width: 33%;
+    margin: 45px 0 0 0;
+  }
 
-    .product {
-        margin-left: 100px;
-    }
+  .Reliability-head {
+    margin: 0 0 0 100px;
+  }
 
-    .product-cols {
-        width: 33%;
-        margin: 45px 0 0 0;
-    }
+  .product-discription {
+    width: 74%;
+  }
 
-    .Reliability-head {
-        margin: 0 0 0 100px;
-    }
+  .product-title {
+    margin: 15px 0;
+  }
 
-    .product-discription {
-        width: 74%;
-    }
+  .bussines-main-heading {
+    font-size: 46px;
+    font-weight: 600;
+    padding-bottom: 50px;
+  }
 
-    .product-title {
-        margin: 15px 0 16px;
-    }
+  .client-heading {
+    font-size: 130px;
+  }
 
-    .bussines-main-heading {
-        font-size: 46px;
-        font-weight: 600;
-        padding-bottom: 50px;
-    }
+  .expand-title {
+    width: 60%;
+  }
 
-    .client-heading {
-        font-size: 130px;
-    }
-
-    .expand-title {
-        width: 60%;
-    }
-
-    .checklist-heading {
-        width: 85%;
-    }
+  .checklist-heading {
+    width: 85%;
+  }
 }
 
+/* FOR TABLET SECREEN */
+@media screen and (max-width: 991px) {
+  .container {
+    max-width: 960px;
+    padding: 0 50px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .toggle-icon {
+    display: block;
+  }
+
+  .video-wrapper {
+    display: none;
+  }
+
+  .banner {
+    background-image: none;
+  }
+
+  .banner-head {
+    min-width: 650px;
+  }
+
+  .bg-h2 h2,
+  .checklist-heading span,
+  .bg-h2,
+  .mobile-heading,
+  .bussines-main-heading {
+    font-size: 40px;
+  }
+
+  .brand-img {
+    flex-wrap: wrap;
+  }
+
+  .brand-img .svg-logo {
+    max-height: 170px;
+    max-width: 170px;
+    width: 50%;
+  }
+
+  .checklist-left-side {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .checklist-right-side {
+    width: 100%;
+  }
+
+  .Scalability {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .Scalability-left-side {
+    width: 100%;
+    order: 2;
+    margin-top: 400px;
+    padding: 0;
+  }
+
+  .Scalability-right-side {
+    width: 100%;
+  }
+
+  .mobile-section-right-side {
+    display: none;
+  }
+
+  .mobile-section-left-side {
+    width: 100%;
+    padding: 100px 0;
+  }
+
+  .ecommerce {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .social-icon {
+    grid-template-columns: 80px 80px 80px 80px 80px;
+    grid-template-rows: 80px 80px;
+    column-gap: 20px;
+  }
+
+  .ecommerce-right-side {
+    margin-top: 50px;
+  }
+
+  .expand-title {
+    width: 85%;
+  }
+
+  .Ecommerce-automation {
+    flex-wrap: wrap;
+    padding: 100px 0;
+  }
+
+  .left-side-Ecommerce-automation {
+    order: 2;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    margin: 65px 0 80px;
+    padding: 0;
+  }
+
+  .rihgt-side-Ecommerce-automation {
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .automation::after {
+    display: none;
+  }
+
+  .card {
+    width: 485px;
+  }
+
+  .product-cols {
+    width: 50%;
+    margin: 45px 0 0 0;
+  }
+
+  .Reliability-head {
+    margin: 0;
+  }
+
+  .product {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .clients-sale {
+    grid-template-columns: 1fr;
+  }
+
+  .client-info {
+    margin: 15px 0 50px;
+  }
+
+  .client-heading {
+    font-size: 110px;
+  }
+}
+
+/* FOR TABLET SECREEN */
+
+/*  FOR MOBILE SECREEN */
 @media screen and (max-width: 575px) {
-    .container {
-        padding: 0 15px;
-    }
-
-    .section {
-        padding: 80px 0;
-    }
-
-    .section-sm {
-        padding: 50px 0;
-    }
-
-    .header {
-        padding: 15px 0;
-    }
-
-    .nav {
-        display: none;
-    }
-
-    .video-wrapper {
-        display: none;
-    }
-
-    .banner-title {
-        width: 100%;
-    }
-
-    .banner {
-        background-image: none;
-    }
-
-    .banner-head {
-        min-width: 300px;
-    }
-
-    h1 {
-        font-size: 40px;
-        font-weight: 700;
-    }
-
-    .banner-discription {
-        font-size: 16px;
-        margin: 24px 0;
-        line-height: 1.5;
-    }
-
-    .brand-title h2 {
-        font-size: 32px;
-        font-weight: 800;
-        text-align: left;
-    }
-
-    .brand-img {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 100px 100px;
-        margin-left: 30px;
-    }
-
-    .svg-logo {
-        width: 120px;
-        height: 150px;
-        width: 100px;
-
-    }
-
-    .title {
-        font-size: 16px;
-        font-weight: 700;
-    }
-
-    .checklist-left-side {
-        padding-right: 0;
-    }
-
-    .bg-h2 h2,
-    .checklist-heading span,
-    .bg-h2,
-    .mobile-heading,
-    .bussines-main-heading {
-        font-size: 32px;
-    }
-
-    .checklist-left-side {
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
-    .inverted-comma {
-        height: 35px;
-        width: 35px;
-    }
-
-    .checklist-right-side {
-        width: 100%;
-    }
-
-    .Scalability {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .Scalability-left-side {
-        width: 75%;
-        order: 2;
-        margin-top: 280px;
-        padding: 0;
-    }
-
-    .Scalability-right-side {
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
-    .mobile-section-right-side {
-        display: none;
-    }
-
-    .mobile-section-left-side {
-        width: 100%;
-        padding: 80px 0;
-    }
-
-    .mobile-heading {
-        line-height: 1.3;
-    }
-
-    .ecommerce-left-side {
-        width: 110%;
-        padding-right: 0;
-    }
-
-    .ecommerce-right-side {
-        width: 90%;
-    }
-
-    .ecommerce-left-side br {
-        display: none;
-    }
-
-    @keyframes third {
-        to {
-            height: 300px;
-            width: 300px;
-            opacity: 1;
-        }
-    }
-
-    @keyframes second {
-        to {
-            height: 200px;
-            width: 200px;
-            opacity: 1;
-        }
-    }
-
-    @keyframes first {
-        to {
-            height: 100px;
-            width: 100px;
-            opacity: 1;
-        }
-    }
-
-    .toggle-icon {
-        display: block;
-    }
-
-    .ecommerce {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .ecommerce-right-side {
-        margin: 50px 50px 0;
-    }
-
-    .expand-title {
-        width: 100%;
-    }
-
-    .Ecommerce-automation {
-        flex-wrap: wrap;
-        padding: 80px 0;
-    }
-
-    .left-side-Ecommerce-automation {
-        order: 2;
-        width: 100%;
-        position: relative;
-        z-index: 10;
-        margin-top: 50px;
-        padding: 0;
-    }
-
-    ul.cards li {
-        margin: 10px auto;
-    }
-
-
-    .rihgt-side-Ecommerce-automation {
-        width: 100%;
-        background-color: transparent;
-        padding: 0;
-
-    }
-
-    .cards {
-        top: 3%;
-    }
-
-    .card {
-        width: 290px;
-        padding: 10px;
-    }
-
-
-    @keyframes svg-line {
-        100% {
-            max-height: 400px;
-        }
-    }
-
-    @keyframes third {
-        to {
-            height: 250px;
-            width: 250px;
-            opacity: 1;
-        }
-    }
-
-    @keyframes second {
-        to {
-            height: 150px;
-            width: 150px;
-            opacity: 1;
-        }
-    }
-
-    @keyframes first {
-        to {
-            height: 75px;
-            width: 75px;
-            opacity: 1;
-        }
-    }
-
-    .card-second {
-        animation-delay: 1.5s;
-    }
-
-    .automation::after {
-        display: none;
-    }
-
-    .Reliability-head {
-        margin: 0;
-    }
-
-    .product {
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .product-cols {
-        width: 100%;
-        margin: 45px 0 0 0;
-    }
-
-    .product-discription {
-        width: 90%;
-        font-size: 18px;
-
-    }
-
-    .product-discription a {
-        color: blue;
-        text-decoration: underline;
-    }
-
-    .product-cols-second {
-        width: 85%;
-    }
-
-    .clients-sale {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .client-info br {
-        display: none;
-    }
-
-    .client-info {
-        margin: 15px 0 50px;
-    }
-
-    .client-heading {
-        font-size: 75px;
-    }
-
-    .expand-title {
-        font-size: 27px;
-        margin-bottom: 25px;
-    }
-
-    .footer-head {
-        display: block;
-        padding-top: 24px;
-    }
-
-    .other-page-link {
-        flex-basis: 25%;
-        flex-wrap: wrap;
-        line-height: 1.7;
-    }
-
-    .social-link {
-        margin-top: 10px;
-    }
-
-    .footer-rows {
-        flex-wrap: wrap;
-    }
-
-    .social-link a {
-        margin: 0 10px 0 0;
-    }
-
-    .footer-cols {
-        flex-basis: 50%;
-    }
-
-    .footer-cols-fifth {
-        order: 2;
-    }
-
-    .footer-cols-second {
-        order: 6;
-    }
-
-    .terms-conditions {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .footer-bottom {
-        display: inline-block;
-        line-height: 2;
-    }
-
-    .terms-conditions a {
-        margin-left: 0;
-    }
-
-    .first-hr {
-        margin: 20px 0 30px;
-    }
-
-    .second-hr {
-        margin-top: 35px;
-    }
+  .header {
+    padding: 15px 0;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .section-sm {
+    padding: 50px 0;
+  }
+
+  .banner-title {
+    width: 100%;
+  }
+
+  .banner-head {
+    min-width: 300px;
+  }
+
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+  }
+
+  .banner-discription {
+    font-size: 16px;
+    margin: 24px 0;
+    line-height: 1.5;
+  }
+
+  .brand-title h2 {
+    font-size: 32px;
+    font-weight: 800;
+    text-align: left;
+  }
+
+  .brand-img {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 100px;
+    margin-left: 30px;
+  }
+
+  .svg-logo {
+    width: 120px;
+    height: 150px;
+    width: 100px;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .checklist-left-side {
+    padding-right: 0;
+  }
+
+  .bg-h2 h2,
+  .checklist-heading span,
+  .bg-h2,
+  .mobile-heading,
+  .bussines-main-heading {
+    font-size: 32px;
+  }
+
+  .inverted-comma {
+    height: 35px;
+    width: 35px;
+  }
+
+  .Scalability-left-side {
+    margin-top: 280px;
+    width: 75%;
+  }
+
+  .Scalability-right-side {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .mobile-section-left-side {
+    width: 100%;
+    padding: 80px 0;
+  }
+
+  .mobile-heading {
+    line-height: 1.3;
+  }
+
+  .ecommerce {
+    justify-content: center;
+  }
+
+  .social-icon {
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
+    column-gap: 20px;
+  }
+
+  .left-side-Ecommerce-automation {
+    margin: 50px 0 0 0;
+  }
+
+  .ecommerce-left-side {
+    width: 110%;
+    padding-right: 0;
+  }
+
+  .ecommerce-right-side {
+    width: 90%;
+  }
+
+  .ecommerce-left-side br {
+    display: none;
+  }
+
+  @keyframes third {
+    to {
+      height: 300px;
+      width: 300px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes second {
+    to {
+      height: 200px;
+      width: 200px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes first {
+    to {
+      height: 100px;
+      width: 100px;
+      opacity: 1;
+    }
+  }
+
+  .ecommerce-right-side {
+    margin: 50px 50px 0;
+  }
+
+  .expand-title {
+    width: 100%;
+  }
+
+  .Ecommerce-automation {
+    padding: 80px 0;
+  }
+
+  .cards {
+    top: 0;
+  }
+
+  .card {
+    width: 290px;
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+  @keyframes svg-line {
+    100% {
+      max-height: 400px;
+    }
+  }
+
+  @keyframes third {
+    to {
+      height: 250px;
+      width: 250px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes second {
+    to {
+      height: 150px;
+      width: 150px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes first {
+    to {
+      height: 75px;
+      width: 75px;
+      opacity: 1;
+    }
+  }
+
+  .card-second {
+    animation-delay: 1.5s;
+  }
+
+  .product-cols {
+    width: 100%;
+    margin: 45px 0 0 0;
+  }
+
+  .product-discription {
+    width: 90%;
+    font-size: 18px;
+  }
+
+  .product-discription a {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  .product-cols-second {
+    width: 85%;
+  }
+
+  .client-info br {
+    display: none;
+  }
+
+  .client-heading {
+    font-size: 75px;
+  }
+
+  .expand-title {
+    font-size: 27px;
+    margin-bottom: 25px;
+  }
+
+  .footer-head {
+    display: block;
+    padding-top: 24px;
+  }
+
+  .other-page-link {
+    flex-basis: 25%;
+    flex-wrap: wrap;
+    line-height: 1.7;
+  }
+
+  .social-link {
+    margin-top: 10px;
+  }
+
+  .footer-rows {
+    flex-wrap: wrap;
+  }
+
+  .social-link a {
+    margin: 0 10px 0 0;
+  }
+
+  .footer-cols {
+    flex-basis: 50%;
+  }
+
+  .footer-cols-fifth {
+    order: 2;
+  }
+
+  .footer-cols-second {
+    order: 6;
+  }
+
+  .terms-conditions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    display: inline-block;
+    line-height: 2;
+  }
+
+  .terms-conditions a {
+    margin-left: 0;
+  }
+
+  .first-hr {
+    margin: 20px 0 30px;
+  }
+
+  .second-hr {
+    margin-top: 35px;
+  }
 }
+
+/*  FOR MOBILE SECREEN */
