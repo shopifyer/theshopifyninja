@@ -859,9 +859,8 @@ ul.cards li {
 }
 
 .product-cols {
-    width: 25%;
+    width: 26%;
     margin: 45px 0 0 100px;
-    text-align: center;
 }
 
 .product-icon {
@@ -871,7 +870,9 @@ ul.cards li {
 
 
 .product-discription {
-    line-height: 1.5;
+    line-height: 1.77;
+    font-size: 18px;
+    font-weight: 400;
 }
 
 .product-discription a {
