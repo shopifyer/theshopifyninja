@@ -367,7 +367,7 @@ h1 {
 /*---------------logo section end---------------*/
 
 
-/*---------------checklist section start---------------*/
+/*1 ---------------checklist section start---------------*/
 
 .animation {
     opacity: 0;
@@ -447,10 +447,10 @@ h1 {
     font-weight: 600;
 }
 
-/*---------------checklist section end---------------*/
+/* 1 ---------------checklist section end---------------*/
 
 
-/*---------------Scalability section start---------------*/
+/* 2 ---------------Scalability section start---------------*/
 
 
 /* ======animation====== */
@@ -551,10 +551,10 @@ h1 {
 }
 
 
-/*---------------Scalability section end---------------*/
+/* 2 ---------------Scalability section end---------------*/
 
 
-/* mobile section start */
+/* 3 mobile section start */
 
 .mobile-section {
     display: flex;
@@ -595,10 +595,10 @@ h1 {
 }
 
 
-/* mobile section end */
+/* 3 mobile section end */
 
 
-/* ecommerce section start */
+/* 4 ecommerce section start */
 
 .ecommerce {
     width: 100%;
@@ -625,10 +625,10 @@ h1 {
 }
 
 
-/* ecommerce section end */
+/* 4 ecommerce section end */
 
 
-/* Bussiness information section start */
+/* 5 Bussiness information section start */
 
 .expand-title {
     font-size: 40px;
@@ -638,10 +638,10 @@ h1 {
 }
 
 
-/* Bussiness information section end */
+/* 5 Bussiness information section end */
 
 
-/* Ecommerce automation information section start */
+/* 6 Ecommerce automation information section start */
 
 .Ecommerce-automation {
     display: flex;
@@ -837,7 +837,7 @@ ul.cards li {
 /* ==========animation========== */
 
 
-/* Ecommerce automation information section end */
+/*  6 Ecommerce automation information section end */
 
 
 /* 7 Reliability and support information section srart */

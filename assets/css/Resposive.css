@@ -141,16 +141,12 @@
   }
 
   .product-cols {
-    width: 33%;
-    margin: 45px 0 0 0;
+    width: 28%;
+    margin: 45px 45px 0 0;
   }
 
   .Reliability-head {
     margin: 0 0 0 100px;
-  }
-
-  .product-discription {
-    width: 74%;
   }
 
   .product-title {
