@@ -16,6 +16,10 @@
     width: 80%;
   }
 
+  .banner-info {
+    margin-top: 60px;
+  }
+
   .banner-head .banner-discription {
     margin: 20px 0;
     max-width: 385px;
