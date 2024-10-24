@@ -894,6 +894,7 @@ ul.cards li {
     font-size: 56px;
     font-weight: 800;
     padding-bottom: 70px;
+    color: black;
 }
 
 .client-heading {
@@ -901,12 +902,14 @@ ul.cards li {
     line-height: 1;
     font-weight: 100;
     font-family: 'Fjalla One', sans-serif;
+    color: black;
 }
 
 .client-info {
     margin-top: 16px;
     font-weight: 800;
     line-height: 1.5;
+    color: black;
 }
 
 
