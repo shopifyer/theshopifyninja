@@ -1,565 +1,1030 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Checkout Master</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="HTML, CSS, JavaScript">
-    <meta name="author" content="Bhupinder-singh">
-    <link rel="stylesheet" href="assets/css/stylesheet.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/Resposive.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout Masters — Premium Ecommerce Development Agency</title>
+<meta name="description" content="We build high-converting Shopify & ecommerce experiences for 7-figure brands. Shopify Plus, CRO, UX/UI Design, and performance optimization.">
+<meta name="keywords" content="Shopify development, Shopify Plus, CRO, ecommerce agency, UX design, conversion rate optimization">
+<link rel="canonical" href="https://checkoutmasters.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:#FAFAF8;color:#111111;font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#FAFAF8}
+::-webkit-scrollbar-thumb{background:#E8194B;border-radius:2px}
+
+/* ─── TOKENS ─── */
+:root{
+  /* Light surfaces */
+  --cream:#FAFAF8;
+  --cream-2:#F4F1EB;
+  --cream-3:#EDE9E1;
+  --white:#FFFFFF;
+
+  /* Dark surfaces */
+  --ink:#0F0F0F;
+  --ink-2:#1A1A1A;
+  --ink-3:#252525;
+
+  /* Text */
+  --t1:#111111;
+  --t2:#444444;
+  --t3:#888888;
+  --t-inv:#FFFFFF;
+  --t-inv2:rgba(255,255,255,.7);
+  --t-inv3:rgba(255,255,255,.4);
+
+  /* Brand */
+  --red:#E8194B;
+  --red-hover:#C4143D;
+  --red-pale:rgba(232,25,75,.08);
+  --red-border:rgba(232,25,75,.2);
+
+  /* Borders */
+  --border:#E4E0D8;
+  --border-dark:rgba(255,255,255,.1);
+
+  /* Spacing */
+  --max-w:1160px;
+  --nav-h:68px;
+  --sec:100px 0;
+  --sec-sm:64px 0;
+  --r:12px;
+  --r-sm:8px;
+}
+
+/* ─── UTILS ─── */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 28px}
+.red{color:var(--red)}
+.tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--red);margin-bottom:18px;
+}
+.tag::before{content:'';width:18px;height:1.5px;background:var(--red);flex-shrink:0}
+
+/* ─── BUTTONS ─── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Inter',sans-serif;font-size:.875rem;font-weight:600;
+  padding:12px 24px;border-radius:50px;cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-red{background:var(--red);color:#fff;border:1.5px solid var(--red)}
+.btn-red:hover{background:var(--red-hover);border-color:var(--red-hover);transform:translateY(-1px);box-shadow:0 4px 20px rgba(232,25,75,.3)}
+.btn-ghost{background:transparent;color:var(--t1);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--t1);background:var(--t1);color:#fff}
+.btn-ghost-inv{background:transparent;color:var(--t-inv);border:1.5px solid var(--border-dark)}
+.btn-ghost-inv:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+
+/* ─── SECTION HEADERS ─── */
+.sec-head{margin-bottom:56px}
+.sec-head.center{text-align:center}
+.sec-head.center .tag{justify-content:center}
+.sec-head h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(2rem,3.5vw,2.75rem);
+  font-weight:800;line-height:1.1;letter-spacing:-.02em;
+  color:var(--t1);margin-bottom:14px;
+}
+.sec-head h2.inv{color:var(--t-inv)}
+.sec-head p{font-size:1.05rem;color:var(--t2);line-height:1.75;max-width:520px}
+.sec-head.center p{margin:0 auto}
+.sec-head p.inv{color:var(--t-inv2)}
+
+/* ─── NAVIGATION ─── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  background:rgba(250,250,248,.9);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+.nav.scrolled{border-bottom-color:var(--border)}
+.nav-inner{
+  max-width:var(--max-w);margin:0 auto;padding:0 28px;
+  height:100%;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--t1);
+}
+.nav-logo-mark{
+  width:34px;height:34px;border-radius:50%;
+  border:2px solid var(--red);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{
+  font-size:.875rem;font-weight:500;color:var(--t2);
+  transition:color .15s;
+}
+.nav-links a:hover{color:var(--t1)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{width:22px;height:1.5px;background:var(--t1);border-radius:2px;transition:.3s}
+
+/* ─── MOBILE NAV ─── */
+.mobile-nav{
+  position:fixed;inset:0;z-index:99;
+  background:rgba(250,250,248,.98);
+  backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.mobile-nav.open{opacity:1;pointer-events:auto}
+.mobile-nav a{font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:800;color:var(--t2);transition:color .2s}
+.mobile-nav a:hover{color:var(--t1)}
+.mobile-nav-close{position:absolute;top:24px;right:24px;font-size:1.4rem;color:var(--t3);cursor:pointer;transition:color .2s}
+.mobile-nav-close:hover{color:var(--t1)}
+
+/* ─── HERO ─── */
+.hero{
+  background:var(--ink);
+  padding:calc(var(--nav-h) + 80px) 0 96px;
+  position:relative;overflow:hidden;
+}
+.hero-noise{
+  position:absolute;inset:0;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 40%,black 30%,transparent 100%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:800px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px;border-radius:50px;
+  border:1px solid rgba(232,25,75,.35);
+  background:rgba(232,25,75,.08);
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--red);margin-bottom:28px;
+}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--red);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(2.8rem,5.5vw,5rem);
+  font-weight:900;line-height:1.06;letter-spacing:-.03em;
+  color:#FFFFFF;margin-bottom:22px;
+}
+.hero h1 .accent{color:var(--red)}
+.hero-sub{
+  font-size:1.1rem;color:rgba(255,255,255,.6);
+  line-height:1.7;max-width:520px;margin-bottom:40px;
+}
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:72px}
+.hero-divider{width:1px;height:40px;background:var(--border-dark)}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-top:1px solid var(--border-dark);padding-top:40px;
+}
+.hero-stat{padding-right:32px}
+.hero-stat + .hero-stat{padding-left:32px;padding-right:32px;border-left:1px solid var(--border-dark)}
+.hero-stat-num{
+  font-family:'Montserrat',sans-serif;font-size:2.25rem;font-weight:900;
+  color:#FFFFFF;letter-spacing:-.03em;margin-bottom:4px;
+}
+.hero-stat-num span{color:var(--red)}
+.hero-stat-label{font-size:.8rem;color:rgba(255,255,255,.45);font-weight:500}
+
+/* ─── MARQUEE ─── */
+.marquee-sec{
+  padding:32px 0;border-bottom:1px solid var(--border);
+  background:var(--white);overflow:hidden;
+}
+.marquee-label{
+  text-align:center;font-size:.7rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:24px;
+}
+.marquee-wrap{display:flex;overflow:hidden;user-select:none}
+.marquee-track{display:flex;animation:scroll 28s linear infinite;flex-shrink:0}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused}
+.marquee-items{display:flex;align-items:center;gap:56px;padding:0 28px;flex-shrink:0}
+.marquee-brand{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;
+  letter-spacing:.08em;text-transform:uppercase;color:#CCCCCC;
+  transition:color .2s;cursor:default;white-space:nowrap;
+}
+.marquee-brand:hover{color:var(--t2)}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ─── SERVICES ─── */
+.services-sec{padding:var(--sec);background:var(--white)}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+}
+.svc-card{
+  background:var(--white);padding:36px 32px;
+  position:relative;transition:background .2s;
+}
+.svc-card:hover{background:var(--cream)}
+.svc-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--red);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .25s ease;
+}
+.svc-card:hover::after{transform:scaleY(1)}
+.svc-icon{
+  width:44px;height:44px;border-radius:var(--r-sm);
+  background:var(--red-pale);border:1px solid var(--red-border);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.svc-icon svg{width:20px;height:20px;stroke:var(--red);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.svc-card h3{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--t1);margin-bottom:10px}
+.svc-card p{font-size:.875rem;color:var(--t2);line-height:1.65;margin-bottom:18px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.svc-tag{
+  font-size:.68rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  padding:3px 9px;border-radius:50px;border:1px solid var(--border);
+  color:var(--t3);background:var(--cream);
+}
+
+/* ─── STATS ─── */
+.stats-sec{padding:var(--sec-sm);background:var(--ink-2)}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border:1px solid var(--border-dark);border-radius:var(--r);overflow:hidden;
+}
+.stat-item{
+  padding:40px 32px;text-align:center;
+  border-right:1px solid var(--border-dark);
+  position:relative;
+}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:'Montserrat',sans-serif;font-size:2.75rem;font-weight:900;
+  color:#FFFFFF;letter-spacing:-.04em;line-height:1;margin-bottom:8px;
+}
+.stat-num .red{color:var(--red)}
+.stat-label{font-size:.875rem;color:rgba(255,255,255,.5);font-weight:500}
+.stat-sub{font-size:.72rem;color:rgba(255,255,255,.25);margin-top:4px}
+
+/* ─── WORK ─── */
+.work-sec{padding:var(--sec);background:var(--cream)}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.case-card{
+  background:var(--white);border-radius:var(--r);
+  border:1px solid var(--border);overflow:hidden;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.09);border-color:var(--red-border)}
+.case-thumb{
+  height:200px;display:flex;align-items:flex-end;
+  padding:20px;position:relative;overflow:hidden;
+}
+.case-card:nth-child(1) .case-thumb{background:linear-gradient(145deg,#1a2c3d,#0d1b2a)}
+.case-card:nth-child(2) .case-thumb{background:linear-gradient(145deg,#1e1228,#2d1450)}
+.case-card:nth-child(3) .case-thumb{background:linear-gradient(145deg,#0d2218,#112e20)}
+.case-chips{display:flex;gap:6px;flex-wrap:wrap}
+.case-chip{
+  font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:4px 10px;border-radius:50px;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
+  color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.15);
+}
+.case-chip.pos{color:#4ade80;border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1)}
+.case-body{padding:22px 24px}
+.case-cat{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.case-card h3{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--t1);margin-bottom:8px}
+.case-card p{font-size:.85rem;color:var(--t2);line-height:1.65}
+
+/* ─── PROCESS ─── */
+.process-sec{padding:var(--sec);background:var(--white)}
+.process-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;position:relative;margin-top:16px;
+}
+.process-grid::before{
+  content:'';position:absolute;top:28px;left:10%;right:10%;
+  height:1px;background:var(--border);
+}
+.process-step{padding:0 12px;text-align:center}
+.process-num{
+  width:56px;height:56px;border-radius:50%;
+  border:1.5px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:800;
+  color:var(--t3);margin:0 auto 20px;position:relative;z-index:1;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.process-step:hover .process-num{
+  border-color:var(--red);color:var(--red);background:var(--red-pale);
+}
+.process-step h3{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;color:var(--t1);margin-bottom:8px}
+.process-step p{font-size:.8rem;color:var(--t3);line-height:1.6}
+
+/* ─── WHY US ─── */
+.why-sec{padding:var(--sec);background:var(--cream-2)}
+.why-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.why-left h2{
+  font-family:'Montserrat',sans-serif;font-size:clamp(2rem,3vw,2.6rem);
+  font-weight:900;line-height:1.1;letter-spacing:-.025em;color:var(--t1);margin-bottom:20px;
+}
+.why-left p{font-size:1rem;color:var(--t2);line-height:1.75;margin-bottom:32px}
+.why-right{display:flex;flex-direction:column;gap:0}
+.why-item{
+  padding:22px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;gap:16px;align-items:flex-start;
+}
+.why-item:first-child{border-top:1px solid var(--border)}
+.why-dot{
+  width:32px;height:32px;border-radius:var(--r-sm);
+  background:var(--red-pale);border:1px solid var(--red-border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
+}
+.why-dot svg{width:14px;height:14px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.why-item h3{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;color:var(--t1);margin-bottom:4px}
+.why-item p{font-size:.85rem;color:var(--t2);line-height:1.6}
+
+/* ─── TESTIMONIALS ─── */
+.testi-sec{padding:var(--sec);background:var(--white)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{
+  padding:32px;border-radius:var(--r);
+  background:var(--cream);border:1px solid var(--border);
+  transition:border-color .2s,box-shadow .2s;
+}
+.testi-card:hover{border-color:var(--red-border);box-shadow:0 8px 32px rgba(0,0,0,.06)}
+.testi-stars{display:flex;gap:3px;margin-bottom:16px}
+.testi-stars span{color:#F59E0B;font-size:.85rem}
+.testi-card blockquote{
+  font-size:.9rem;color:var(--t2);line-height:1.75;
+  margin-bottom:24px;font-style:normal;
+}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-av{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:800;color:#fff;
+}
+.testi-name{font-size:.875rem;font-weight:600;color:var(--t1)}
+.testi-role{font-size:.75rem;color:var(--t3)}
+
+/* ─── CTA ─── */
+.cta-sec{
+  padding:96px 0;
+  background:var(--ink);
+  position:relative;overflow:hidden;
+}
+.cta-sec::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 80% at 50% 100%,rgba(232,25,75,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.cta-inner{position:relative;z-index:1;text-align:center;max-width:600px;margin:0 auto}
+.cta-inner h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(2.2rem,4.5vw,3.25rem);
+  font-weight:900;letter-spacing:-.03em;line-height:1.1;
+  color:#FFFFFF;margin-bottom:18px;
+}
+.cta-inner h2 span{color:var(--red)}
+.cta-inner p{font-size:1rem;color:rgba(255,255,255,.55);margin-bottom:36px;line-height:1.7}
+.cta-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.cta-note{font-size:.75rem;color:rgba(255,255,255,.3);margin-top:18px}
+
+/* ─── FOOTER ─── */
+.footer{padding:64px 0 36px;background:var(--ink-2);border-top:1px solid var(--border-dark)}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:56px;margin-bottom:56px;
+}
+.footer-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;
+  margin-bottom:14px;
+}
+.footer-logo-mark{
+  width:30px;height:30px;border-radius:50%;
+  border:2px solid var(--red);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.footer-brand p{font-size:.85rem;color:rgba(255,255,255,.4);line-height:1.65;max-width:260px;margin-bottom:20px}
+.footer-socials{display:flex;gap:10px}
+.footer-soc{
+  width:36px;height:36px;border-radius:var(--r-sm);
+  border:1px solid var(--border-dark);background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,background .2s;
+}
+.footer-soc:hover{border-color:var(--red);background:var(--red-pale)}
+.footer-soc svg{width:15px;height:15px;fill:rgba(255,255,255,.35);transition:fill .2s}
+.footer-soc:hover svg{fill:var(--red)}
+.footer-col h4{
+  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-bottom:16px;
+}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:.875rem;color:rgba(255,255,255,.5);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:28px;border-top:1px solid var(--border-dark);flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.25)}
+.footer-bottom a{color:rgba(255,255,255,.25);transition:color .2s}
+.footer-bottom a:hover{color:rgba(255,255,255,.6)}
+
+/* ─── STICKY CTA ─── */
+.float-cta{
+  position:fixed;bottom:28px;right:28px;z-index:99;
+  display:flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:50px;
+  background:var(--red);color:#fff;
+  font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;
+  box-shadow:0 6px 24px rgba(232,25,75,.35);
+  transition:opacity .3s,transform .2s,box-shadow .2s;
+  opacity:0;pointer-events:none;
+}
+.float-cta.show{opacity:1;pointer-events:auto}
+.float-cta:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(232,25,75,.5)}
+.float-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);animation:blink 2s ease-in-out infinite}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid{grid-template-columns:repeat(3,1fr)}
+  .process-grid::before{display:none}
+  .why-layout{grid-template-columns:1fr;gap:40px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
+}
+@media(max-width:768px){
+  :root{--sec:72px 0;--sec-sm:48px 0}
+  .nav-links,.nav-right .btn-ghost{display:none}
+  .nav-hamburger{display:flex}
+  .hero h1{font-size:2.5rem}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hero-stat{padding:20px 0}
+  .hero-stat + .hero-stat{padding:20px 0;border-left:none;border-top:1px solid var(--border-dark)}
+  .services-grid{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .float-cta{bottom:20px;right:20px}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column;align-items:flex-start}
+  .hero-divider{display:none}
+}
+</style>
 </head>
-
 <body>
-    <!-----------------==================== Header section start ===================----------------->
-    <header class="header">
-        <div class="logo_nav container">
-            <div class="logo ">
-                <a class="main_logo text-xl" href="#">
-                   Checkout Masters
-                </a>
-            </div>
-            <nav class="nav">
-                <ul class="navbar">
-                    <!-- <li class="nav-item"><a class="txt-dec-none white" href="#">About Us</a></li> -->
-                    <!-- <li class="nav-item"><a class="txt-dec-none white" href="#">Our Client</a></li> -->
-                    <!-- <li class="nav-item"><a class="txt-dec-none white" href="#">Pricing</a></li> -->
-                    <li class="nav-item "><a class="txt-dec-none green" href="#footer">Let's talk</a></li>
-                </ul>
-            </nav>
-            <div class="toggle-icon">
-                <div class="toggle toggle-first"></div>
-                <div class="toggle toggle-second"></div>
-                <div class="toggle toggle-third"></div>
-            </div>
-        </div>
-    </header>
-    <!-----------------==================== Header sectio end ===================----------------->
-    <!-----------------==================== Banner section start ===================----------------->
-    <section class="banner section">
-        <div class="container video-banner">
-            <div class="section-head banner-head">
-                <div class="banner-info green">
-                    <p>Mastering Shopify E-Commerce Solutions That Drive Results</p>
-                </div>
-                <div class="banner-title">
-                    <h1 class="white">We Build Shopify Stores That Sell</h1>
-                </div>
-                <div class="banner-discription white">
-                    <p>Empowering e-commerce brands with high-converting, user-focused Shopify solutions.</p>
-                </div>
-                <a href="#footer" class="btn">Let's talk</a>
-            </div>
-            <div class="section-body video-wrapper">
-                <div class="laptop-video">
-                    <video class="video"
-                        poster="https://cdn.shopify.com/shopifycloud/plus_website/assets/pages/enterprise-ecommerce/video-placeholder-large-2cf5d4d42a8ff90f33dfa88940b7914d544b173d3f4d276c1dae0429bd032fe4.jpg"
-                        loop="loop" muted="muted"
-                        class="video ma-video js-ma-video js-play-on-scroll laptop-hero__video js-is-active"
-                        data-poster="https://cdn.shopify.com/shopifycloud/plus_website/assets/pages/enterprise-ecommerce/video-placeholder-large-2cf5d4d42a8ff90f33dfa88940b7914d544b173d3f4d276c1dae0429bd032fe4.jpg"
-                        aria-label="A laptop with a website changing design to showcase different layouts" tabindex="0"
-                        src="https://cdn.shopify.com/shopifycloud/plus_website/assets/pages/enterprise-ecommerce/hero-video-e342a887bfe45e0128bdf37affc18c31e1c49cb0f2a6fb8de22315c9373b7d2b.mp4"
-                        autoplay="true"></video>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-----------------==================== Banner section end ===================----------------->
-    <!-----------------==================== Logo section start ===================----------------->
-    <section class="section-sm">
-        <div class="container">
-            <div class="section-head">
-                <div class="section-title brand-title">
-                    <h2 class="">The world’s biggest brands choose Shopify.</h2>
-                </div>
-            </div>
-            <div class=" section-body brand-logo">
-                <div class="brand-img">
-                    <img class="svg-logo" src="assets/img/logo1.svg" alt="">
-                    <img class="svg-logo" src="assets/img/logo2.svg" alt="">
-                    <img class="svg-logo" src="assets/img/logo3.svg" alt="">
-                    <img class="svg-logo" src="assets/img/logo4.svg" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-----------------==================== Logo section end ===================----------------->
 
+<!-- FLOAT CTA -->
+<a href="#contact" class="float-cta" id="floatCta">
+  <span class="float-dot"></span>Book a Call
+</a>
 
-    <!-----------------==================== 7 Reliability and support  section start ===================----------------->
-    <section class="section  bg-gray">
-        <div class="container ">
-            <div class="section-head Reliability-head ">
-                <p class="title blue">What We Offer</p>
-                <h2 class="bg-h2">End-to-End Shopify Solutions</h2>
-            </div>
-            <div class="section-body">
-                <ul class="product">
-                    <li class="product-cols">
-                        <svg class="icon product-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
-                            width="512" height="512">
-                            <g id="laptop_template" data-name="laptop template">
-                                <path
-                                    d="M14.293,31.293l-6,6a1,1,0,0,0,0,1.414l6,6,1.414-1.414L10.414,38l5.293-5.293Z" />
-                                <path
-                                    d="M49.707,44.707l6-6a1,1,0,0,0,0-1.414l-6-6-1.414,1.414L53.586,38l-5.293,5.293Z" />
-                                <path
-                                    d="M45,49V23a1,1,0,0,0-1-1H20a1,1,0,0,0-1,1V49a1,1,0,0,0,1,1H44A1,1,0,0,0,45,49Zm-2-1H21V24H43Z" />
-                                <path
-                                    d="M24,36h6a1,1,0,0,0,1-1V27a1,1,0,0,0-1-1H24a1,1,0,0,0-1,1v8A1,1,0,0,0,24,36Zm1-8h4v6H25Z" />
-                                <path
-                                    d="M24,46h6a1,1,0,0,0,1-1V39a1,1,0,0,0-1-1H24a1,1,0,0,0-1,1v6A1,1,0,0,0,24,46Zm1-6h4v4H25Z" />
-                                <path
-                                    d="M34,46h6a1,1,0,0,0,1-1V27a1,1,0,0,0-1-1H34a1,1,0,0,0-1,1V45A1,1,0,0,0,34,46Zm1-18h4V44H35Z" />
-                                <path
-                                    d="M61.76,54.35A1.011,1.011,0,0,0,61,54H60V21a3.009,3.009,0,0,0-3-3H7a3.009,3.009,0,0,0-3,3V54H3a1,1,0,0,0-.99,1.16l.73,4.33A2.978,2.978,0,0,0,5.69,62H58.31a2.978,2.978,0,0,0,2.95-2.51l.73-4.33A1,1,0,0,0,61.76,54.35ZM6,21a1,1,0,0,1,1-1H57a1,1,0,0,1,1,1V54H36a1,1,0,0,0-1,1v1H29V55a1,1,0,0,0-1-1H6ZM59.29,59.16a.989.989,0,0,1-.98.84H5.69a.989.989,0,0,1-.98-.84L4.18,56H27v1a1,1,0,0,0,1,1h8a1,1,0,0,0,1-1V56H59.82Z" />
-                                <path
-                                    d="M7,14h4a1,1,0,0,0,1-1V9a1,1,0,0,0-1-1H7A1,1,0,0,0,6,9v4A1,1,0,0,0,7,14Zm1-4h2v2H8Z" />
-                                <path
-                                    d="M15,14h4a1,1,0,0,0,1-1V9a1,1,0,0,0-1-1H15a1,1,0,0,0-1,1v4A1,1,0,0,0,15,14Zm1-4h2v2H16Z" />
-                                <path
-                                    d="M23,14h4a1,1,0,0,0,1-1V9a1,1,0,0,0-1-1H23a1,1,0,0,0-1,1v4A1,1,0,0,0,23,14Zm1-4h2v2H24Z" />
-                                <path
-                                    d="M37,14h4a1,1,0,0,0,1-1V9a1,1,0,0,0-1-1H37a1,1,0,0,0-1,1v4A1,1,0,0,0,37,14Zm1-4h2v2H38Z" />
-                                <path
-                                    d="M45,14h4a1,1,0,0,0,1-1V9a1,1,0,0,0-1-1H45a1,1,0,0,0-1,1v4A1,1,0,0,0,45,14Zm1-4h2v2H46Z" />
-                                <path
-                                    d="M53,14h4a1,1,0,0,0,1-1V9a1,1,0,0,0-1-1H53a1,1,0,0,0-1,1v4A1,1,0,0,0,53,14Zm1-4h2v2H54Z" />
-                                <rect x="30" y="10" width="4" height="2" />
-                            </g>
-                        </svg>
-                        <p class="product-title">Shopify Custom Theme Design</p>
-                        <p class="product-discription ">We deliver a data-driven and user-centered Shopify theme design
-                            solution that builds experiential ecommerce experience and amplifies your business growth.
-                        </p>
-                    </li>
-                    <li class="product-cols product-cols-second">
-                        <svg class="icon product-icon" height="496pt" viewBox="0 0 496 496" width="496pt"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="m452.59375 335.617188-60.59375-13.984376v-15.753906c6.160156-4.941406 11.351562-11.015625 15.34375-17.878906h8.65625c22.054688 0 40-17.945312 40-40 0-8.929688-3.039062-17.089844-8-23.753906v-32.246094c0-52.9375-43.0625-96-96-96s-96 43.0625-96 96v32.246094c-4.960938 6.664062-8 14.832031-8 23.753906 0 22.054688 17.945312 40 40 40h8.65625c3.984375 6.863281 9.183594 12.9375 15.34375 17.878906v15.753906l-60.59375 13.984376c-3.957031.910156-7.757812 2.335937-11.40625 4.070312v-43.6875c0-13.230469-10.769531-24-24-24h-192c-13.230469 0-24 10.769531-24 24v144c0 13.230469 10.769531 24 24 24h64v16h-16v16h424v-105.816406c0-26.230469-17.847656-48.671875-43.40625-54.566406zm-134.410156 1.015624 19.503906 14.625-19.71875 11.832032-4.242188-25.433594zm25.175781 63.367188h17.289063l6.664062 80h-30.617188zm18.871094-16h-20.46875l-4.59375-13.777344 14.832031-8.894531 14.824219 8.894531zm4.089843-32.742188 19.503907-14.625 5.640625 1.304688-5.074219 25.359375zm49.679688-79.257812h-2.105469c1.328125-5.128906 2.105469-10.464844 2.105469-16v-32c13.230469 0 24 10.769531 24 24s-10.769531 24-24 24zm-64-160c44.113281 0 80 35.886719 80 80v19.390625c-4.910156-2.160156-10.304688-3.390625-16-3.390625v-16h-16v4.464844c-5.550781 4.832031-12.199219 8.269531-19.3125 10.0625.3125-.304688.65625-.566406.96875-.871094l-11.3125-11.3125c-5.96875 5.96875-13.527344 10.136719-21.65625 12.183594.3125-.304688.65625-.566406.96875-.871094l-11.3125-11.3125c-8.679688 8.679688-20.695312 13.65625-32.96875 13.65625h-1.375v-16h-16v16c-5.695312 0-11.089844 1.230469-16 3.390625v-19.390625c0-44.113281 35.886719-80 80-80zm-64 160c-13.230469 0-24-10.769531-24-24s10.769531-24 24-24v32c0 5.535156.777344 10.871094 2.105469 16zm16-16v-32h1.375c7.769531 0 15.441406-1.535156 22.625-4.328125v4.328125h9.375c7.769531 0 15.441406-1.535156 22.625-4.328125v4.328125h9.375c10.746094 0 21.320312-2.886719 30.625-8.089844v40.089844c0 5.617188-1.023438 10.984375-2.800781 16h-45.199219v16h35.679688c-8.792969 9.792969-21.503907 16-35.679688 16-26.472656 0-48-21.527344-48-48zm48 64c8.488281 0 16.585938-1.695312 24-4.710938v8.710938l-24 18-24-18v-8.710938c7.414062 3.015626 15.511719 4.710938 24 4.710938zm-97 31.207031 43.105469-9.941406 7.933593 47.636719 17.082032-10.246094 4.773437 14.320312-7.253906 87.023438h-40.640625v-88h-16v88h-40v-17.472656c9.289062-3.3125 16-12.113282 16-22.527344v-81.726562c4.449219-3.351563 9.542969-5.800782 15-7.066407zm-103 112.792969h56v16h-56zm-128-16c-4.414062 0-8-3.585938-8-8v-144c0-4.414062 3.585938-8 8-8h192c4.414062 0 8 3.585938 8 8v144c0 4.414062-3.585938 8-8 8h-64v-16c0-17.648438-14.351562-32-32-32s-32 14.351562-32 32v16zm80-16c0-8.824219 7.175781-16 16-16s16 7.175781 16 16v48h-32zm376 48h-40v-88h-16v88h-40.640625l-7.246094-87.023438 4.765625-14.320312 16.738282 10.046875 9.429687-47.167969 41.953125 9.679688c18.246094 4.210937 31 20.234375 31 38.96875zm0 0" />
-                            <path
-                                d="m200 163.527344c0-10.34375-6.59375-19.496094-16.40625-22.765625l-31.59375-10.53125v-10.4375c9.65625-7.3125 16-18.785157 16-31.792969v-16c0-22.054688-17.945312-40-40-40s-40 17.945312-40 40v16c0 13.015625 6.34375 24.488281 16 31.792969v10.4375l-31.59375 10.53125c-9.8125 3.277343-16.40625 12.421875-16.40625 22.765625v44.472656h144zm-96-91.527344c0-13.230469 10.769531-24 24-24s24 10.769531 24 24v16c0 13.230469-10.769531 24-24 24s-24-10.769531-24-24zm80 120h-112v-28.472656c0-3.449219 2.191406-6.496094 5.472656-7.589844l42.527344-14.167969v-14.578125c2.585938.527344 5.265625.808594 8 .808594s5.414062-.28125 8-.808594v14.578125l42.527344 14.167969c3.28125 1.09375 5.472656 4.152344 5.472656 7.589844zm0 0" />
-                            <path
-                                d="m128 256c70.574219 0 128-57.425781 128-128s-57.425781-128-128-128-128 57.425781-128 128 57.425781 128 128 128zm0-240c61.761719 0 112 50.238281 112 112s-50.238281 112-112 112-112-50.238281-112-112 50.238281-112 112-112zm0 0" />
-                            <path d="m296 48h16v16h-16zm0 0" />
-                            <path d="m344 48h16v16h-16zm0 0" />
-                            <path d="m392 48h16v16h-16zm0 0" /></svg>
-                        <p class="product-title">Shopify Integration Services</p>
-                        <p class="product-discription ">We have extensive Shopify experience in integrating third-party
-                            applications, shopping carts, and APIs to expedite the functionality of store and reduce
-                            costs.
-                            <!-- <a href="#">how we calculate uptime</a>.</p> -->
-                    </li>
-                    <li class="product-cols">
-                        <svg class="icon product-icon" id="icons" enable-background="new 0 0 64 64" height="512"
-                            viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="m8.004 18.998h19.002c.553 0 1-.447 1-1s-.447-1-1-1h-19.002c-.553 0-1 .447-1 1s.447 1 1 1z" />
-                            <path
-                                d="m30.006 20.998h-20.002c-.553 0-1 .447-1 1s.447 1 1 1h20.002c.553 0 1-.447 1-1s-.447-1-1-1z" />
-                            <path
-                                d="m24.008 45.014h-14.004c-.553 0-1 .447-1 1s.447 1 1 1h14.004c.553 0 1-.447 1-1s-.447-1-1-1z" />
-                            <path
-                                d="m34.006 22.998h2c.553 0 1-.447 1-1s-.447-1-1-1h-2c-.553 0-1 .447-1 1s.447 1 1 1z" />
-                            <path
-                                d="m14.004 49.002h-6c-.553 0-1 .447-1 1s.447 1 1 1h6c.553 0 1-.447 1-1s-.447-1-1-1z" />
-                            <path
-                                d="m35.012 29.998c0 .553.447 1 1 1h23.002c.553 0 1-.447 1-1s-.447-1-1-1h-23.002c-.553 0-1 .447-1 1z" />
-                            <path
-                                d="m51.016 34.998c.553 0 1-.447 1-1s-.447-1-1-1h-13.002c-.553 0-1 .447-1 1s.447 1 1 1z" />
-                            <path
-                                d="m53.008 36.998h-9.995c-.553 0-1 .447-1 1s.447 1 1 1h9.995c.553 0 1-.447 1-1s-.447-1-1-1z" />
-                            <path
-                                d="m39.013 36.998h-3.001c-.553 0-1 .447-1 1s.447 1 1 1h3.001c.553 0 1-.447 1-1s-.448-1-1-1z" />
-                            <path
-                                d="m63 24.998h-11.032v-10.909c.003-.03.018-.056.018-.087s-.015-.057-.018-.087v-1.913c0-1.654-1.346-3-3-3h-45.968c-1.654 0-3 1.346-3 3v2c0 .031.015.057.018.087v39.907c0 .553.447 1 1 1h2.972c.004 0 .006.002.01.002s.006-.002.01-.002h46.976c.553 0 1-.447 1-1v-10.99h11.014c.553 0 1-.447 1-1v-16.008c0-.553-.447-1-1-1zm-60-13.996h1.02c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1h2.989c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1h2.989c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1h38.938c.552 0 1 .448 1 1v1h-39.939-3-3-2.03v-1c0-.552.448-1 1-1zm-.982 4h.982v37.994h-.982zm47.967 37.994h-44.985v-37.994h44.968v9.996h-17.96c-.553 0-1 .447-1 1v16.008c0 .553.447 1 1 1h17.978v9.99zm12.015-11.99h-28.992v-14.008h28.992z" />
-                            <path
-                                d="m12.034 26.998c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m12.034 30.996c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m12.034 34.994c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m12.034 38.992c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m16.034 26.998c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m20.034 26.998c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m24.034 24.998h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1z" />
-                            <path
-                                d="m28.034 24.998h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1z" />
-                            <path
-                                d="m12.034 43.014c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m16.034 43.014c.552 0 1-.447 1-1s-.448-1-1-1h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1z" />
-                            <path
-                                d="m20.034 41.014h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1z" />
-                            <path
-                                d="m24.034 41.014h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1z" />
-                            <path
-                                d="m28.034 41.014h-.011c-.552 0-.994.447-.994 1s.452 1 1.005 1c.552 0 1-.447 1-1s-.448-1-1-1z" />
-                            <path
-                                d="m20.002 34.996h.998v.998c0 .553.447 1 1 1s1-.447 1-1v-.998h1c.553 0 1-.447 1-1s-.447-1-1-1h-1v-1c0-.553-.447-1-1-1s-1 .447-1 1v1h-.998c-.553 0-1 .447-1 1s.447 1 1 1z" />
-                        </svg>
-                        <p class="product-title">Shopify Module Development</p>
-                        <p class="product-discription ">We devise custom Shopify modules to bring agility to your
-                            storefront and help you to deliver your customers with flawless user experience.</p>
-                    </li>
-                    <li class="product-cols">
-                        <svg class="icon product-icon" id="_x33_0" enable-background="new 0 0 64 64" height="512"
-                            viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <path
-                                    d="m35 11h-6v8h-2v-12h-6v12h-2v-10h-6v10h-2v-6h-6v8h30zm-26 8h-2v-4h2zm14-10h2v10h-2zm-8 2h2v8h-2zm18 8h-2v-6h2z" />
-                                <path
-                                    d="m19.181 41.427-1.102 1.573h-13.079v14h14v-11.828l1.819-2.599zm-2.181 13.573h-10v-10h9.679l-3.815 5.45-2.157-2.157-1.414 1.414 3.843 3.843 3.864-5.521z" />
-                                <path d="m21 53h6v2h-6z" />
-                                <path d="m29 53h6v2h-6z" />
-                                <path d="m21 49h14v2h-14z" />
-                                <path d="m21 45h14v2h-14z" />
-                                <path
-                                    d="m62.934 25.226h-1c-2.192 0-4.15-1.31-4.989-3.336-.838-2.023-.378-4.331 1.226-5.935l.693-.707-9.186-9.186-.754-.659-.707.707c-1.549 1.549-3.857 2.009-5.882 1.171s-3.335-2.796-3.335-5.055v-1.226h-38v62h38v-.841c0-2.192 1.31-4.15 3.335-4.989 2.022-.836 4.332-.377 5.929 1.219l.707.707 9.192-9.192.66-.754-.707-.707c-1.55-1.549-2.01-3.857-1.172-5.882s2.796-3.335 5.056-3.335h1v-13zm-45.934 2.156-4.554 2.277c-.891.446-1.446 1.344-1.446 2.341s.555 1.895 1.447 2.342l4.553 2.276v.382h-10v-10h10zm-3.657 5.171c-.212-.106-.343-.318-.343-.553s.131-.447.342-.553l1.658-.829v2.763zm3.657 1.829v-4.763l4-2v8.764zm26-7.382v4h-20v-4zm2 10v-10h2v10zm-22-4h20v4h-20zm16 6h12.879c-2.067 6.059-6.837 10.892-12.879 13.029zm13-2h-3v-10h3c1.654 0 3 1.346 3 3v4c0 1.654-1.346 3-3 3zm-13-12v-12.574c5.869 2.08 10.572 6.728 12.719 12.574zm-36-22h34v22h-15.236l-2.764 1.382v-1.382h-14v14h14v-1.382l2.764 1.382h15.236v22h-34zm58 34.284c-2.618.328-4.876 2.026-5.903 4.512-1.021 2.469-.635 5.245.99 7.355l-7.157 7.157c-2.082-1.617-4.877-2.013-7.359-.986-.999.413-1.864 1.031-2.57 1.785v-2.98c7.306-2.334 13.022-8.228 15.119-15.616 1.695-.8 2.88-2.514 2.88-4.511v-4c0-2.062-1.255-3.834-3.041-4.598-2.218-7.135-7.858-12.808-14.959-15.079v-2.978c.707.754 1.572 1.371 2.57 1.784 2.467 1.021 5.239.636 7.354-.991l7.158 7.159c-1.617 2.081-2.014 4.876-.986 7.358 1.022 2.47 3.26 4.163 5.903 4.506v10.123z" />
-                            </g>
-                        </svg>
-                        <p class="product-title">Shopify Store Setup</p>
-                        <p class="product-discription ">We design and develop intuitive Shopify online stores that are
-                            tailored to the custom requirements of your business and customers.</p>
-                    </li>
-                    <li class="product-cols">
-                        <svg class="icon product-icon" fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80px" height="80px"><path d="M 36.628906 7.0019531 C 35.603376 7.0394724 34.577953 7.4380094 33.609375 8.0585938 C 32.317937 8.8860395 31.073928 10.126821 29.894531 11.666016 C 27.658697 14.583936 25.668151 18.599469 24.375 23.003906 L 16.769531 25.490234 A 1.0001 1.0001 0 0 0 16.087891 26.3125 L 11.007812 65.955078 A 1.0001 1.0001 0 0 0 11.8125 67.064453 L 48.041016 73.982422 A 1.0001546 1.0001546 0 0 0 48.164062 73.996094 A 1.0001 1.0001 0 0 0 48.707031 73.943359 L 68.216797 69.611328 A 1.0001 1.0001 0 0 0 68.990234 68.492188 C 68.990234 68.492188 67.267629 56.507182 65.541016 44.478516 C 64.677709 38.464182 63.813039 32.439352 63.162109 27.896484 C 62.836645 25.625051 62.564886 23.724404 62.373047 22.380859 C 62.277127 21.709087 62.200834 21.176078 62.148438 20.806641 C 62.122237 20.621922 62.101861 20.47862 62.087891 20.378906 C 62.073921 20.279196 62.058429 20.147925 62.068359 20.240234 A 1.0001 1.0001 0 0 0 61.992188 19.951172 C 61.716963 19.316322 61.147259 18.959312 60.765625 18.828125 A 1.0001 1.0001 0 0 0 60.441406 18.773438 C 60.555891 18.773438 60.375826 18.770036 60.224609 18.759766 C 60.07339 18.749536 59.866315 18.734677 59.623047 18.716797 C 59.13651 18.681047 58.505743 18.631817 57.882812 18.583984 C 56.825671 18.502814 56.082985 18.444612 55.792969 18.421875 C 55.590105 18.21339 55.07248 17.681896 54.308594 16.904297 C 53.858314 16.445933 53.394731 15.976715 53.015625 15.597656 C 52.666491 15.248566 52.457528 15.034987 52.253906 14.857422 L 52.25 14.855469 C 51.99794 14.601021 51.7074 14.426399 51.357422 14.361328 A 1.0001 1.0001 0 0 0 51.091797 14.316406 A 1.0001 1.0001 0 0 0 50.607422 14.425781 L 47.625 15.400391 C 47.230606 13.707452 46.657673 12.24241 45.861328 11.091797 C 45.037953 9.9021276 43.938753 9.0275947 42.613281 8.7421875 C 41.899742 8.5888179 41.183913 8.6692103 40.494141 8.8867188 C 39.718168 7.9780885 38.771583 7.3302987 37.654297 7.0898438 L 37.652344 7.0898438 C 37.312565 7.0169388 36.97075 6.9894467 36.628906 7.0019531 z M 36.689453 9.0019531 C 36.88092 8.9938492 37.062451 9.0084518 37.232422 9.0449219 C 37.734254 9.1529229 38.210996 9.4198067 38.658203 9.8457031 C 37.884726 10.420674 37.154022 11.163676 36.451172 12.044922 C 34.712729 14.224611 33.138463 17.239037 31.830078 20.564453 L 26.705078 22.242188 C 27.930415 18.581158 29.654682 15.266188 31.482422 12.880859 C 32.561526 11.472554 33.676438 10.391945 34.6875 9.7441406 C 35.445797 9.2582875 36.115053 9.0262649 36.689453 9.0019531 z M 41.769531 10.652344 C 41.913782 10.651561 42.055118 10.667552 42.193359 10.697266 C 42.929887 10.855858 43.598172 11.336638 44.216797 12.230469 C 44.835421 13.1243 45.36185 14.416583 45.716797 16.003906 L 45.912109 15.960938 L 43.236328 16.835938 C 42.991387 14.433034 42.47347 12.330048 41.646484 10.666016 C 41.686909 10.663357 41.729706 10.65256 41.769531 10.652344 z M 39.820312 11.472656 C 39.821741 11.475462 39.822792 11.477657 39.824219 11.480469 C 40.561166 12.932158 41.08666 15.006899 41.296875 17.466797 L 41.308594 17.464844 L 34.34375 19.744141 C 35.461391 17.183499 36.726374 14.907004 38.013672 13.292969 C 38.626018 12.525198 39.241817 11.911548 39.820312 11.472656 z M 49.992188 16.732422 L 49.839844 19.943359 A 1.0001226 1.0001226 0 0 0 49.880859 20.273438 L 49.880859 20.275391 L 49.882812 20.277344 A 1.0001226 1.0001226 0 0 0 50.486328 20.923828 L 50.492188 20.929688 L 50.509766 20.933594 A 1.0001226 1.0001226 0 0 0 50.839844 20.990234 L 50.841797 20.990234 A 1.0001226 1.0001226 0 0 0 51.634766 20.591797 L 51.640625 20.589844 L 51.642578 20.583984 A 1.0001226 1.0001226 0 0 0 51.837891 20.037109 L 51.962891 17.376953 C 52.26016 17.675747 52.561281 17.977383 52.882812 18.304688 C 53.778753 19.216711 54.623047 20.087891 54.623047 20.087891 A 1.0001 1.0001 0 0 0 55.261719 20.386719 C 55.261719 20.386719 56.482329 20.482289 57.730469 20.578125 C 58.354538 20.626045 58.98585 20.674875 59.476562 20.710938 C 59.721919 20.728967 59.931532 20.743196 60.089844 20.753906 C 60.103924 20.754859 60.108974 20.754859 60.121094 20.755859 C 60.134244 20.849349 60.147749 20.945317 60.167969 21.087891 C 60.220539 21.458536 60.296613 21.990018 60.392578 22.662109 C 60.584508 24.006292 60.858105 25.908089 61.183594 28.179688 C 61.83457 32.722882 62.697228 38.747302 63.560547 44.761719 C 65.221175 56.330696 66.752738 66.994775 66.876953 67.859375 L 49.402344 71.740234 L 49.529297 69.046875 A 1.0001688 1.0001688 0 0 0 49.390625 68.488281 L 49.539062 67.654297 L 48.927734 67 L 48.580078 66.9375 L 47.779297 67.339844 L 47.621094 68.220703 L 47.755859 68.365234 A 1.0001688 1.0001688 0 0 0 47.53125 68.951172 L 47.396484 71.822266 L 13.111328 65.277344 L 17.992188 27.193359 L 49.992188 16.732422 z M 50.650391 22.986328 L 49.849609 23.388672 L 49.691406 24.269531 L 50.304688 24.923828 L 50.650391 24.986328 L 51.451172 24.585938 L 51.609375 23.703125 L 50.998047 23.048828 L 50.650391 22.986328 z M 50.462891 26.982422 L 49.662109 27.382812 L 49.503906 28.265625 L 50.115234 28.919922 L 50.462891 28.982422 L 51.263672 28.580078 L 51.421875 27.699219 L 50.808594 27.044922 L 50.462891 26.982422 z M 36.699219 29.117188 C 32.24463 29.120088 28.787057 30.672395 26.492188 33.068359 C 24.1952 35.466533 23.066406 38.665784 23.066406 41.888672 C 23.066406 45.782562 25.077635 48.001305 26.859375 49.533203 C 27.750245 50.299152 28.578828 50.936613 29.126953 51.5625 C 29.675078 52.188387 29.955078 52.731097 29.955078 53.546875 C 29.955078 53.842463 29.83329 54.260541 29.597656 54.542969 C 29.362023 54.825397 29.060053 55.029297 28.427734 55.029297 C 27.423013 55.029297 26.040496 54.419522 24.970703 53.751953 C 23.90091 53.084384 23.154297 52.421875 23.154297 52.421875 A 1.0001 1.0001 0 0 0 21.53125 52.886719 L 19.882812 58.453125 A 1.0001 1.0001 0 0 0 20.056641 59.355469 C 20.056641 59.355469 23.496574 63.649322 30.076172 63.650391 C 32.881964 63.650391 35.397215 62.540339 37.164062 60.580078 C 38.930912 58.619817 39.945312 55.840999 39.945312 52.570312 C 39.945312 48.317402 37.551391 45.703331 35.361328 43.929688 C 34.266297 43.042865 33.210091 42.32276 32.5 41.6875 C 31.789909 41.05224 31.517578 40.60197 31.517578 40.199219 C 31.517578 40.000101 31.558218 39.477788 31.878906 39.052734 C 32.199593 38.627681 32.803472 38.152344 34.474609 38.152344 C 36.696505 38.152344 38.648438 39.195312 38.648438 39.195312 A 1.0001 1.0001 0 0 0 40.080078 38.625 L 42.425781 31.367188 A 1.0001 1.0001 0 0 0 41.992188 30.205078 C 41.992188 30.205078 41.45013 29.884576 40.5625 29.617188 C 39.675752 29.350064 38.381733 29.098007 36.703125 29.117188 L 36.699219 29.117188 z M 50.273438 30.978516 L 49.472656 31.378906 L 49.314453 32.261719 L 49.927734 32.916016 L 50.273438 32.978516 L 51.076172 32.576172 L 51.232422 31.693359 L 50.621094 31.039062 L 50.273438 30.978516 z M 36.710938 31.117188 A 1.0001 1.0001 0 0 0 36.722656 31.117188 C 38.192609 31.099927 39.277755 31.318389 39.984375 31.53125 C 40.169075 31.58689 40.11094 31.583409 40.238281 31.630859 L 38.513672 36.970703 C 37.597517 36.591447 36.27718 36.152344 34.474609 36.152344 C 32.371746 36.152344 30.998016 36.90021 30.283203 37.847656 C 29.56839 38.795103 29.517578 39.796336 29.517578 40.199219 C 29.517578 41.450968 30.29781 42.401229 31.167969 43.179688 C 32.038128 43.958146 33.089594 44.664822 34.101562 45.484375 C 36.125501 47.123481 37.945312 49.039224 37.945312 52.570312 C 37.945312 55.430627 37.071636 57.693745 35.677734 59.240234 C 34.283832 60.786724 32.365379 61.650391 30.076172 61.650391 C 24.829008 61.649538 22.401354 58.91876 21.978516 58.417969 L 23.046875 54.814453 C 23.394475 55.077329 23.405548 55.133116 23.912109 55.449219 C 25.132317 56.210649 26.720456 57.029297 28.427734 57.029297 C 29.590415 57.029297 30.552696 56.519541 31.132812 55.824219 C 31.71293 55.128897 31.955078 54.306287 31.955078 53.546875 C 31.955078 52.200153 31.376375 51.095145 30.632812 50.246094 C 29.88925 49.397043 28.995443 48.730426 28.164062 48.015625 C 26.501303 46.586023 25.066406 45.139782 25.066406 41.888672 C 25.066406 39.131559 26.027283 36.443498 27.935547 34.451172 C 29.84381 32.458845 32.706475 31.117187 36.710938 31.117188 z M 50.085938 34.972656 L 49.285156 35.375 L 49.126953 36.255859 L 49.738281 36.912109 L 50.085938 36.972656 L 50.886719 36.572266 L 51.044922 35.689453 L 50.433594 35.035156 L 50.085938 34.972656 z M 49.898438 38.96875 L 49.095703 39.371094 L 48.939453 40.251953 L 49.550781 40.90625 L 49.898438 40.96875 L 50.699219 40.568359 L 50.857422 39.685547 L 50.244141 39.03125 L 49.898438 38.96875 z M 49.708984 42.964844 L 48.908203 43.365234 L 48.75 44.248047 L 49.363281 44.902344 L 49.708984 44.964844 L 50.509766 44.5625 L 50.667969 43.681641 L 50.056641 43.027344 L 49.708984 42.964844 z M 49.521484 46.960938 L 48.720703 47.361328 L 48.5625 48.244141 L 49.173828 48.898438 L 49.521484 48.960938 L 50.322266 48.558594 L 50.480469 47.675781 L 49.869141 47.021484 L 49.521484 46.960938 z M 49.332031 50.955078 L 48.53125 51.357422 L 48.373047 52.238281 L 48.986328 52.892578 L 49.332031 52.955078 L 50.134766 52.554688 L 50.291016 51.671875 L 49.679688 51.017578 L 49.332031 50.955078 z M 49.144531 54.951172 L 48.34375 55.353516 L 48.185547 56.234375 L 48.796875 56.888672 L 49.144531 56.951172 L 49.945312 56.548828 L 50.103516 55.667969 L 49.492188 55.013672 L 49.144531 54.951172 z M 48.957031 58.947266 L 48.15625 59.347656 L 47.998047 60.230469 L 48.609375 60.884766 L 48.957031 60.947266 L 49.757812 60.544922 L 49.916016 59.664062 L 49.302734 59.009766 L 48.957031 58.947266 z M 48.767578 62.941406 L 47.966797 63.34375 L 47.808594 64.226562 L 48.421875 64.880859 L 48.767578 64.941406 L 49.568359 64.541016 L 49.726562 63.658203 L 49.115234 63.003906 L 48.767578 62.941406 z"/></svg>
-                        <p class="product-title">Shopify Migration</p>
-                        <p class="product-discription ">Our Shopify Migration Expert assures quick and seamless migration of your store from other platforms to Shopify without any loss of data.</p>
-                    </li>
-                    <li class="product-cols">
-                    <svg class="icon product-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 480.006 480.006" style="enable-background:new 0 0 480.006 480.006;" xml:space="preserve"><g><g><rect x="40.003" y="48.006" width="104" height="16"/></g></g><g><g><rect x="40.003" y="80.006" width="104" height="16"/></g></g><g><g><rect x="40.003" y="112.006" width="72" height="16"/></g></g><g><g><rect x="40.003" y="144.006" width="72" height="16"/></g></g><g><g><rect x="0.003" y="464.006" width="480" height="16"/></g></g><g><g><path d="M463.163,68.43l-32-64c-1.973-3.954-6.776-5.56-10.73-3.587c-0.002,0.001-0.004,0.002-0.006,0.003l-64,32c-3.954,1.975-5.559,6.782-3.584,10.736s6.782,5.559,10.736,3.584l46.352-23.16l-12.648,36.112C341.69,218.446,198.501,329.522,31.323,344.006l1.36,16C206.16,344.978,354.737,229.701,412.395,65.398l12.912-36.896l23.536,47.08c1.975,3.954,6.782,5.559,10.736,3.584C463.534,77.191,465.138,72.385,463.163,68.43z"/></g></g><g><g><path d="M96.003,384.006h-56c-4.418,0-8,3.582-8,8v48c0,4.418,3.582,8,8,8h56c4.418,0,8-3.582,8-8v-48C104.003,387.588,100.421,384.006,96.003,384.006z M88.003,432.006h-40v-32h40V432.006z"/></g></g><g><g><path d="M184.003,360.006h-56c-4.418,0-8,3.582-8,8v72c0,4.418,3.582,8,8,8h56c4.418,0,8-3.582,8-8v-72C192.003,363.588,188.421,360.006,184.003,360.006z M176.003,432.006h-40v-56h40V432.006z"/></g></g><g><g><path d="M272.003,320.006h-56c-4.418,0-8,3.582-8,8v112c0,4.418,3.582,8,8,8h56c4.418,0,8-3.582,8-8v-112C280.003,323.588,276.421,320.006,272.003,320.006z M264.003,432.006h-40v-96h40V432.006z"/></g></g><g><g><path d="M360.003,264.006h-56c-4.418,0-8,3.582-8,8v168c0,4.418,3.582,8,8,8h56c4.418,0,8-3.582,8-8v-168C368.003,267.588,364.421,264.006,360.003,264.006z M352.003,432.006h-40v-152h40V432.006z"/></g></g><g><g><path d="M448.003,152.006h-56c-4.418,0-8,3.582-8,8v280c0,4.418,3.582,8,8,8h56c4.418,0,8-3.582,8-8v-280C456.003,155.588,452.421,152.006,448.003,152.006z M440.003,432.006h-40v-264h40V432.006z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-                        <p class="product-title">Shopify Upgrade and Maintenance</p>
-                        <p class="product-discription ">Our 24X7 Support team will provide you with extensive Shopify support, upgrade, and maintenance services to ensure a seamless customer experience.</p>
-                    </li>
-                </ul>
-            </div>
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <span class="mobile-nav-close" id="mobileNavClose">✕</span>
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#work" onclick="closeMobileNav()">Work</a>
+  <a href="#process" onclick="closeMobileNav()">Process</a>
+  <a href="#why" onclick="closeMobileNav()">Why Us</a>
+  <a href="#contact" class="btn btn-red" onclick="closeMobileNav()" style="font-size:.95rem;margin-top:8px">Book a Call →</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M5 19L19 5M19 5H9M19 5V15" stroke="#E8194B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      Checkout Masters
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#why">Why Us</a>
+    </div>
+    <div class="nav-right">
+      <a href="mailto:bhupinder@checkoutmasters.com" class="btn btn-ghost">Contact</a>
+      <a href="#contact" class="btn btn-red">Book a Call →</a>
+      <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Trusted by 7-figure ecommerce brands
+      </div>
+      <h1>We Build Ecommerce<br>Experiences That<br><span class="accent">Convert.</span></h1>
+      <p class="hero-sub">From Shopify Plus engineering to conversion rate optimization — we partner with ambitious DTC brands to build storefronts that sell more, load faster, and scale further.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-red" style="font-size:.95rem;padding:14px 28px">Book Discovery Call →</a>
+        <div class="hero-divider"></div>
+        <a href="#work" class="btn btn-ghost-inv" style="font-size:.95rem;padding:13px 28px">View Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num"><span data-count="50" data-suffix="+">0+</span></div>
+          <div class="hero-stat-label">Brands Scaled</div>
         </div>
-    </section>
-    <!-----------------==================== 7 Reliability and support information section end ===================----------------->
-
-    <!-----------------==================== 1 Checklist section start ===================----------------->
-    <section class="section">
-        <div class="container checklist">
-            <div class="section-head  checklist-left-side ">
-                <div class="checklist-title title ">
-                    <span class="blue">Limitless customization</span>
-                </div>
-                <div class="checklist-heading bg-h2">
-                    <h2>Tailored Shopify Services to Fuel Your Growth <span class="blue"> Online and <br> everywhere.</span></h2>
-                    
-                </div>
-                <div class="checklist-discription discription">
-                    <p class="light-black">When it comes to setting up a web store or empowering a simple website with the customer-centric features, Emavens is a name to be reckoned as a top <b class="bold--txt">Shopify development company.</b> Over the years, our agile-trained Shopify developers have leveraged the power of Shopify to create extremely persuasive shopping experiences. This has helped our clients to augment their business conversions
-                    </p>
-                </div>
-
-            </div>
-            <ul class="section-body checklist-right-side animation">
-                <li class="check-col">
-                    <svg class="check-icon" enable-background="new 0 0 426.667 426.667" version="1.1"
-                        viewBox="0 0 426.67 426.67" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="m421.88 56.307c-6.548-6.78-17.352-6.968-24.132-0.42-0.142 0.137-0.282 0.277-0.42 0.42l-278.07 278.07-90.334-90.334c-6.78-6.548-17.584-6.36-24.132 0.42-6.388 6.614-6.388 17.099 0 23.713l102.4 102.4c6.665 6.663 17.468 6.663 24.132 0l290.13-290.13c6.78-6.549 6.968-17.353 0.42-24.133z" />
-                    </svg>
-                    <div class="check-info">
-                        <h3>Customize your store, checkout, and back end with the Shopify App Store and APIs</h3>
-                    </div>
-                </li>
-                <li class="check-col">
-                    <svg class="check-icon" enable-background="new 0 0 426.667 426.667" version="1.1"
-                        viewBox="0 0 426.67 426.67" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="m421.88 56.307c-6.548-6.78-17.352-6.968-24.132-0.42-0.142 0.137-0.282 0.277-0.42 0.42l-278.07 278.07-90.334-90.334c-6.78-6.548-17.584-6.36-24.132 0.42-6.388 6.614-6.388 17.099 0 23.713l102.4 102.4c6.665 6.663 17.468 6.663 24.132 0l290.13-290.13c6.78-6.549 6.968-17.353 0.42-24.133z" />
-                    </svg>
-                    <div class="check-info">
-                        <h3>Launch your online store 50% faster than traditional enterprise platforms</h3>
-                    </div>
-                </li>
-                <li class="check-col">
-                    <svg class="check-icon" enable-background="new 0 0 426.667 426.667" version="1.1"
-                        viewBox="0 0 426.67 426.67" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="m421.88 56.307c-6.548-6.78-17.352-6.968-24.132-0.42-0.142 0.137-0.282 0.277-0.42 0.42l-278.07 278.07-90.334-90.334c-6.78-6.548-17.584-6.36-24.132 0.42-6.388 6.614-6.388 17.099 0 23.713l102.4 102.4c6.665 6.663 17.468 6.663 24.132 0l290.13-290.13c6.78-6.549 6.968-17.353 0.42-24.133z" />
-                    </svg>
-                    <div class="check-info">
-                        <h3>Focus on growth, not your tech stack, with automatic updates and maintenance</h3>
-                    </div>
-                </li>
-                <li class="check-col">
-                    <svg class="check-icon" enable-background="new 0 0 426.667 426.667" version="1.1"
-                        viewBox="0 0 426.67 426.67" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="m421.88 56.307c-6.548-6.78-17.352-6.968-24.132-0.42-0.142 0.137-0.282 0.277-0.42 0.42l-278.07 278.07-90.334-90.334c-6.78-6.548-17.584-6.36-24.132 0.42-6.388 6.614-6.388 17.099 0 23.713l102.4 102.4c6.665 6.663 17.468 6.663 24.132 0l290.13-290.13c6.78-6.549 6.968-17.353 0.42-24.133z" />
-                    </svg>
-                    <div class="check-info">
-                        <h3>Be the first to market with augmented-reality shopping experiences</h3>
-                    </div>
-                </li>
-            </ul>
+        <div class="hero-stat">
+          <div class="hero-stat-num"><span data-count="32" data-suffix="%">0%</span></div>
+          <div class="hero-stat-label">Avg. Conversion Uplift</div>
         </div>
-    </section>
-    <!-----------------==================== 1 Checklist section end ===================----------------->
-
-      <!-----------------==================== 5 Bussiness information section start ===================----------------->
-      <section class="section-sm bg-black">
-        <div class="container">
-            <div class="expand-title white">Expand your business with a global platform in 175 countries and 20
-                languages.</div>
-            <a href="#" class="btn">Let's talk</a>
+        <div class="hero-stat">
+          <div class="hero-stat-num">$<span data-count="100" data-suffix="M+">0M+</span></div>
+          <div class="hero-stat-label">Client Revenue Influenced</div>
         </div>
-    </section>
-    <!-----------------==================== 5 Bussiness information section end ===================----------------->
-
-    <!-----------------==================== 4 Ecommerce section start ===================----------------->
-    <section class="section">
-        <div class="container ecommerce">
-            <div class="ecommerce-left-side">
-                <div class="title blue">
-                    <span>Multi-channel ecommerce</span>
-                </div>
-                <div class="bg-h2">
-                    <h2>Everywhere your customers buy.</h2>
-                    <span class="blue">Today and <br> tomorrow.</span>
-                </div>
-                <div class="discription">
-                    <p class="light-black">Deliver the experience you’re known for across marketplaces, mobile, social,
-                        and in real life. Power immersive shopping experiences anywhere with over 20 channels and
-                        Shopify Point of Sale.</p>
-                </div>
-            </div>
-            <div class="ecommerce-right-side social-icon animation">
-                <svg class="icon" height="682.66669pt" viewBox="-21 -21 682.66669 682.66669" width="682.66669pt"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m604.671875 0h-569.375c-19.496094.0117188-35.30078125 15.824219-35.296875 35.328125v569.375c.0117188 19.496094 15.824219 35.300781 35.328125 35.296875h306.546875v-247.5h-83.125v-96.875h83.125v-71.292969c0-82.675781 50.472656-127.675781 124.222656-127.675781 35.324219 0 65.679688 2.632812 74.527344 3.808594v86.410156h-50.855469c-40.125 0-47.894531 19.066406-47.894531 47.050781v61.699219h95.9375l-12.5 96.875h-83.4375v247.5h162.796875c19.507813.003906 35.324219-15.804688 35.328125-35.3125 0-.003906 0-.007812 0-.015625v-569.375c-.007812-19.496094-15.824219-35.30078125-35.328125-35.296875zm0 0" />
-                </svg>
-                <svg class="icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                    style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                    <g>
-                        <g>
-                            <path d="M256,0C114.624,0,0,106.112,0,237.024c0,74.592,37.216,141.12,95.392,184.576V512l87.168-47.84
-                            c23.264,6.432,47.904,9.92,73.44,9.92c141.376,0,256-106.112,256-237.024S397.376,0,256,0z M281.44,319.2l-65.184-69.536
-                            L89.056,319.2l139.936-148.544l66.784,69.536l125.6-69.536L281.44,319.2z" />
-                        </g>
-                </svg>
-                <svg class="icon" id="Bold" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24"
-                    width="512" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m12.004 5.838c-3.403 0-6.158 2.758-6.158 6.158 0 3.403 2.758 6.158 6.158 6.158 3.403 0 6.158-2.758 6.158-6.158 0-3.403-2.758-6.158-6.158-6.158zm0 10.155c-2.209 0-3.997-1.789-3.997-3.997s1.789-3.997 3.997-3.997 3.997 1.789 3.997 3.997c.001 2.208-1.788 3.997-3.997 3.997z" />
-                    <path
-                        d="m16.948.076c-2.208-.103-7.677-.098-9.887 0-1.942.091-3.655.56-5.036 1.941-2.308 2.308-2.013 5.418-2.013 9.979 0 4.668-.26 7.706 2.013 9.979 2.317 2.316 5.472 2.013 9.979 2.013 4.624 0 6.22.003 7.855-.63 2.223-.863 3.901-2.85 4.065-6.419.104-2.209.098-7.677 0-9.887-.198-4.213-2.459-6.768-6.976-6.976zm3.495 20.372c-1.513 1.513-3.612 1.378-8.468 1.378-5 0-7.005.074-8.468-1.393-1.685-1.677-1.38-4.37-1.38-8.453 0-5.525-.567-9.504 4.978-9.788 1.274-.045 1.649-.06 4.856-.06l.045.03c5.329 0 9.51-.558 9.761 4.986.057 1.265.07 1.645.07 4.847-.001 4.942.093 6.959-1.394 8.453z" />
-                    <circle cx="18.406" cy="5.595" r="1.439" /></svg>
-                <svg class="icon" enable-background="new 0 0 512.853 512.853" version="1.1" viewBox="0 0 512.85 512.85"
-                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m500.91 376.75c-64.853-11.093-93.867-75.947-97.28-83.627v-0.853c-3.413-6.827-4.267-11.947-2.56-16.213 3.413-7.68 17.92-12.8 27.307-15.36 2.56-0.853 5.12-1.707 6.827-2.56 17.92-7.68 27.307-17.067 27.307-28.16 0-8.533-6.827-17.067-17.067-20.48-3.413-1.707-7.68-2.56-11.947-2.56-2.56 0-6.827 0.853-11.093 2.56-8.533 3.413-15.36 5.973-20.48 5.973-1.707 0-3.413 0-5.12-0.853 0.853-2.56 0.853-5.12 0.853-8.533v-1.707c1.707-34.987 5.12-78.507-6.827-104.11-34.987-76.8-107.52-82.773-128.85-82.773h-10.24c-21.333 0-93.867 5.973-128 82.773-11.947 25.6-9.387 69.12-6.827 104.11 0.853 3.413 0.853 6.827 0.853 10.24-1.707 0-4.267 0.853-6.827 0.853-6.827 0-13.653-1.707-22.187-5.973-11.947-5.12-34.987 2.56-37.547 17.92-1.707 8.533 1.707 20.48 27.307 30.72 1.707 0.853 4.267 1.707 7.68 2.56 8.533 2.56 23.04 7.68 26.453 15.36 1.707 3.413 0.853 9.387-2.56 16.213-1.707 2.56-31.573 71.68-98.987 82.773-6.825 1.707-11.092 7.68-11.092 14.507 0 2.56 0.853 4.267 1.707 5.973 5.12 13.653 27.307 22.187 67.413 29.013 0.853 2.56 1.707 7.68 2.56 10.24 0.853 3.413 1.707 7.68 2.56 11.947s5.12 11.093 15.36 11.093c3.413 0 7.68-0.853 11.947-1.707 6.827-1.707 15.36-3.413 26.453-3.413 6.827 0 12.8 0.853 19.627 2.56 11.947 1.707 23.04 9.387 34.987 17.92 17.92 12.8 34.133 22.187 67.413 22.187h2.56s2.56 0 3.413 0c29.013 0 54.613-7.68 76.8-22.187 11.947-7.68 23.04-16.213 34.987-17.92 5.973-0.853 12.8-1.707 18.773-1.707 10.24 0 18.773 0.853 26.453 2.56 5.12 0.853 9.387 1.707 12.8 1.707 6.827 0 12.8-4.267 14.507-11.093 0.853-4.267 1.707-7.68 2.56-11.947 0.853-1.707 1.707-6.827 2.56-9.387 40.107-5.973 59.733-15.36 65.707-28.16 0.853-1.707 1.707-4.267 1.707-5.973-1e-3 -6.826-5.121-13.653-11.947-14.506zm-60.587 31.573c-10.24 0.853-11.947 11.093-14.507 22.187-0.853 2.56-1.707 5.973-2.56 9.387-1.707 0-4.267 0-8.533-0.853-8.533-1.707-17.92-3.413-29.867-3.413-6.827 0-13.653 0.853-21.333 1.707-15.36 2.56-29.013 11.947-41.813 21.333-18.774 13.652-40.107 19.625-65.707 19.625h-3.413-0.64-0.213c-28.16 0-41.813-8.533-58.027-19.627-12.8-9.387-25.6-18.773-41.813-21.333-6.827-0.853-14.507-1.707-21.333-1.707-12.8 0-23.04 1.707-29.867 3.413-3.413 0.853-5.973 1.707-8.533 1.707-0.853-3.413-1.707-6.827-2.56-10.24-2.56-11.093-4.267-21.333-14.507-23.04-37.547-5.12-50.347-12.8-54.613-16.213 69.973-14.507 102.4-82.773 106.67-92.16 5.12-11.093 5.973-21.333 2.56-29.867-6.827-15.36-25.6-21.333-37.547-24.747-2.56 0-4.267-0.853-5.973-1.707-14.508-5.972-17.068-11.092-17.068-11.945 0-2.56 5.973-5.973 11.093-5.973h2.56c10.24 5.12 20.48 7.68 29.013 7.68 12.8 0 19.627-5.973 21.333-7.68s2.56-3.413 2.56-5.973c0-5.12-0.853-10.24-0.853-15.36-2.56-33.28-5.12-74.24 5.12-96.427 29.867-67.413 93.867-72.533 112.64-72.533h9.386c18.773 0 82.773 5.12 113.49 70.827 9.387 22.187 6.827 63.147 5.12 96.427v1.707c0 5.12-0.853 9.387-0.853 13.653 0 2.56 0.853 5.12 2.56 6.827s7.68 6.827 20.48 7.68c8.533-0.853 17.067-3.413 27.307-7.68 1.707-0.853 5.973-0.853 9.387 0.853 4.267 1.707 5.973 4.267 5.973 5.12 0 1.707-3.413 6.827-17.067 11.947-1.707 0.853-4.267 1.707-6.827 2.56-11.093 3.413-29.867 9.387-36.693 24.747-4.267 8.533-2.56 18.773 2.56 29.867 3.413 8.533 34.987 78.507 105.81 93.013-4.265 3.411-16.212 10.238-52.905 16.211z" />
-                </svg>
-                <svg class="icon" height="682.66669pt" viewBox="-21 -21 682.66669 682.66669" width="682.66669pt"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m604.671875 0h-569.375c-19.496094.0117188-35.30078125 15.824219-35.296875 35.328125v569.375c.0117188 19.496094 15.824219 35.300781 35.328125 35.296875h306.546875v-247.5h-83.125v-96.875h83.125v-71.292969c0-82.675781 50.472656-127.675781 124.222656-127.675781 35.324219 0 65.679688 2.632812 74.527344 3.808594v86.410156h-50.855469c-40.125 0-47.894531 19.066406-47.894531 47.050781v61.699219h95.9375l-12.5 96.875h-83.4375v247.5h162.796875c19.507813.003906 35.324219-15.804688 35.328125-35.3125 0-.003906 0-.007812 0-.015625v-569.375c-.007812-19.496094-15.824219-35.30078125-35.328125-35.296875zm0 0" />
-                </svg>
-                <svg class="icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                    style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                    <g>
-                        <g>
-                            <path d="M256,0C114.624,0,0,106.112,0,237.024c0,74.592,37.216,141.12,95.392,184.576V512l87.168-47.84
-                            c23.264,6.432,47.904,9.92,73.44,9.92c141.376,0,256-106.112,256-237.024S397.376,0,256,0z M281.44,319.2l-65.184-69.536
-                            L89.056,319.2l139.936-148.544l66.784,69.536l125.6-69.536L281.44,319.2z" />
-                        </g>
-                </svg>
-                <svg class="icon" id="Bold" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24"
-                    width="512" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m12.004 5.838c-3.403 0-6.158 2.758-6.158 6.158 0 3.403 2.758 6.158 6.158 6.158 3.403 0 6.158-2.758 6.158-6.158 0-3.403-2.758-6.158-6.158-6.158zm0 10.155c-2.209 0-3.997-1.789-3.997-3.997s1.789-3.997 3.997-3.997 3.997 1.789 3.997 3.997c.001 2.208-1.788 3.997-3.997 3.997z" />
-                    <path
-                        d="m16.948.076c-2.208-.103-7.677-.098-9.887 0-1.942.091-3.655.56-5.036 1.941-2.308 2.308-2.013 5.418-2.013 9.979 0 4.668-.26 7.706 2.013 9.979 2.317 2.316 5.472 2.013 9.979 2.013 4.624 0 6.22.003 7.855-.63 2.223-.863 3.901-2.85 4.065-6.419.104-2.209.098-7.677 0-9.887-.198-4.213-2.459-6.768-6.976-6.976zm3.495 20.372c-1.513 1.513-3.612 1.378-8.468 1.378-5 0-7.005.074-8.468-1.393-1.685-1.677-1.38-4.37-1.38-8.453 0-5.525-.567-9.504 4.978-9.788 1.274-.045 1.649-.06 4.856-.06l.045.03c5.329 0 9.51-.558 9.761 4.986.057 1.265.07 1.645.07 4.847-.001 4.942.093 6.959-1.394 8.453z" />
-                    <circle cx="18.406" cy="5.595" r="1.439" /></svg>
-                <svg class="icon" enable-background="new 0 0 512.02 512.02" version="1.1" viewBox="0 0 512.02 512.02"
-                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m64 320.01c-35.346 0-64-28.654-64-64s28.654-64 64-64 64 28.654 64 64c0 5.891-4.776 10.667-10.667 10.667h-94.656c4.865 18.842 21.863 32.005 41.323 32 27.093 0 34.624-4.096 44.928-17.259 3.635-4.636 10.34-5.448 14.976-1.813s5.448 10.34 1.813 14.976c-14.326 19.187-38.033 28.955-61.717 25.429zm-41.323-74.667h82.645c-5.891-22.816-29.162-36.537-51.978-30.646-15.029 3.88-26.766 15.617-30.646 30.646h-0.021z"
-                        fill="#F44336" />
-                    <g fill="#2196F3">
-                        <path
-                            d="m192 320.01c-35.346 0-64-28.654-64-64s28.654-64 64-64 64 28.654 64 64-28.654 64-64 64zm0-106.67c-23.564 0-42.667 19.103-42.667 42.667s19.103 42.667 42.667 42.667 42.667-19.103 42.667-42.667-19.103-42.667-42.667-42.667z" />
-                        <path
-                            d="m138.67 320.01c-5.891 0-10.667-4.776-10.667-10.667v-149.33c0-5.891 4.776-10.667 10.667-10.667s10.667 4.776 10.667 10.667v149.33c-1e-3 5.891-4.776 10.667-10.667 10.667z" />
-                    </g>
-                    <g fill="#FFC107">
-                        <path
-                            d="m373.33 320.01c-5.891 0-10.667-4.776-10.667-10.667v-64c0-21.099-29.867-32-42.667-32-13.28-1.865-26.394 4.361-33.344 15.829-2.907 5.124-9.418 6.92-14.541 4.013-5.045-2.863-6.877-9.232-4.125-14.338 10.657-18.284 30.934-28.747 52.011-26.837 22.976 0 64 17.813 64 53.333v64c0 5.891-4.776 10.667-10.667 10.667z" />
-                        <path
-                            d="m309.33 320.01c-46.4 0-53.333-26.731-53.333-42.667-0.04-7.061 2.867-13.819 8.021-18.645 16.192-15.552 53.333-15.445 93.355-13.824 6.272 0.256 11.755 0.469 15.957 0.469 5.891-7e-3 10.672 4.764 10.679 10.655 2e-3 1.885-0.495 3.737-1.441 5.367 1.523 2.634 1.849 5.793 0.896 8.683-11.654 30.659-41.341 50.667-74.134 49.962zm19.712-54.507c-17.207-1.857-34.591 1.097-50.219 8.533-0.991 0.805-1.544 2.031-1.493 3.307 0 10.539 3.797 21.333 32 21.333 22.409 0.733 43.096-11.965 52.587-32.277l-5.397-0.235c-7.254-0.255-17.152-0.661-27.478-0.661z" />
-                    </g>
-                    <g fill="#4CAF50">
-                        <path
-                            d="m437.33 309.34c-3.568-2e-3 -6.898-1.787-8.875-4.757l-64-96c-3.27-4.901-1.947-11.525 2.955-14.795s11.525-1.947 14.795 2.955l64 96c3.264 4.904 1.934 11.526-2.971 14.79-1.749 1.164-3.803 1.785-5.904 1.786v0.021z" />
-                        <path
-                            d="m416 362.68c-5.891 0.01-10.675-4.758-10.685-10.649-3e-3 -1.862 0.481-3.692 1.405-5.309l85.333-149.33c2.946-5.119 9.483-6.882 14.603-3.936 5.119 2.946 6.882 9.483 3.936 14.603l-85.333 149.33c-1.92 3.29-5.449 5.307-9.259 5.291z" />
-                    </g>
-                    <path
-                        d="m64 320.01c-35.346 0-64-28.654-64-64s28.654-64 64-64 64 28.654 64 64c0 5.891-4.776 10.667-10.667 10.667h-94.656c4.865 18.842 21.863 32.005 41.323 32 27.093 0 34.645-4.096 44.928-17.259 3.635-4.636 10.34-5.448 14.976-1.813s5.448 10.34 1.813 14.976c-14.32 19.194-38.031 28.964-61.717 25.429zm-41.323-74.667h82.645c-5.891-22.816-29.162-36.537-51.978-30.646-15.029 3.88-26.766 15.617-30.646 30.646h-0.021z" />
-                    <path
-                        d="m192 320.01c-35.346 0-64-28.654-64-64s28.654-64 64-64 64 28.654 64 64-28.654 64-64 64zm0-106.67c-23.564 0-42.667 19.103-42.667 42.667s19.103 42.667 42.667 42.667 42.667-19.103 42.667-42.667-19.103-42.667-42.667-42.667z" />
-                    <path
-                        d="m138.67 320.01c-5.891 0-10.667-4.776-10.667-10.667v-149.33c0-5.891 4.776-10.667 10.667-10.667s10.667 4.776 10.667 10.667v149.33c-1e-3 5.891-4.776 10.667-10.667 10.667z" />
-                    <path
-                        d="m373.33 320.01c-5.891 0-10.667-4.776-10.667-10.667v-64c0-21.12-29.867-32-42.667-32-13.271-1.844-26.368 4.377-33.323 15.829-2.675 5.248-9.099 7.334-14.347 4.659s-7.334-9.099-4.659-14.347c0.106-0.209 0.22-0.414 0.34-0.616 10.648-18.285 30.915-28.756 51.989-26.859 22.976 0 64 17.813 64 53.333v64c1e-3 5.892-4.775 10.668-10.666 10.668z" />
-                    <path
-                        d="m309.33 320.01c-46.4 0-53.333-26.731-53.333-42.667-0.043-7.062 2.865-13.821 8.021-18.645 16.192-15.552 53.333-15.445 93.355-13.824 6.272 0.256 11.755 0.469 15.957 0.469 5.891 0 10.667 4.776 10.667 10.667 6e-3 1.873-0.487 3.714-1.429 5.333 1.53 2.64 1.856 5.808 0.896 8.704-11.638 30.672-41.336 50.687-74.134 49.963zm19.734-54.507c-17.221-1.858-34.619 1.096-50.261 8.533-0.983 0.81-1.528 2.034-1.472 3.307 0 10.56 3.797 21.333 32 21.333 22.415 0.756 43.114-11.949 52.587-32.277l-5.397-0.213c-7.255-0.299-17.111-0.683-27.457-0.683z" />
-                    <path
-                        d="m437.33 309.34c-3.575 5e-3 -6.915-1.781-8.896-4.757l-64-96c-3.27-4.901-1.947-11.525 2.955-14.795s11.525-1.947 14.795 2.955l64 96c3.264 4.904 1.934 11.526-2.971 14.79-1.749 1.164-3.803 1.785-5.904 1.786l0.021 0.021z" />
-                    <path
-                        d="m416 362.68c-5.891-2e-3 -10.665-4.779-10.663-10.67 1e-3 -1.855 0.485-3.677 1.405-5.287l85.333-149.33c2.946-5.113 9.479-6.871 14.592-3.925s6.871 9.479 3.925 14.592l-85.333 149.33c-1.92 3.289-5.449 5.306-9.259 5.29z" />
-                </svg>
-                <svg class="icon" enable-background="new 0 0 579.148 579.148" version="1.1" viewBox="0 0 579.15 579.15"
-                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="m434.92 38.847c-44.363-25.893-92.817-38.837-145.35-38.837-52.54 0-100.99 12.944-145.36 38.837-44.364 25.894-79.493 61.023-105.38 105.38-25.893 44.369-38.837 92.821-38.837 145.36 0 58.568 15.955 111.73 47.883 159.49 31.922 47.768 73.771 83.08 125.56 105.95-1.01-26.896 0.625-49.137 4.902-66.732l37.326-157.61c-6.285-12.314-9.425-27.645-9.425-45.999 0-21.365 5.404-39.217 16.212-53.538 10.802-14.333 24.003-21.5 39.59-21.5 12.564 0 22.246 4.143 29.034 12.448 6.787 8.292 10.184 18.727 10.184 31.292 0 7.797-1.451 17.289-4.334 28.47-2.895 11.187-6.665 24.13-11.31 38.837-4.651 14.701-7.98 26.451-9.994 35.252-3.525 15.33-0.63 28.463 8.672 39.4 9.295 10.936 21.616 16.4 36.952 16.4 26.898 0 48.955-14.951 66.176-44.865 17.217-29.914 25.826-66.236 25.826-108.97 0-32.925-10.617-59.701-31.859-80.312-21.242-20.606-50.846-30.918-88.795-30.918-42.486 0-76.862 13.642-103.12 40.906-26.267 27.277-39.401 59.896-39.401 97.84 0 22.625 6.414 41.609 19.229 56.941 4.272 5.029 5.655 10.428 4.149 16.205-0.508 1.512-1.511 5.281-3.017 11.309-1.505 6.029-2.515 9.934-3.017 11.689-2.014 8.049-6.787 10.564-14.333 7.541-19.357-8.043-34.064-21.99-44.113-41.85-10.055-19.854-15.08-42.852-15.08-68.996 0-16.842 2.699-33.685 8.103-50.527s13.819-33.115 25.264-48.832c11.432-15.698 25.135-29.596 41.102-41.659 15.961-12.069 35.38-21.738 58.256-29.04 22.871-7.283 47.51-10.93 73.904-10.93 35.693 0 67.744 7.919 96.146 23.751 28.402 15.839 50.086 36.329 65.043 61.463 14.951 25.135 22.436 52.026 22.436 80.692 0 37.705-6.541 71.641-19.607 101.81-13.072 30.166-31.549 53.855-55.43 71.072-23.887 17.215-51.035 25.826-81.445 25.826-15.336 0-29.664-3.58-42.986-10.748-13.33-7.166-22.503-15.648-27.528-25.453-11.31 44.486-18.097 71.018-20.361 79.555-4.78 17.852-14.584 38.457-29.413 61.836 26.897 8.043 54.296 12.062 82.198 12.062 52.534 0 100.99-12.943 145.35-38.83 44.363-25.895 79.492-61.023 105.39-105.39 25.887-44.365 38.838-92.811 38.838-145.35 0-52.54-12.951-100.98-38.838-145.36-25.889-44.334-61.024-79.463-105.39-105.36z" />
-                </svg>
-            </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num"><span data-count="98" data-suffix="%">0%</span></div>
+          <div class="hero-stat-label">Client Retention</div>
         </div>
-    </section>
-    <!-----------------==================== 4 Ecommerce section end ===================----------------->
-  
-   
-    <!-----------------==================== 8 Bussiness growth section start ===================----------------->
-    <section class="section white bg-gray">
-        <div class="container">
-            <div class="section-head">
-                <h2 class="bussines-main-heading">We’re creating the future of commerce–together.</h2>
-            </div>
-            <div class="section-body clients-sale">
-                <!-- <div class="clients">
-                    <h2 class="client-heading">10,000+</h2>
-                    <h3 class="client-info">Businesses trust Shopify to grow bigger, <br> faster</h3>
-                </div> -->
-                <div class="sale">
-                    <h2 class="client-heading">$200B+</h2>
-                    <h3 class="client-info">Total sales on Shopify</h3>
-                </div>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        </div>
-    </section>
-    <!-----------------==================== 8 Bussiness growth section end ===================----------------->
-    <!-----------------==================== 9 Bussiness information section start ===================----------------->
-    <section class="section-sm ">
-        <div class="container">
-            <div class="expand-title">Your customers won’t stand still. <span class="blue">You can’t either.</span>
-            </div>
-            <a href="#footer" class="btn btn-blue ">Let's talk</a>
-        </div>
-    </section>
-    <!-----------------==================== 9 Bussiness information section end ===================----------------->
-    <!-----------------==================== Footer section start ===================----------------->
-    <footer class="footer bg-black gray" id="footer">
-        <div class="container">
-            <div class="footer-head">
-                <!-- <ul class="other-page-link">
-                    <li>
-                        <a href="#">Platform</a>
-                    </li>
-                    <li>
-                        <a href="#">Migration</a>
-                    </li>
-                    <li>
-                        <a href="#">Pricing</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Careers</a>
-                    </li>
-                    <li>
-                        <a href="#">Press</a>
-                    </li>
-                    <li>
-                        <a href="#">Blog</a>
-                    </li>
-                    <li>
-                        <a href="#">Sitemap</a>
-                    </li>
-                </ul> -->
-                <!-- <div class="social-link">
-                    <a href="#">
-                        <svg class="footer-icon" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
-                            <title id="inline-_new/channels/twitter-title">Twitter</title>
-                            <path
-                                d="M25.9371368,8.47811642 C27.038974,7.7917088 27.884428,6.70330781 28.2812115,5.40676008 C27.2495745,6.0439116 26.109585,6.5046945 24.8932911,6.75415282 C23.9226977,5.67369637 22.5354816,5 21.0002348,5 C18.0548806,5 15.6680754,7.48663874 15.6680754,10.5532284 C15.6680754,10.9885888 15.712332,11.4128268 15.8038974,11.817998 C11.3721312,11.5860176 7.44244879,9.37743753 4.80994307,6.01531128 C4.35058989,6.83836487 4.08810237,7.7917088 4.08810237,8.80860898 C4.08810237,10.7343637 5.02970006,12.4344937 6.46117274,13.432327 C5.58672301,13.4037267 4.76416036,13.1510906 4.04384575,12.7379749 L4.04384575,12.8062978 C4.04384575,15.4979055 5.88125844,17.7430305 8.32452897,18.2514806 C7.87585843,18.3817709 7.40582262,18.4469161 6.91747373,18.4469161 C6.57410342,18.4469161 6.23836356,18.413549 5.91483242,18.3484039 C6.59241651,20.5538062 8.56259905,22.1617796 10.8975172,22.2046801 C9.07078711,23.6950744 6.77096907,24.5816842 4.27275929,24.5816842 C3.84240183,24.5816842 3.41662264,24.5578506 3,24.5054167 C5.36086165,26.0800231 8.16428949,27 11.1767917,27 C20.9895522,27 26.3522334,18.5374837 26.3522334,11.1983244 C26.3522334,10.9568106 26.3491812,10.7168857 26.3384986,10.4801387 C27.3808182,9.69680774 28.2873158,8.71804131 29,7.60421782 C28.0431414,8.04593384 27.0145566,8.34464827 25.9371368,8.47811642 Z">
-                            </path>
-                        </svg>
-                    </a>
-                    <a href="#">
-                        <svg class="footer-icon" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
-                            <title id="inline-_new/channels/facebook-title">Facebook</title>
-                            <path
-                                d="M17.9796789,27 L12.6588092,27 L12.6588092,15.4985483 L10,15.4985483 L10,11.535534 L12.6588092,11.535534 L12.6588092,9.15627367 C12.6588092,5.92344105 14.1593172,4 18.4251168,4 L21.9756147,4 L21.9756147,7.96446604 L19.7565535,7.96446604 C18.0959155,7.96446604 17.9861817,8.5182719 17.9861817,9.55184928 L17.9788661,11.535534 L22,11.535534 L21.529364,15.4985483 L17.9788661,15.4985483 L17.9788661,27 L17.9796789,27 Z">
-                            </path>
-                        </svg>
-                    </a>
-                    <a href="#">
-                        <svg class="footer-icon" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
-                            <title id="inline-_new/channels/instagram-title">Instagram</title>
-                            <path
-                                d="M15.5,4 C19.2455224,4 19.6891429,4.01425466 21.1682863,4.08174155 C22.5359538,4.14416135 23.2786994,4.37268132 23.7730464,4.56472941 C24.4277583,4.8191973 24.8950995,5.1232224 25.3859385,5.61406146 C25.8767776,6.10490052 26.1808027,6.57224167 26.4352149,7.2269536 C26.6273187,7.72130064 26.8558386,8.46404621 26.9182585,9.83165802 C26.9857453,11.3108571 27,11.7544776 27,15.5 C27,19.2455224 26.9857453,19.6891429 26.9182585,21.1682863 C26.8558386,22.5359538 26.6273187,23.2786994 26.4352149,23.7730464 C26.1808027,24.4277583 25.8767776,24.8950995 25.3859385,25.3859385 C24.8950995,25.8767776 24.4277583,26.1808027 23.7730464,26.4352149 C23.2786994,26.6273187 22.5359538,26.8558386 21.1682863,26.9182585 C19.6893657,26.9857453 19.2457451,27 15.5,27 C11.7542549,27 11.3106343,26.9857453 9.83171371,26.9182585 C8.46404621,26.8558386 7.72130064,26.6273187 7.22700928,26.4352149 C6.57224167,26.1808027 6.10490052,25.8767776 5.61406146,25.3859385 C5.1232224,24.8950995 4.8191973,24.4277583 4.56478509,23.7730464 C4.37268132,23.2786994 4.14416135,22.5359538 4.08174155,21.168342 C4.01425466,19.6891429 4,19.2455224 4,15.5 C4,11.7544776 4.01425466,11.3108571 4.08174155,9.83171371 C4.14416135,8.46404621 4.37268132,7.72130064 4.56478509,7.2269536 C4.8191973,6.57224167 5.1232224,6.10490052 5.61406146,5.61406146 C6.10490052,5.1232224 6.57224167,4.8191973 7.22700928,4.56472941 C7.72130064,4.37268132 8.46404621,4.14416135 9.83165802,4.08174155 C11.3108571,4.01425466 11.7544776,4 15.5,4 Z M15.5278602,8.31922761 C11.5466907,8.31922761 8.31928329,11.5466351 8.31928329,15.5278045 C8.31928329,19.5089739 11.5466907,22.7363814 15.5278602,22.7363814 C19.5090296,22.7363814 22.7364371,19.5089739 22.7364371,15.5278045 C22.7364371,11.5466351 19.5090296,8.31922761 15.5278602,8.31922761 Z M15.5278602,20.2070689 C12.943605,20.2070689 10.8485958,18.1120597 10.8485958,15.5278045 C10.8485958,12.9435493 12.943605,10.8485401 15.5278602,10.8485401 C18.1121154,10.8485401 20.2071246,12.9435493 20.2071246,15.5278045 C20.2071246,18.1120597 18.1121154,20.2070689 15.5278602,20.2070689 Z M24.6290364,7.98521187 C24.6290364,7.06292054 23.8814148,6.3152989 22.9591234,6.3152989 C22.0368321,6.3152989 21.2891552,7.06292054 21.2891552,7.98521187 C21.2891552,8.9075032 22.0368321,9.65518008 22.9591234,9.65518008 C23.8814148,9.65518008 24.6290364,8.9075032 24.6290364,7.98521187 Z">
-                            </path>
-                        </svg>
-                    </a>
-                    <a href="#">
-                        <svg class="footer-icon" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
-                            <title id="inline-_new/channels/youtube-title">YouTube</title>
-                            <path
-                                d="M30,20.8462698 L30,10.1537302 C30,10.1537302 30,5 25.0024106,5 L5.99588429,5 C5.99588429,5 1,5 1,10.1537302 L1,20.8462698 C1,20.8462698 1,26 5.99588429,26 L25.0024106,26 C25.0024106,26 30,26 30,20.8462698 M21,16.0009173 L12,22 L12,10 L21,16.0009173">
-                            </path>
-                        </svg>
-                    </a>
-                    <a href="#">
-                        <svg class="footer-icon" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg">
-                            <title id="inline-_new/channels/linkedin-title">LinkedIn</title>
-                            <path
-                                d="M9.94871795,13.364532 L9.94871795,26 L5.30769231,26 L5.30769231,13.364532 L9.94871795,13.364532 Z M5,8.51231527 C5,8.16748596 5.06837538,7.84318707 5.20512821,7.53940887 C5.34188103,7.23563067 5.52991333,6.96880246 5.76923077,6.73891626 C6.00854821,6.50903005 6.28632321,6.32840788 6.6025641,6.19704433 C6.918805,6.06568079 7.25640846,6 7.61538462,6 C7.97436077,6 8.31196423,6.06568079 8.62820513,6.19704433 C8.94444603,6.32840788 9.22222103,6.50903005 9.46153846,6.73891626 C9.7008559,6.96880246 9.88888821,7.23563067 10.025641,7.53940887 C10.1623938,7.84318707 10.2307692,8.16748596 10.2307692,8.51231527 C10.2307692,8.85714458 10.1623938,9.18144347 10.025641,9.48522167 C9.88888821,9.78899988 9.7008559,10.0558281 9.46153846,10.2857143 C9.22222103,10.5156005 8.94444603,10.6962227 8.62820513,10.8275862 C8.31196423,10.9589498 7.97436077,11.0246305 7.61538462,11.0246305 C7.25640846,11.0246305 6.918805,10.9589498 6.6025641,10.8275862 C6.28632321,10.6962227 6.00854821,10.5156005 5.76923077,10.2857143 C5.52991333,10.0558281 5.34188103,9.78899988 5.20512821,9.48522167 C5.06837538,9.18144347 5,8.85714458 5,8.51231527 Z M13.1282051,13.364532 L17.7692308,13.364532 L17.7692308,14.9655172 C18.4017126,14.2265973 19.0427318,13.7298863 19.6923077,13.4753695 C20.3418836,13.2208526 21.1025597,13.0935961 21.974359,13.0935961 C22.8974405,13.0935961 23.6880309,13.2372728 24.3461538,13.5246305 C25.0042768,13.8119883 25.5641003,14.2183882 26.025641,14.7438424 C26.4017113,15.1707739 26.658119,15.6469596 26.7948718,16.1724138 C26.9316246,16.697868 27,17.2972052 27,17.9704433 L27,26 L22.3589744,26 L22.3589744,19.6206897 C22.3589744,18.9967128 22.3119663,18.4917917 22.2179487,18.1059113 C22.1239312,17.7200309 21.9572662,17.4121522 21.7179487,17.182266 C21.5128195,16.9852207 21.2820526,16.845649 21.025641,16.7635468 C20.7692295,16.6814446 20.4957279,16.6403941 20.2051282,16.6403941 C19.4187995,16.6403941 18.8162414,16.8661718 18.3974359,17.317734 C17.9786304,17.7692962 17.7692308,18.4137889 17.7692308,19.2512315 L17.7692308,26 L13.1282051,26 L13.1282051,13.364532 Z">
-                            </path>
-                        </svg>
-                    </a>
-                </div> -->
-            </div>
-            <div class="footer-body">
-                <ul class="footer-rows">
-                    <li class="footer-cols">
-                        <div class="menu-title">
-                            <h3 class="white">Email</h3>
-                        </div>
-                        <ul class="footer-nav">
-                            <li class="footer-item"><a href="#">master@checkoutmasters.com</a></li>
-                        </ul>
-                    </li>
-                   
-                </ul>
-            </div>
-            <hr class="second-hr">
-            <div class="footer-bottom">
-                <div class="logo">
-                    <a class="main_logo" href="#">Checkout Masters</a>
-                </div>
-            </div>
-        </div>
+<!-- MARQUEE -->
+<div class="marquee-sec">
+  <p class="marquee-label">Powering leading ecommerce brands</p>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-items">
+        <span class="marquee-brand">Gymshark</span>
+        <span class="marquee-brand">Allbirds</span>
+        <span class="marquee-brand">MVMT Watches</span>
+        <span class="marquee-brand">Kylie Cosmetics</span>
+        <span class="marquee-brand">Beardbrand</span>
+        <span class="marquee-brand">Chubbies</span>
+        <span class="marquee-brand">Death Wish Coffee</span>
+        <span class="marquee-brand">Pura Vida</span>
+        <span class="marquee-brand">Bulletproof</span>
+        <span class="marquee-brand">Liquid Death</span>
+        <span class="marquee-brand">Outer</span>
+        <span class="marquee-brand">Tushy</span>
+      </div>
+      <div class="marquee-items" aria-hidden="true">
+        <span class="marquee-brand">Gymshark</span>
+        <span class="marquee-brand">Allbirds</span>
+        <span class="marquee-brand">MVMT Watches</span>
+        <span class="marquee-brand">Kylie Cosmetics</span>
+        <span class="marquee-brand">Beardbrand</span>
+        <span class="marquee-brand">Chubbies</span>
+        <span class="marquee-brand">Death Wish Coffee</span>
+        <span class="marquee-brand">Pura Vida</span>
+        <span class="marquee-brand">Bulletproof</span>
+        <span class="marquee-brand">Liquid Death</span>
+        <span class="marquee-brand">Outer</span>
+        <span class="marquee-brand">Tushy</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-    </footer>
-    <!-----------------==================== Footer section end ===================----------------->
+<!-- SERVICES -->
+<section class="services-sec" id="services">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="tag">What We Do</span>
+      <h2>End-to-End Ecommerce Engineering</h2>
+      <p>Every service is built around one outcome — helping your brand convert more visitors into loyal, repeat customers.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal d1">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3>Shopify Development</h3>
+        <p>Custom theme development, app integrations, and full-stack builds engineered for speed, flexibility, and conversion from day one.</p>
+        <div class="svc-tags"><span class="svc-tag">Liquid</span><span class="svc-tag">Theme Dev</span><span class="svc-tag">App Integration</span></div>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>Shopify Plus Engineering</h3>
+        <p>Enterprise-grade solutions — custom checkout extensions, B2B flows, multi-store architectures, and Shopify Functions automation.</p>
+        <div class="svc-tags"><span class="svc-tag">Checkout Extensions</span><span class="svc-tag">B2B</span><span class="svc-tag">Scripts</span></div>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+        <h3>CRO & A/B Testing</h3>
+        <p>Data-driven conversion optimization — from hypothesis to implementation. We identify friction, run experiments, and scale what works.</p>
+        <div class="svc-tags"><span class="svc-tag">A/B Testing</span><span class="svc-tag">Heatmaps</span><span class="svc-tag">Funnel Analysis</span></div>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M2 20c0-4 4-7 10-7s10 3 10 7"/></svg></div>
+        <h3>UX/UI Design</h3>
+        <p>Pixel-perfect, conversion-focused design systems. From wireframes to high-fidelity prototypes built specifically for premium DTC brands.</p>
+        <div class="svc-tags"><span class="svc-tag">Figma</span><span class="svc-tag">Design Systems</span><span class="svc-tag">Prototyping</span></div>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Performance Optimization</h3>
+        <p>Sub-2-second load times. We audit, rebuild, and optimize your storefront to achieve Core Web Vitals scores that beat the competition.</p>
+        <div class="svc-tags"><span class="svc-tag">Core Web Vitals</span><span class="svc-tag">Speed</span><span class="svc-tag">SEO</span></div>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>Subscription & Retention</h3>
+        <p>Build recurring revenue with frictionless subscription flows, loyalty systems, and retention mechanics designed to increase lifetime value.</p>
+        <div class="svc-tags"><span class="svc-tag">Subscriptions</span><span class="svc-tag">Loyalty</span><span class="svc-tag">LTV</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- STATS -->
+<div class="stats-sec">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num"><span class="counter" data-target="50">0</span><span class="red">+</span></div>
+        <div class="stat-label">Shopify Stores Built</div>
+        <div class="stat-sub">Shopify & Shopify Plus</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-num"><span class="counter" data-target="32">0</span><span class="red">%</span></div>
+        <div class="stat-label">Avg. Conversion Uplift</div>
+        <div class="stat-sub">Across all CRO engagements</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-num"><span class="red">$</span><span class="counter" data-target="100">0</span><span class="red">M+</span></div>
+        <div class="stat-label">Revenue Influenced</div>
+        <div class="stat-sub">Client GMV supported</div>
+      </div>
+      <div class="stat-item reveal d3">
+        <div class="stat-num"><span class="counter" data-target="2" data-decimal="1">0</span><span class="red">s</span></div>
+        <div class="stat-label">Avg. Page Load Time</div>
+        <div class="stat-sub">Post-optimization target</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work-sec" id="work">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="tag">Featured Work</span>
+      <h2>Results That Speak for Themselves</h2>
+      <p>We don't just build stores — we engineer revenue-generating machines backed by data and beautiful design.</p>
+    </div>
+    <div class="work-grid">
+      <div class="case-card reveal d1">
+        <div class="case-thumb">
+          <div class="case-chips">
+            <span class="case-chip pos">+41% CVR</span>
+            <span class="case-chip pos">+28% AOV</span>
+            <span class="case-chip">Shopify Plus</span>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-cat">Shopify Plus · CRO · Design</div>
+          <h3>Premium Apparel Replatform</h3>
+          <p>Full Shopify Plus migration and redesign for a 7-figure DTC apparel brand. Rebuilt checkout flow and product pages to crush conversion benchmarks.</p>
+        </div>
+      </div>
+      <div class="case-card reveal d2">
+        <div class="case-thumb" style="background:linear-gradient(145deg,#1e1228,#2d1450)">
+          <div class="case-chips">
+            <span class="case-chip pos">+63% Subscribers</span>
+            <span class="case-chip pos">2.1× LTV</span>
+            <span class="case-chip">Subscriptions</span>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-cat">Subscriptions · UX Design · Retention</div>
+          <h3>Subscription Engine Overhaul</h3>
+          <p>Redesigned the entire subscription experience for a health & wellness brand — from PDP to portal. Subscriber count doubled within 60 days of launch.</p>
+        </div>
+      </div>
+      <div class="case-card reveal d3">
+        <div class="case-thumb" style="background:linear-gradient(145deg,#0d2218,#112e20)">
+          <div class="case-chips">
+            <span class="case-chip pos">1.4s load time</span>
+            <span class="case-chip pos">+22% Revenue</span>
+            <span class="case-chip">Performance</span>
+          </div>
+        </div>
+        <div class="case-body">
+          <div class="case-cat">Performance · A/B Testing · Dev</div>
+          <h3>Speed & Conversion Sprint</h3>
+          <p>Complete performance audit and rebuild for a luxury skincare brand. Achieved 1.4s load time and ran 12 successful A/B tests in 90 days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-sec" id="process">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="tag">How We Work</span>
+      <h2>A Proven Process Built for Growth</h2>
+      <p>From day one to scale — a structured engagement that delivers results without surprises.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal d1">
+        <div class="process-num">01</div>
+        <h3>Strategy</h3>
+        <p>Deep dive into your brand, customers, analytics, and competitive landscape to define the roadmap.</p>
+      </div>
+      <div class="process-step reveal d2">
+        <div class="process-num">02</div>
+        <h3>Design</h3>
+        <p>Conversion-first UX wireframes and pixel-perfect UI designs built in Figma with your team's input.</p>
+      </div>
+      <div class="process-step reveal d3">
+        <div class="process-num">03</div>
+        <h3>Development</h3>
+        <p>Clean, performant code. Custom Shopify development with thorough QA and staging reviews.</p>
+      </div>
+      <div class="process-step reveal d4">
+        <div class="process-num">04</div>
+        <h3>Optimization</h3>
+        <p>Launch, measure, and improve. We run experiments continuously until we find what moves the needle.</p>
+      </div>
+      <div class="process-step reveal d5">
+        <div class="process-num">05</div>
+        <h3>Scale</h3>
+        <p>Ongoing partnership — new features, seasonal campaigns, and infrastructure as your brand grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-sec" id="why">
+  <div class="container">
+    <div class="why-layout">
+      <div class="why-left reveal">
+        <span class="tag">Why Checkout Masters</span>
+        <h2>The Agency Built for Ecommerce</h2>
+        <p>We don't do everything — we do one thing exceptionally well. Ecommerce experiences that convert. We're 100% focused on Shopify and DTC brands, which means every team member lives and breathes the platform you're on.</p>
+        <a href="#contact" class="btn btn-red">Start a Project →</a>
+      </div>
+      <div class="why-right reveal d1">
+        <div class="why-item">
+          <div class="why-dot"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div>
+            <h3>Conversion-First Thinking</h3>
+            <p>Every decision is evaluated through one lens — will this help more visitors become customers?</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <h3>Fast Execution</h3>
+            <p>We move at startup speed without sacrificing quality. Most projects launch in 6–10 weeks, not 6 months.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div>
+            <h3>Premium Design Quality</h3>
+            <p>Our design team has built storefronts for some of the most recognizable DTC brands. Your store will look the part.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <h3>True Partnership</h3>
+            <p>We embed as strategic partners, not just vendors. Your KPIs become our KPIs from day one.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-dot"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div>
+            <h3>Deep Technical Expertise</h3>
+            <p>Shopify Plus certified developers, CRO specialists, and UX designers — all under one roof.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="tag">Testimonials</span>
+      <h2>What Our Partners Are Saying</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal d1">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"Checkout Masters completely transformed our Shopify store. Our conversion rate jumped 38% within the first month after launch. They think like growth partners, not just developers."</blockquote>
+        <div class="testi-author">
+          <div class="testi-av" style="background:#E8194B">JM</div>
+          <div>
+            <div class="testi-name">James Mitchell</div>
+            <div class="testi-role">Founder — Apex Apparel Co.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"The team built our entire subscription experience from scratch. We went from 800 to 2,100 active subscribers in 8 weeks. The ROI has been extraordinary."</blockquote>
+        <div class="testi-author">
+          <div class="testi-av" style="background:#C4143D">SK</div>
+          <div>
+            <div class="testi-name">Sarah Kim</div>
+            <div class="testi-role">CEO — Vital Wellness</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal d3">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <blockquote>"I've worked with 3 Shopify agencies. Checkout Masters is the only one that understood both design and performance equally. Our site now scores 94 on PageSpeed."</blockquote>
+        <div class="testi-author">
+          <div class="testi-av" style="background:#8B1030">RN</div>
+          <div>
+            <div class="testi-name">Ryan Nakamura</div>
+            <div class="testi-role">Head of Ecommerce — LuxeSkin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="tag" style="justify-content:center;margin-bottom:20px">Let's Work Together</span>
+      <h2>Ready to Build Something <span>Exceptional?</span></h2>
+      <p>Book a free 30-minute discovery call. We'll audit your current store, identify your biggest growth opportunities, and outline exactly how we'd approach your project.</p>
+      <div class="cta-actions">
+        <a href="mailto:bhupinder@checkoutmasters.com?subject=Discovery Call Request" class="btn btn-red" style="font-size:.95rem;padding:14px 28px">Book Discovery Call →</a>
+        <a href="mailto:bhupinder@checkoutmasters.com" class="btn btn-ghost-inv" style="font-size:.95rem;padding:13px 28px">Send a Message</a>
+      </div>
+      <p class="cta-note">No sales pressure. Just a genuine conversation about your brand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-mark">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H9M19 5V15" stroke="#E8194B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          Checkout Masters
+        </div>
+        <p>We build high-converting ecommerce experiences for ambitious DTC brands. Shopify Plus specialists obsessed with conversion, design, and performance.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="footer-soc" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="footer-soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Shopify Development</a></li>
+          <li><a href="#services">Shopify Plus</a></li>
+          <li><a href="#services">CRO & A/B Testing</a></li>
+          <li><a href="#services">UX/UI Design</a></li>
+          <li><a href="#services">Performance</a></li>
+          <li><a href="#services">Subscriptions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <ul>
+          <li><a href="mailto:bhupinder@checkoutmasters.com">bhupinder@<br>checkoutmasters.com</a></li>
+          <li><a href="#contact">Book a Call</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Checkout Masters. All rights reserved.</p>
+      <p>Built for brands that refuse to be average.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('mainNav');
+const floatCta = document.getElementById('floatCta');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 10);
+  floatCta.classList.toggle('show', y > 500);
+}, { passive: true });
+
+// Mobile nav
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('mobileNavClose').addEventListener('click', closeMobileNav);
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Counter animation
+function animateCount(el) {
+  const target = parseFloat(el.dataset.target);
+  const isDecimal = !!el.dataset.decimal;
+  const dur = 1600;
+  const start = performance.now();
+  (function update(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = isDecimal ? (target * ease).toFixed(1) : Math.floor(target * ease);
+    if (p < 1) requestAnimationFrame(update);
+    else el.textContent = isDecimal ? target.toFixed(1) : target;
+  })(start);
+}
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => cio.observe(el));
+
+// Hero stat counters fire on load
+setTimeout(() => {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1800;
+    const start = performance.now();
+    (function update(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * ease) + suffix;
+      if (p < 1) requestAnimationFrame(update);
+      else el.textContent = target + suffix;
+    })(start);
+  });
+}, 500);
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
 </body>
-
 </html>
