@@ -22,15 +22,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ─── TOKENS ─── */
 :root{
-  --bg:#FFFFFF;
-  --text:#282B33;
-  --muted:#6B6F7A;
-  --line:#E8E8E8;
-  --line-strong:#DEDEDE;
-  --chip:#EDEDED;
-  --panel:#F6F6F4;
+  color-scheme:dark;
+  --bg:#0B0B0D;
+  --surface:#121215;
+  --text:#F2EEE6;
+  --muted:#9D988F;
+  --line:#232327;
+  --line-strong:#38383E;
+  --chip:#1E1E23;
+  --panel:#18181C;
   --green:#22C55E;
-  --serif-ghost:#DCDCDC;
+  --violet:#8B5CF6;
+  --violet-soft:#B9A2FF;
+  --coral:#FF5A4A;
+  --grad:linear-gradient(135deg,#6D28D9 0%,#C026D3 55%,#FF4D3D 100%);
+  --grad-text:linear-gradient(90deg,#B9A2FF 0%,#E879F9 50%,#FF7A6B 100%);
+  --serif-ghost:#2A2A30;
   --frame:880px;
   --pad:40px;
   --r:8px;
@@ -49,27 +56,33 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .dot.bl{left:-4px;bottom:-4px}.dot.br{right:-4px;bottom:-4px}
 
 /* ─── NAV ─── */
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+::selection{background:var(--violet);color:#fff}
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,11,13,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav-inner{max-width:var(--frame);margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--line);border-right:1px solid var(--line)}
 .nav a{display:flex;align-items:center;justify-content:center;height:44px;font-size:12.5px;border-left:1px solid var(--line);transition:background .15s}
 .nav a:first-child{border-left:0}
 .nav a:hover{background:var(--panel)}
-.nav a.cta{font-weight:500}
+.nav a.cta{font-weight:500;color:var(--coral)}
+.nav a.cta:hover{background:var(--grad);color:#fff}
 
 /* ─── LOGO (Checkout Masters mark) ─── */
 .logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.01em}
-.logo-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#6D28D9,#FF4D3D);position:relative;flex-shrink:0}
+.logo-mark{width:26px;height:26px;border-radius:7px;background:var(--grad);position:relative;flex-shrink:0}
 .logo-mark::after{content:'';position:absolute;right:5px;bottom:5px;width:5px;height:5px;border-radius:50%;background:#fff}
 
 /* ─── TYPE ─── */
 h1,h2{font-size:24px;line-height:1.4;font-weight:600;letter-spacing:-.01em}
 h3{font-size:18px;line-height:1.4;font-weight:600}
 .lead{color:var(--muted);max-width:560px;margin-top:12px}
+.accent{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2::before{content:'';display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--grad);margin-right:12px;vertical-align:middle;transform:translateY(-2px)}
 .mono{font-family:var(--mono)}
 
 /* ─── BUTTONS ─── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:34px;padding:0 14px;font-size:12.5px;border:1px solid var(--line-strong);border-radius:6px;background:#fff;transition:background .15s,border-color .15s}
-.btn:hover{background:var(--panel);border-color:#cfcfcf}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:34px;padding:0 14px;font-size:12.5px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);transition:background .15s,border-color .15s}
+.btn:hover{background:var(--panel);border-color:var(--violet)}
+.btn-primary{background:var(--grad);border-color:transparent;color:#fff;font-weight:500}
+.btn-primary:hover{filter:brightness(1.1);border-color:transparent}
 .btn-block{display:flex;width:100%}
 .status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .status i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.18);animation:pulse 2s infinite}
@@ -81,7 +94,7 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 .hero-actions{display:flex;align-items:center;gap:18px;margin-top:22px;flex-wrap:wrap}
 
 /* ─── CARDS / CHIPS ─── */
-.card{border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
 .chip{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;background:var(--chip);border-radius:4px;padding:3px 7px}
 
@@ -89,13 +102,14 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 .clients{display:grid;gap:12px;margin-top:24px}
 .client{display:grid;grid-template-columns:1.35fr 1fr;gap:12px}
 .client-visual{border-radius:var(--r);min-height:196px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
-.client-visual .big{font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
-.client-visual .cap{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.7}
-.client-visual .tag{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;align-self:flex-start;background:rgba(255,255,255,.6);padding:3px 8px;border-radius:4px}
-.v1{background:#EDE6DA;color:#3B2F22}
-.v2{background:#DDE8DF;color:#20382A}
-.v3{background:#E4E2F1;color:#2B2550}
-.v4{background:#F1E3DE;color:#4A2A20}
+.client-visual{border:1px solid var(--line);background-color:var(--panel)}
+.client-visual .big{font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1.05;position:relative}
+.client-visual .cap{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:10px;position:relative}
+.client-visual .tag{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;align-self:flex-start;background:rgba(242,238,230,.07);border:1px solid var(--line-strong);padding:3px 8px;border-radius:4px;position:relative}
+.v1{background-image:radial-gradient(120% 90% at 100% 0%,rgba(139,92,246,.32),transparent 60%)}
+.v2{background-image:radial-gradient(120% 90% at 0% 100%,rgba(255,90,74,.28),transparent 60%)}
+.v3{background-image:radial-gradient(120% 90% at 100% 100%,rgba(192,38,211,.28),transparent 60%)}
+.v4{background-image:radial-gradient(90% 80% at 0% 0%,rgba(255,90,74,.22),transparent 60%),radial-gradient(90% 80% at 100% 100%,rgba(139,92,246,.26),transparent 60%)}
 .client .card{padding:18px 20px}
 .client .card p{color:var(--muted);margin-top:8px}
 .note{color:var(--muted);text-align:center;margin-top:20px}
@@ -105,7 +119,8 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 .tab{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:var(--r);font-size:13px;text-align:left;transition:border-color .15s,background .15s}
 .tab svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .tab:hover{background:var(--panel)}
-.tab[aria-selected="true"]{border-color:var(--text)}
+.tab[aria-selected="true"]{border-color:var(--violet);background:rgba(139,92,246,.1)}
+.tab[aria-selected="true"] svg{stroke:var(--violet-soft)}
 .panel{margin-top:12px;padding:20px}
 .panel[hidden]{display:none}
 .panel > p{color:var(--muted);max-width:640px}
@@ -116,7 +131,7 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 /* ─── PROCESS ─── */
 .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
 .step{padding:16px 18px}
-.step-num{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--chip);font-family:var(--mono);font-size:10px}
+.step-num{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--grad);color:#fff;font-family:var(--mono);font-size:10px}
 .step h3{font-size:14px;font-weight:500;margin-top:12px}
 .step p{color:var(--muted);margin-top:8px}
 
@@ -124,21 +139,19 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 .plans{display:grid;gap:14px;margin-top:24px}
 .plan{padding:22px 22px 24px}
 .plan > p{color:var(--muted);margin-top:6px}
-.price{display:flex;align-items:baseline;gap:12px;margin:28px 0 14px}
-.price b{font-size:26px;font-weight:600;letter-spacing:-.02em}
-.price s{color:var(--muted);font-size:15px}
+.price{display:flex;align-items:baseline;gap:12px;margin:22px 0 12px}
 .price small{color:var(--muted);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}
 .feats{margin-top:20px;display:grid;gap:12px}
 .feats-label{margin-top:20px;font-weight:500}
 .feats li{display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:start}
-.feats li::before{content:'';width:14px;height:14px;margin-top:3px;border-radius:3px;background:var(--text) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/10px no-repeat}
+.feats li::before{content:'';width:14px;height:14px;margin-top:3px;border-radius:3px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/10px no-repeat,var(--grad)}
 .feats strong{font-weight:600}
 
 /* ─── TESTIMONIALS ─── */
 .quotes{columns:2;column-gap:12px;margin-top:22px}
 .quote{break-inside:avoid;margin-bottom:12px;padding:18px 18px 20px}
 .who{display:flex;align-items:center;gap:12px}
-.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;background:var(--panel);border:1px solid var(--line);flex-shrink:0}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;background:var(--grad);color:#fff;flex-shrink:0}
 .who-name{font-size:14px;font-weight:500;line-height:1.3}
 .who-co{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .quote blockquote{margin-top:14px}
@@ -146,7 +159,7 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 /* ─── CONTACT / FOOTER ─── */
 .contact{padding:56px var(--pad) 28px;text-align:center}
 .contact-big{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(64px,15vw,150px);line-height:.9;letter-spacing:-.02em;color:var(--serif-ghost);transition:color .25s}
-.contact-big:hover{color:var(--text)}
+.contact-big:hover{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
 .contact-sub{color:var(--muted);margin-top:14px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:44px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .foot a:hover{color:var(--text)}
@@ -177,7 +190,7 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
   <div class="nav-inner">
     <a href="#work">Work</a>
     <a href="#services">Services</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#pricing">Plans</a>
     <a href="#testimonials" class="hide-sm">Testimonials</a>
     <a href="#contact" class="cta">Book a call</a>
   </div>
@@ -188,9 +201,10 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
   <!-- HERO -->
   <section class="sec hero">
     <a href="#" class="logo" aria-label="Checkout Masters home"><span class="logo-mark"></span>Checkout Masters</a>
-    <h1>Senior Shopify talent without the agency overhead. We help fast-growing DTC brands scale with data-led Shopify development, CRO and retention.</h1>
+    <h1>Senior Shopify talent without the agency overhead. We help fast-growing DTC brands scale with <span class="accent">data-led Shopify development, CRO and retention.</span></h1>
     <p class="lead">One focused team for Shopify Plus engineering, revenue-per-visitor optimisation, and lifecycle marketing that grows customer lifetime value.</p>
     <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Book a call</a>
       <a href="#services" class="btn">Our services</a>
       <span class="status"><i></i>Taking on new clients</span>
     </div>
@@ -204,46 +218,46 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
     <div class="clients">
       <article class="client reveal">
         <div class="client-visual v1">
-          <span class="tag">Apparel · Shopify Plus</span>
-          <div><div class="big">+41%</div><div class="cap">Conversion rate after relaunch</div></div>
+          <span class="tag">Clean skincare · Shopify Plus</span>
+          <div><div class="big">True Botanicals</div><div class="cap">Clinical, non-toxic skin wellness</div></div>
         </div>
         <div class="card">
-          <h3>Apex Apparel Co.</h3>
-          <p>Migrated a 7-figure apparel brand to Shopify Plus with a custom theme, rebuilt product pages and a checkout tuned for mobile buyers.</p>
-          <div class="chips"><span class="chip">Design</span><span class="chip">Dev</span><span class="chip">CRO</span></div>
+          <h3>True Botanicals</h3>
+          <p>A clean-beauty pioneer pairing non-toxic formulas with clinical results. We built product pages that lead with ingredient transparency and proof, plus regimen bundles and subscribe-and-save to grow repeat orders.</p>
+          <div class="chips"><span class="chip">Dev</span><span class="chip">CRO</span><span class="chip">Subscriptions</span></div>
         </div>
       </article>
       <article class="client reveal">
         <div class="client-visual v2">
-          <span class="tag">Wellness · Subscriptions</span>
-          <div><div class="big">2.1×</div><div class="cap">Subscriber lifetime value</div></div>
+          <span class="tag">Bags &amp; tech accessories · International</span>
+          <div><div class="big">Knomo London</div><div class="cap">London-designed laptop bags</div></div>
         </div>
         <div class="card">
-          <h3>Vital Wellness</h3>
-          <p>Rebuilt the subscription journey end to end — PDP, customer portal and lifecycle flows — and grew active subscribers 2.6× in eight weeks.</p>
-          <div class="chips"><span class="chip">Dev</span><span class="chip">Email</span><span class="chip">Strategy</span></div>
+          <h3>Knomo London</h3>
+          <p>Premium laptop bags and organised carry for modern commuters. We shaped a multi-market storefront with localised pricing, rich product galleries and size-and-fit guidance so shoppers find the right bag for their device.</p>
+          <div class="chips"><span class="chip">Design</span><span class="chip">Dev</span><span class="chip">Markets</span></div>
         </div>
       </article>
       <article class="client reveal">
         <div class="client-visual v3">
-          <span class="tag">Skincare · Performance</span>
-          <div><div class="big">1.4s</div><div class="cap">Load time on mobile</div></div>
+          <span class="tag">E-bikes · High-ticket</span>
+          <div><div class="big">Aventon</div><div class="cap">Electric bikes for every rider</div></div>
         </div>
         <div class="card">
-          <h3>LuxeSkin</h3>
-          <p>Performance rebuild plus a weekly testing programme — twelve A/B tests in 90 days and a 22% lift in revenue per visitor.</p>
-          <div class="chips"><span class="chip">Dev</span><span class="chip">CRO</span><span class="chip">Support</span></div>
+          <h3>Aventon</h3>
+          <p>A fast-growing e-bike brand selling high-consideration products online. We focused on helping riders choose with confidence — model comparison, financing messaging and a checkout tuned for high-value orders.</p>
+          <div class="chips"><span class="chip">Dev</span><span class="chip">CRO</span><span class="chip">Checkout</span></div>
         </div>
       </article>
       <article class="client reveal">
         <div class="client-visual v4">
-          <span class="tag">B2B · Checkout</span>
-          <div><div class="big">+28%</div><div class="cap">Average order value</div></div>
+          <span class="tag">Supplements · Subscriptions</span>
+          <div><div class="big">We Heart Nutrition</div><div class="cap">Supplements for every life stage</div></div>
         </div>
         <div class="card">
-          <h3>Wholesale checkout</h3>
-          <p>Checkout UI extensions and Shopify Functions for tiered B2B pricing, payment terms and volume discounts — no third-party workarounds.</p>
-          <div class="chips"><span class="chip">Dev</span><span class="chip">Checkout</span><span class="chip">B2B</span></div>
+          <h3>We Heart Nutrition</h3>
+          <p>An American family-owned supplement brand with third-party-tested formulas and 10% of every purchase given back. We built life-stage shopping, a product-finder quiz and subscription flows that keep customers coming back.</p>
+          <div class="chips"><span class="chip">Dev</span><span class="chip">Email</span><span class="chip">Retention</span></div>
         </div>
       </article>
     </div>
@@ -315,15 +329,15 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 
   <!-- PRICING -->
   <section class="sec" id="pricing">
-    <h2 class="reveal">Pricing</h2>
-    <p class="lead reveal">One flat monthly fee covers your Shopify development, CRO or retention work — no hourly billing and no scope haggling. Go month to month, or lock in a longer term for a lower rate.</p>
+    <h2 class="reveal">Plans</h2>
+    <p class="lead reveal">Each plan is a flat monthly partnership covering your Shopify development, CRO or retention work — no hourly billing and no scope haggling. Every brand is different, so we tailor pricing to your goals. Get in touch and we'll put together a quote.</p>
 
     <div class="plans">
       <article class="card plan reveal">
         <h3>Build &amp; Optimise</h3>
         <p>Development and conversion work in one stream, measured on revenue per visitor.</p>
-        <div class="price"><b>$6,500/mo</b></div>
-        <a href="#contact" class="btn btn-block">Book a call</a>
+        <div class="price"><small>Pricing on request</small></div>
+        <a href="mailto:master@checkoutmasters.com?subject=Pricing%20enquiry%20%E2%80%94%20Build%20and%20Optimise" class="btn btn-block">Contact us for pricing</a>
         <ul class="feats">
           <li><span><strong>Weekly A/B tests:</strong> at least one new test live every week, run to significance.</span></li>
           <li><span><strong>Development sprints:</strong> test winners shipped, plus new sections, app integrations, fixes and upgrades.</span></li>
@@ -337,8 +351,8 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
       <article class="card plan reveal">
         <h3>Retention Marketing</h3>
         <p>Email, SMS and subscription programmes measured on customer lifetime value.</p>
-        <div class="price"><b>$5,500/mo</b></div>
-        <a href="#contact" class="btn btn-block">Book a call</a>
+        <div class="price"><small>Pricing on request</small></div>
+        <a href="mailto:master@checkoutmasters.com?subject=Pricing%20enquiry%20%E2%80%94%20Retention%20Marketing" class="btn btn-block">Contact us for pricing</a>
         <ul class="feats">
           <li><span><strong>Campaigns:</strong> weekly designed emails, plain-text sends and SMS.</span></li>
           <li><span><strong>Flows:</strong> build and optimise every lifecycle and subscription flow.</span></li>
@@ -352,8 +366,8 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
       <article class="card plan reveal">
         <h3>Convert + Retain</h3>
         <p>Both programmes on one shared roadmap, so acquisition, on-site and retention work pull in the same direction.</p>
-        <div class="price"><b>$10,500/mo</b><s>$12,000/mo</s><small>Bundle</small></div>
-        <a href="#contact" class="btn btn-block">Book a call</a>
+        <div class="price"><small>Pricing on request</small></div>
+        <a href="mailto:master@checkoutmasters.com?subject=Pricing%20enquiry%20%E2%80%94%20Convert%20%2B%20Retain" class="btn btn-block">Contact us for pricing</a>
         <p class="feats-label">Everything in both plans, plus:</p>
         <ul class="feats">
           <li><span><strong>One strategy:</strong> testing and retention calendars aligned to the same customer journey.</span></li>
@@ -391,10 +405,10 @@ h3{font-size:18px;line-height:1.4;font-weight:600}
 
   <!-- CONTACT -->
   <footer class="contact" id="contact">
-    <a class="contact-big" href="mailto:bhupinder@checkoutmasters.com?subject=Discovery%20Call%20Request">let's talk</a>
+    <a class="contact-big" href="mailto:master@checkoutmasters.com?subject=Discovery%20Call%20Request">let's talk</a>
     <p class="contact-sub">Book a free 30-minute discovery call — we'll review your store and outline where we'd start.</p>
     <div class="foot">
-      <a href="mailto:bhupinder@checkoutmasters.com">bhupinder@checkoutmasters.com</a>
+      <a href="mailto:master@checkoutmasters.com">master@checkoutmasters.com</a>
       <span>© 2026 Checkout Masters. All rights reserved</span>
     </div>
   </footer>
