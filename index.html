@@ -3,915 +3,436 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout Masters — Shopify Plus Engineering</title>
-<meta name="description" content="Shopify Plus engineering for brands that have outgrown freelancers. Checkout extensions, custom storefronts, and performance engineering built to hold up at scale.">
-<meta name="keywords" content="Shopify Plus development, checkout extensions, Shopify Functions, ecommerce engineering, conversion rate optimization">
+<title>Checkout Masters — Shopify Development, CRO &amp; Retention</title>
+<meta name="description" content="Checkout Masters helps fast-growing DTC brands scale on Shopify with expert development, revenue-focused CRO, and retention marketing — all for one flat monthly fee.">
+<meta name="keywords" content="Shopify Plus development, Shopify CRO, retention marketing, Klaviyo, subscriptions, checkout extensions">
 <link rel="canonical" href="https://checkoutmasters.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
 <style>
-
 /* ─── RESET ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--white);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-img,svg{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:64px;overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
 ul{list-style:none}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--white)}
-::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ─── TOKENS ─── */
 :root{
-  --blue:#00205B;
-  --blue-hover:#001640;
-  --blue-tint:#EEF1F6;
-  --blue-border:#D6DCE8;
-  --red:#BA0C2F;
-  --red-hover:#96091F;
-  --red-tint:#FCECEF;
-  --white:#FFFFFF;
-  --bg:#FAFAFA;
-  --section:#F4F6F8;
-  --text:#111827;
-  --muted:#6B7280;
-  --border:#E5E7EB;
-
-  --font-head:'Plus Jakarta Sans',sans-serif;
-  --font-body:'Inter',sans-serif;
-  --font-mono:'JetBrains Mono',monospace;
-
-  --max-w:1280px;
-  --nav-h:72px;
-  --sec:112px 0;
-  --sec-sm:72px 0;
-  --r:16px;
-  --r-sm:10px;
+  --bg:#FFFFFF;
+  --text:#282B33;
+  --muted:#6B6F7A;
+  --line:#E8E8E8;
+  --line-strong:#DEDEDE;
+  --chip:#EDEDED;
+  --panel:#F6F6F4;
+  --green:#22C55E;
+  --serif-ghost:#DCDCDC;
+  --frame:880px;
+  --pad:40px;
+  --r:8px;
+  --mono:'Geist Mono',ui-monospace,monospace;
 }
 
-@media (prefers-reduced-motion: reduce){
-  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}
-}
+/* ─── FRAME (vertical rails + section dividers) ─── */
+.frame{position:relative;max-width:var(--frame);margin:0 auto;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.sec{position:relative;padding:56px var(--pad)}
+.divider{position:relative;height:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.divider::before,.divider::after{content:'';position:absolute;width:100vw;left:50%;transform:translateX(-50%);height:1px;background:var(--line)}
+.divider::before{top:-1px}
+.divider::after{bottom:-1px}
+.dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--line-strong);z-index:2}
+.dot.tl{left:-4px;top:-4px}.dot.tr{right:-4px;top:-4px}
+.dot.bl{left:-4px;bottom:-4px}.dot.br{right:-4px;bottom:-4px}
 
-/* ─── UTILS ─── */
-.container{max-width:var(--max-w);margin:0 auto;padding:0 32px}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--font-body);font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--red);margin-bottom:20px;
-}
-.eyebrow::before{content:'';width:16px;height:2px;background:var(--red);flex-shrink:0;border-radius:2px}
+/* ─── NAV ─── */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:var(--frame);margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.nav a{display:flex;align-items:center;justify-content:center;height:44px;font-size:12.5px;border-left:1px solid var(--line);transition:background .15s}
+.nav a:first-child{border-left:0}
+.nav a:hover{background:var(--panel)}
+.nav a.cta{font-weight:500}
+
+/* ─── LOGO (Checkout Masters mark) ─── */
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.01em}
+.logo-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#6D28D9,#FF4D3D);position:relative;flex-shrink:0}
+.logo-mark::after{content:'';position:absolute;right:5px;bottom:5px;width:5px;height:5px;border-radius:50%;background:#fff}
+
+/* ─── TYPE ─── */
+h1,h2{font-size:24px;line-height:1.4;font-weight:600;letter-spacing:-.01em}
+h3{font-size:18px;line-height:1.4;font-weight:600}
+.lead{color:var(--muted);max-width:560px;margin-top:12px}
+.mono{font-family:var(--mono)}
 
 /* ─── BUTTONS ─── */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--font-body);font-size:.9rem;font-weight:600;
-  padding:13px 26px;border-radius:10px;cursor:pointer;
-  transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease;
-  white-space:nowrap;
-}
-.btn-primary{background:var(--blue);color:#fff;border:1px solid var(--blue)}
-.btn-primary:hover{background:var(--blue-hover);border-color:var(--blue-hover)}
-.btn-secondary{background:var(--white);color:var(--blue);border:1px solid var(--blue-border)}
-.btn-secondary:hover{border-color:var(--blue);background:var(--blue-tint)}
-.btn-inv{background:var(--white);color:var(--blue);border:1px solid var(--white)}
-.btn-inv:hover{background:var(--blue-tint)}
-.btn-red{background:var(--red);color:#fff;border:1px solid var(--red)}
-.btn-red:hover{background:var(--red-hover);border-color:var(--red-hover)}
-
-/* ─── SECTION HEADERS ─── */
-.sec-head{margin-bottom:64px;max-width:640px}
-.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
-.sec-head.center .eyebrow{justify-content:center}
-.sec-head h2{
-  font-family:var(--font-head);
-  font-size:clamp(1.9rem,3.2vw,2.5rem);
-  font-weight:700;line-height:1.18;letter-spacing:-.02em;
-  color:var(--text);margin-bottom:14px;
-}
-.sec-head p{font-size:1.05rem;color:var(--muted);line-height:1.7}
-
-/* ─── NAVIGATION ─── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:var(--nav-h);
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border-bottom:1px solid transparent;
-  transition:border-color .2s;
-}
-.nav.scrolled{border-bottom-color:var(--border)}
-.nav-inner{
-  max-width:var(--max-w);margin:0 auto;padding:0 32px;
-  height:100%;display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:1.05rem;color:var(--text);white-space:nowrap}
-.nav-logo-mark{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--blue);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;
-}
-.nav-logo-mark::after{content:'';position:absolute;right:5px;bottom:5px;width:5px;height:5px;border-radius:50%;background:var(--red)}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{font-size:.9rem;font-weight:500;color:var(--muted);transition:color .15s}
-.nav-links a:hover{color:var(--text)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.nav-hamburger span{width:22px;height:1.5px;background:var(--text);border-radius:2px;transition:.2s}
-
-/* ─── MOBILE NAV ─── */
-.mobile-nav{
-  position:fixed;inset:0;z-index:99;
-  background:rgba(255,255,255,.98);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-}
-.mobile-nav.open{opacity:1;pointer-events:auto}
-.mobile-nav a{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--text)}
-.mobile-nav a.btn-primary{color:#fff}
-.mobile-nav-close{position:absolute;top:26px;right:28px;font-size:1.3rem;color:var(--muted);cursor:pointer}
-.mobile-nav-close:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:34px;padding:0 14px;font-size:12.5px;border:1px solid var(--line-strong);border-radius:6px;background:#fff;transition:background .15s,border-color .15s}
+.btn:hover{background:var(--panel);border-color:#cfcfcf}
+.btn-block{display:flex;width:100%}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.18);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
 
 /* ─── HERO ─── */
-.hero{background:var(--bg);padding:calc(var(--nav-h) + 88px) 0 0;position:relative}
-.hero-layout{display:grid;grid-template-columns:1fr;gap:56px;text-align:center;max-width:760px;margin:0 auto}
-.hero h1{
-  font-family:var(--font-head);
-  font-size:clamp(2.5rem,5vw,4rem);
-  font-weight:800;line-height:1.1;letter-spacing:-.025em;
-  color:var(--text);margin-bottom:22px;
-}
-.hero h1 .accent{color:var(--blue)}
-.hero-sub{font-size:1.15rem;color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 36px}
-.hero-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
-.hero-note{font-size:.85rem;color:var(--muted);margin-bottom:72px}
+.hero{padding-top:44px;padding-bottom:48px}
+.hero h1{margin-top:28px;max-width:640px}
+.hero-actions{display:flex;align-items:center;gap:18px;margin-top:22px;flex-wrap:wrap}
 
-/* ─── HERO VISUAL: CODE WINDOW ─── */
-.code-window{
-  max-width:900px;margin:0 auto;border-radius:var(--r);
-  border:1px solid var(--border);background:#0B1220;
-  box-shadow:0 24px 64px -24px rgba(0,32,91,.25);
-  overflow:hidden;text-align:left;
-}
-.code-titlebar{
-  display:flex;align-items:center;gap:8px;
-  padding:14px 18px;background:#0F1830;border-bottom:1px solid rgba(255,255,255,.06);
-}
-.code-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15)}
-.code-filename{margin-left:8px;font-family:var(--font-mono);font-size:.78rem;color:rgba(255,255,255,.45)}
-.code-body{padding:26px 28px 30px;font-family:var(--font-mono);font-size:.85rem;line-height:1.85;overflow-x:auto}
-.code-body .ln{color:rgba(255,255,255,.25);display:inline-block;width:22px;user-select:none}
-.code-kw{color:#7CA6E8}
-.code-fn{color:#E8B96A}
-.code-str{color:#8FCB9B}
-.code-com{color:rgba(255,255,255,.35)}
-.code-plain{color:rgba(255,255,255,.75)}
-.code-accent{color:#E8536E}
+/* ─── CARDS / CHIPS ─── */
+.card{border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.chip{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;background:var(--chip);border-radius:4px;padding:3px 7px}
 
-/* ─── MARQUEE ─── */
-.marquee-sec{padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--white);overflow:hidden;margin-top:88px}
-.marquee-label{text-align:center;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
-.marquee-wrap{display:flex;overflow:hidden;user-select:none}
-.marquee-track{display:flex;animation:scroll 30s linear infinite;flex-shrink:0}
-.marquee-wrap:hover .marquee-track{animation-play-state:paused}
-.marquee-items{display:flex;align-items:center;gap:64px;padding:0 32px;flex-shrink:0}
-.marquee-brand{font-family:var(--font-head);font-weight:700;font-size:.9rem;letter-spacing:.02em;color:#C7CBD1;transition:color .15s;white-space:nowrap}
-.marquee-brand:hover{color:var(--muted)}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* ─── CLIENTS ─── */
+.clients{display:grid;gap:12px;margin-top:24px}
+.client{display:grid;grid-template-columns:1.35fr 1fr;gap:12px}
+.client-visual{border-radius:var(--r);min-height:196px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+.client-visual .big{font-size:44px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.client-visual .cap{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.7}
+.client-visual .tag{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;align-self:flex-start;background:rgba(255,255,255,.6);padding:3px 8px;border-radius:4px}
+.v1{background:#EDE6DA;color:#3B2F22}
+.v2{background:#DDE8DF;color:#20382A}
+.v3{background:#E4E2F1;color:#2B2550}
+.v4{background:#F1E3DE;color:#4A2A20}
+.client .card{padding:18px 20px}
+.client .card p{color:var(--muted);margin-top:8px}
+.note{color:var(--muted);text-align:center;margin-top:20px}
 
-/* ─── STATS ─── */
-.stats-sec{padding:var(--sec-sm);background:var(--white)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.stat-item{padding:36px 28px;text-align:center;border-right:1px solid var(--border)}
-.stat-item:last-child{border-right:none}
-.stat-num{font-family:var(--font-head);font-size:2.5rem;font-weight:800;color:var(--blue);letter-spacing:-.03em;line-height:1;margin-bottom:10px}
-.stat-num .red{color:var(--red)}
-.stat-label{font-size:.9rem;color:var(--text);font-weight:600;margin-bottom:2px}
-.stat-sub{font-size:.78rem;color:var(--muted)}
-
-/* ─── SERVICES ─── */
-.services-sec{padding:var(--sec);background:var(--white)}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.svc-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;transition:border-color .2s,transform .2s}
-.svc-card:hover{border-color:var(--blue-border);transform:translateY(-2px)}
-.svc-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--blue-tint);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
-.svc-icon svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.svc-card h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:10px}
-.svc-card p{font-size:.9rem;color:var(--muted);line-height:1.65;margin-bottom:20px}
-.svc-tags{display:flex;flex-wrap:wrap;gap:6px}
-.svc-tag{font-size:.7rem;font-weight:600;letter-spacing:.02em;padding:4px 10px;border-radius:6px;border:1px solid var(--border);color:var(--muted);background:var(--section)}
-
-/* ─── CHECKOUT SHOWCASE ─── */
-.showcase-sec{padding:var(--sec);background:var(--section)}
-.showcase-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.showcase-copy .eyebrow{margin-bottom:20px}
-.showcase-copy h2{font-family:var(--font-head);font-size:clamp(1.9rem,3vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-.02em;color:var(--text);margin-bottom:18px}
-.showcase-copy p{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:28px}
-.showcase-list{display:flex;flex-direction:column;gap:16px}
-.showcase-list li{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;color:var(--text)}
-.showcase-check{width:20px;height:20px;border-radius:6px;background:var(--blue-tint);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.showcase-check svg{width:11px;height:11px;stroke:var(--blue);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-
-/* ─── CHECKOUT MOCK ─── */
-.checkout-mock{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.checkout-mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--section)}
-.checkout-mock-bar span{width:8px;height:8px;border-radius:50%;background:var(--border)}
-.checkout-mock-url{margin-left:8px;font-size:.72rem;color:var(--muted);font-family:var(--font-mono)}
-.checkout-mock-body{padding:28px}
-.checkout-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:.85rem}
-.checkout-row:first-child{padding-top:0}
-.checkout-row-label{color:var(--muted)}
-.checkout-row-value{color:var(--text);font-weight:600}
-.checkout-total{display:flex;justify-content:space-between;align-items:center;padding-top:16px;margin-top:4px}
-.checkout-total-label{font-family:var(--font-head);font-weight:700;color:var(--text)}
-.checkout-total-value{font-family:var(--font-head);font-weight:800;color:var(--blue);font-size:1.2rem}
-.checkout-pay{margin-top:20px;width:100%;text-align:center;padding:14px;border-radius:10px;background:var(--blue);color:#fff;font-weight:600;font-size:.9rem}
-.checkout-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);margin-top:14px;justify-content:center;width:100%}
-.checkout-badge svg{width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2}
-
-/* ─── WORK ─── */
-.work-sec{padding:var(--sec);background:var(--white)}
-.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.case-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;transition:border-color .2s,transform .2s}
-.case-card:hover{border-color:var(--blue-border);transform:translateY(-2px)}
-.case-thumb{height:auto;padding:24px 24px 0;position:relative}
-.case-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
-.case-chip{font-size:.68rem;font-weight:700;letter-spacing:.03em;padding:5px 10px;border-radius:6px;background:var(--blue-tint);color:var(--blue);border:1px solid var(--blue-border)}
-.case-chip.pos{color:#0F7A4D;background:#E9F5EF;border-color:#BFE3D2}
-.case-body{padding:0 24px 26px}
-.case-cat{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-.case-card h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:8px}
-.case-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
+/* ─── SERVICES (tabs) ─── */
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.tab{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:var(--r);font-size:13px;text-align:left;transition:border-color .15s,background .15s}
+.tab svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.tab:hover{background:var(--panel)}
+.tab[aria-selected="true"]{border-color:var(--text)}
+.panel{margin-top:12px;padding:20px}
+.panel[hidden]{display:none}
+.panel > p{color:var(--muted);max-width:640px}
+.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:18px}
+.panel-grid strong{display:block;font-weight:500;font-size:13.5px}
+.panel-grid span{color:var(--muted);font-size:13px}
 
 /* ─── PROCESS ─── */
-.process-sec{padding:var(--sec);background:var(--section)}
-.process-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-top:16px}
-.process-grid::before{content:'';position:absolute;top:27px;left:10%;right:10%;height:1px;background:var(--border)}
-.process-step{padding:0 12px;text-align:center}
-.process-num{
-  width:54px;height:54px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-head);font-size:.92rem;font-weight:700;color:var(--muted);
-  margin:0 auto 20px;position:relative;z-index:1;transition:border-color .2s,color .2s,background .2s;
-}
-.process-step:hover .process-num{border-color:var(--blue);color:var(--blue);background:var(--blue-tint)}
-.process-step h3{font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:8px}
-.process-step p{font-size:.82rem;color:var(--muted);line-height:1.6}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.step{padding:16px 18px}
+.step-num{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--chip);font-family:var(--mono);font-size:10px}
+.step h3{font-size:14px;font-weight:500;margin-top:12px}
+.step p{color:var(--muted);margin-top:8px}
 
-/* ─── WHY US ─── */
-.why-sec{padding:var(--sec);background:var(--white)}
-.why-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
-.why-left h2{font-family:var(--font-head);font-size:clamp(1.9rem,3vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-.02em;color:var(--text);margin-bottom:20px}
-.why-left p{font-size:1rem;color:var(--muted);line-height:1.75;margin-bottom:32px}
-.why-right{display:flex;flex-direction:column;gap:0}
-.why-item{padding:22px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start}
-.why-item:first-child{border-top:1px solid var(--border)}
-.why-dot{width:34px;height:34px;border-radius:var(--r-sm);background:var(--blue-tint);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.why-dot svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.why-item h3{font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:4px}
-.why-item p{font-size:.87rem;color:var(--muted);line-height:1.6}
+/* ─── PRICING ─── */
+.plans{display:grid;gap:14px;margin-top:24px}
+.plan{padding:22px 22px 24px}
+.plan > p{color:var(--muted);margin-top:6px}
+.price{display:flex;align-items:baseline;gap:12px;margin:28px 0 14px}
+.price b{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.price s{color:var(--muted);font-size:15px}
+.price small{color:var(--muted);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}
+.feats{margin-top:20px;display:grid;gap:12px}
+.feats-label{margin-top:20px;font-weight:500}
+.feats li{display:grid;grid-template-columns:16px 1fr;gap:10px;align-items:start}
+.feats li::before{content:'';width:14px;height:14px;margin-top:3px;border-radius:3px;background:var(--text) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/10px no-repeat}
+.feats strong{font-weight:600}
 
 /* ─── TESTIMONIALS ─── */
-.testi-sec{padding:var(--sec);background:var(--section)}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.testi-card{padding:32px;border-radius:var(--r);background:var(--white);border:1px solid var(--border);transition:border-color .2s}
-.testi-card:hover{border-color:var(--blue-border)}
-.testi-quote-mark{font-family:var(--font-head);font-size:2rem;color:var(--blue-border);line-height:1;margin-bottom:8px}
-.testi-card blockquote{font-size:.92rem;color:var(--text);line-height:1.75;margin-bottom:24px}
-.testi-author{display:flex;align-items:center;gap:12px}
-.testi-av{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.78rem;font-weight:700;color:#fff;background:var(--blue)}
-.testi-name{font-size:.87rem;font-weight:600;color:var(--text)}
-.testi-role{font-size:.78rem;color:var(--muted)}
+.quotes{columns:2;column-gap:12px;margin-top:22px}
+.quote{break-inside:avoid;margin-bottom:12px;padding:18px 18px 20px}
+.who{display:flex;align-items:center;gap:12px}
+.av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;background:var(--panel);border:1px solid var(--line);flex-shrink:0}
+.who-name{font-size:14px;font-weight:500;line-height:1.3}
+.who-co{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.quote blockquote{margin-top:14px}
 
-/* ─── CTA ─── */
-.cta-sec{padding:104px 0;background:var(--blue);position:relative}
-.cta-inner{text-align:center;max-width:620px;margin:0 auto}
-.cta-inner .eyebrow{color:#7FA3E0;justify-content:center;margin-bottom:20px}
-.cta-inner .eyebrow::before{background:#7FA3E0}
-.cta-inner h2{font-family:var(--font-head);font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.025em;line-height:1.15;color:#fff;margin-bottom:18px}
-.cta-inner p{font-size:1.05rem;color:rgba(255,255,255,.65);margin-bottom:36px;line-height:1.7}
-.cta-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.cta-note{font-size:.8rem;color:rgba(255,255,255,.4);margin-top:20px}
+/* ─── CONTACT / FOOTER ─── */
+.contact{padding:56px var(--pad) 28px;text-align:center}
+.contact-big{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:clamp(64px,15vw,150px);line-height:.9;letter-spacing:-.02em;color:var(--serif-ghost);transition:color .25s}
+.contact-big:hover{color:var(--text)}
+.contact-sub{color:var(--muted);margin-top:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:44px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.foot a:hover{color:var(--text)}
 
-/* ─── FOOTER ─── */
-.footer{padding:64px 0 32px;background:var(--section);border-top:1px solid var(--border)}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px}
-.footer-logo{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--text);margin-bottom:14px}
-.footer-logo-mark{width:28px;height:28px;border-radius:7px;background:var(--blue);flex-shrink:0;position:relative}
-.footer-logo-mark::after{content:'';position:absolute;right:4px;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--red)}
-.footer-brand p{font-size:.87rem;color:var(--muted);line-height:1.65;max-width:280px;margin-bottom:20px}
-.footer-socials{display:flex;gap:10px}
-.footer-soc{width:36px;height:36px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;transition:border-color .2s}
-.footer-soc:hover{border-color:var(--blue)}
-.footer-soc svg{width:15px;height:15px;fill:var(--muted);transition:fill .2s}
-.footer-soc:hover svg{fill:var(--blue)}
-.footer-col h4{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.footer-col li{margin-bottom:10px}
-.footer-col a{font-size:.87rem;color:var(--text);opacity:.75;transition:opacity .15s}
-.footer-col a:hover{opacity:1;color:var(--blue)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
-.footer-bottom p{font-size:.8rem;color:var(--muted)}
-.footer-bottom a{color:var(--muted);transition:color .15s}
-.footer-bottom a:hover{color:var(--blue)}
-
-/* ─── STICKY CTA ─── */
-.float-cta{
-  position:fixed;bottom:28px;right:28px;z-index:99;
-  display:flex;align-items:center;gap:8px;padding:13px 22px;border-radius:10px;
-  background:var(--blue);color:#fff;font-family:var(--font-body);font-size:.85rem;font-weight:600;
-  box-shadow:0 12px 32px -8px rgba(0,32,91,.4);
-  transition:opacity .2s,transform .15s;opacity:0;pointer-events:none;
-}
-.float-cta.show{opacity:1;pointer-events:auto}
-.float-cta:hover{background:var(--blue-hover);transform:translateY(-1px)}
-.float-dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
-
-/* ─── SCROLL REVEAL ─── */
-.reveal{opacity:0;transform:translateY(20px) scale(.98);transition:opacity .5s ease,transform .5s ease}
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:none}
-.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
-.d4{transition-delay:.24s}.d5{transition-delay:.30s}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}.status i{animation:none}}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1024px){
-  .services-grid{grid-template-columns:repeat(2,1fr)}
-  .work-grid{grid-template-columns:repeat(2,1fr)}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .process-grid{grid-template-columns:repeat(3,1fr)}
-  .process-grid::before{display:none}
-  .why-layout{grid-template-columns:1fr;gap:40px}
-  .showcase-layout{grid-template-columns:1fr;gap:40px}
-  .showcase-layout .checkout-mock{max-width:440px;margin:0 auto}
-  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
-  .testi-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  :root{--sec:72px 0;--sec-sm:48px 0}
-  .nav-links,.nav-right .btn-secondary{display:none}
-  .nav-hamburger{display:flex}
-  .nav-logo{font-size:.92rem}
-  .nav-right{gap:8px}
-  .nav-right .btn-primary{padding:10px 16px;font-size:.82rem}
-  .hero-note{margin-bottom:48px}
-  .stat-item{border-right:none;border-bottom:1px solid var(--border)}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .stat-item:nth-child(odd){border-right:1px solid var(--border)}
-  .services-grid{grid-template-columns:1fr}
-  .work-grid{grid-template-columns:1fr}
-  .process-grid{grid-template-columns:1fr 1fr}
-  .testi-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr}
-  .float-cta{bottom:20px;right:20px}
-  .code-body{font-size:.72rem}
-}
-@media(max-width:480px){
-  .stats-grid{grid-template-columns:1fr}
-  .stat-item:nth-child(odd){border-right:none}
-  .process-grid{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column;align-items:stretch}
-  .hero-actions .btn{justify-content:center}
-  .nav-inner{padding:0 20px}
-  .nav-right .btn-primary{display:none}
+@media(max-width:760px){
+  :root{--pad:16px}
+  .nav a{font-size:11px}
+  .nav a.hide-sm{display:none}
+  .nav-inner{grid-template-columns:repeat(4,1fr)}
+  .client{grid-template-columns:1fr}
+  .client-visual{min-height:150px}
+  .tabs,.steps,.panel-grid{grid-template-columns:1fr}
+  .quotes{columns:1}
+  .foot{justify-content:center;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<!-- FLOAT CTA -->
-<a href="#contact" class="float-cta" id="floatCta">
-  <span class="float-dot"></span>Book a Call
-</a>
-
-<!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav">
-  <span class="mobile-nav-close" id="mobileNavClose">✕</span>
-  <a href="#services" onclick="closeMobileNav()">Services</a>
-  <a href="#work" onclick="closeMobileNav()">Work</a>
-  <a href="#process" onclick="closeMobileNav()">Process</a>
-  <a href="#why" onclick="closeMobileNav()">Why Us</a>
-  <a href="#contact" class="btn btn-primary" onclick="closeMobileNav()" style="font-size:.95rem;margin-top:8px">Book a Call →</a>
-</div>
-
 <!-- NAV -->
-<nav class="nav" id="mainNav">
+<nav class="nav" aria-label="Main">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <div class="nav-logo-mark"></div>
-      Checkout Masters
-    </a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#process">Process</a>
-      <a href="#why">Why Us</a>
-    </div>
-    <div class="nav-right">
-      <a href="mailto:bhupinder@checkoutmasters.com" class="btn btn-secondary">Contact</a>
-      <a href="#contact" class="btn btn-primary">Book a Call →</a>
-      <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
-    </div>
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials" class="hide-sm">Testimonials</a>
+    <a href="#contact" class="cta">Book a call</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-layout">
-      <div class="hero-inner reveal">
-        <div class="eyebrow" style="justify-content:center">Shopify Plus Engineering Partner</div>
-        <h1>Shopify commerce,<br>engineered <span class="accent">properly.</span></h1>
-        <p class="hero-sub">We build storefronts, checkout extensions, and Shopify Functions for brands that have outgrown freelancers. No templates. No shortcuts.</p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary" style="font-size:.95rem;padding:14px 28px">Book Discovery Call →</a>
-          <a href="#work" class="btn btn-secondary" style="font-size:.95rem;padding:13px 28px">View Our Work</a>
+<main class="frame">
+
+  <!-- HERO -->
+  <section class="sec hero">
+    <a href="#" class="logo" aria-label="Checkout Masters home"><span class="logo-mark"></span>Checkout Masters</a>
+    <h1>Senior Shopify talent without the agency overhead. We help fast-growing DTC brands scale with data-led Shopify development, CRO and retention.</h1>
+    <p class="lead">One focused team for Shopify Plus engineering, revenue-per-visitor optimisation, and lifecycle marketing that grows customer lifetime value.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn">Our services</a>
+      <span class="status"><i></i>Taking on new clients</span>
+    </div>
+  </section>
+
+  <div class="divider"><span class="dot tl"></span><span class="dot tr"></span><span class="dot bl"></span><span class="dot br"></span></div>
+
+  <!-- CLIENTS / WORK -->
+  <section class="sec" id="work">
+    <h2 class="reveal">Our clients</h2>
+    <div class="clients">
+      <article class="client reveal">
+        <div class="client-visual v1">
+          <span class="tag">Apparel · Shopify Plus</span>
+          <div><div class="big">+41%</div><div class="cap">Conversion rate after relaunch</div></div>
         </div>
-        <p class="hero-note">No sales pressure. A direct conversation with the engineers who'd build it.</p>
-      </div>
+        <div class="card">
+          <h3>Apex Apparel Co.</h3>
+          <p>Migrated a 7-figure apparel brand to Shopify Plus with a custom theme, rebuilt product pages and a checkout tuned for mobile buyers.</p>
+          <div class="chips"><span class="chip">Design</span><span class="chip">Dev</span><span class="chip">CRO</span></div>
+        </div>
+      </article>
+      <article class="client reveal">
+        <div class="client-visual v2">
+          <span class="tag">Wellness · Subscriptions</span>
+          <div><div class="big">2.1×</div><div class="cap">Subscriber lifetime value</div></div>
+        </div>
+        <div class="card">
+          <h3>Vital Wellness</h3>
+          <p>Rebuilt the subscription journey end to end — PDP, customer portal and lifecycle flows — and grew active subscribers 2.6× in eight weeks.</p>
+          <div class="chips"><span class="chip">Dev</span><span class="chip">Email</span><span class="chip">Strategy</span></div>
+        </div>
+      </article>
+      <article class="client reveal">
+        <div class="client-visual v3">
+          <span class="tag">Skincare · Performance</span>
+          <div><div class="big">1.4s</div><div class="cap">Load time on mobile</div></div>
+        </div>
+        <div class="card">
+          <h3>LuxeSkin</h3>
+          <p>Performance rebuild plus a weekly testing programme — twelve A/B tests in 90 days and a 22% lift in revenue per visitor.</p>
+          <div class="chips"><span class="chip">Dev</span><span class="chip">CRO</span><span class="chip">Support</span></div>
+        </div>
+      </article>
+      <article class="client reveal">
+        <div class="client-visual v4">
+          <span class="tag">B2B · Checkout</span>
+          <div><div class="big">+28%</div><div class="cap">Average order value</div></div>
+        </div>
+        <div class="card">
+          <h3>Wholesale checkout</h3>
+          <p>Checkout UI extensions and Shopify Functions for tiered B2B pricing, payment terms and volume discounts — no third-party workarounds.</p>
+          <div class="chips"><span class="chip">Dev</span><span class="chip">Checkout</span><span class="chip">B2B</span></div>
+        </div>
+      </article>
+    </div>
+    <p class="note reveal">And many more growing Shopify brands.</p>
+  </section>
+
+  <div class="divider"><span class="dot tl"></span><span class="dot tr"></span><span class="dot bl"></span><span class="dot br"></span></div>
+
+  <!-- SERVICES -->
+  <section class="sec" id="services">
+    <h2 class="reveal">Our services</h2>
+    <p class="lead reveal">Everything a scaling Shopify brand needs to convert more visitors and keep more customers — measured against revenue, not vanity metrics.</p>
+
+    <div class="tabs reveal" role="tablist" aria-label="Services">
+      <button class="tab" role="tab" id="t-dev" aria-controls="p-dev" aria-selected="true">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Shopify Development
+      </button>
+      <button class="tab" role="tab" id="t-cro" aria-controls="p-cro" aria-selected="false" tabindex="-1">
+        <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/></svg>On-site Optimisation
+      </button>
+      <button class="tab" role="tab" id="t-ltv" aria-controls="p-ltv" aria-selected="false" tabindex="-1">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>Retention &amp; LTV
+      </button>
     </div>
 
-    <div class="code-window reveal d1">
-      <div class="code-titlebar">
-        <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
-        <span class="code-filename">checkout.discount-function.ts</span>
+    <div class="card panel" role="tabpanel" id="p-dev" aria-labelledby="t-dev">
+      <p>Custom Shopify and Shopify Plus builds engineered for speed and flexibility — from a full theme to a single checkout extension.</p>
+      <div class="panel-grid">
+        <div><strong>Custom themes</strong><span>Online Store 2.0 and Hydrogen builds, designed in Figma with your team.</span></div>
+        <div><strong>Checkout extensibility</strong><span>Checkout UI extensions, post-purchase upsells and payment customisations.</span></div>
+        <div><strong>Shopify Functions</strong><span>Server-side discount, shipping and B2B pricing logic.</span></div>
+        <div><strong>Migrations &amp; integrations</strong><span>Replatforms, subscription app moves, ERP and app integrations.</span></div>
       </div>
-      <div class="code-body"><span class="ln">1</span><span class="code-kw">export function</span> <span class="code-fn">run</span>(<span class="code-plain">input: FunctionInput</span>): <span class="code-plain">FunctionRunResult</span> {
-<span class="ln">2</span>  <span class="code-com">// Applies tiered discounts at checkout — evaluated server-side</span>
-<span class="ln">3</span>  <span class="code-kw">const</span> <span class="code-plain">cart = input.cart;</span>
-<span class="ln">4</span>  <span class="code-kw">const</span> <span class="code-plain">tier = </span><span class="code-fn">resolveTier</span><span class="code-plain">(cart.buyerIdentity);</span>
-<span class="ln">5</span>
-<span class="ln">6</span>  <span class="code-kw">if</span> (<span class="code-plain">!tier) </span><span class="code-kw">return</span> <span class="code-plain">{ operations: [] };</span>
-<span class="ln">7</span>
-<span class="ln">8</span>  <span class="code-kw">return</span> {
-<span class="ln">9</span>    <span class="code-plain">operations: [</span><span class="code-fn">applyDiscount</span><span class="code-plain">(cart, tier)]</span>
-<span class="ln">10</span>  };
-<span class="ln">11</span>}</div>
     </div>
-  </div>
-</section>
+    <div class="card panel" role="tabpanel" id="p-cro" aria-labelledby="t-cro" hidden>
+      <p>We optimise for revenue per visitor — conversion rate and average order value together — so growth comes without extra ad spend.</p>
+      <div class="panel-grid">
+        <div><strong>Weekly A/B testing</strong><span>Hypothesis-driven tests run to statistical significance.</span></div>
+        <div><strong>Funnel analytics</strong><span>Instrumentation that shows exactly where revenue leaks.</span></div>
+        <div><strong>Performance</strong><span>Core Web Vitals and sub-2-second load times on mobile.</span></div>
+        <div><strong>Ship the winners</strong><span>Winning variants built properly into your theme.</span></div>
+      </div>
+    </div>
+    <div class="card panel" role="tabpanel" id="p-ltv" aria-labelledby="t-ltv" hidden>
+      <p>Lifecycle marketing judged on lifetime value, not open rates — so every flow and campaign earns its place.</p>
+      <div class="panel-grid">
+        <div><strong>Email &amp; SMS campaigns</strong><span>A steady calendar of designed and plain-text sends.</span></div>
+        <div><strong>Flow builds</strong><span>Welcome, replenishment, win-back, cross-sell and subscription flows.</span></div>
+        <div><strong>Segmentation</strong><span>Ongoing segment tests to lift revenue per recipient.</span></div>
+        <div><strong>Subscriptions &amp; loyalty</strong><span>Portal, upsell and churn-reduction mechanics.</span></div>
+      </div>
+    </div>
+  </section>
 
-<!-- MARQUEE -->
-<div class="marquee-sec">
-  <div class="container">
-    <p class="marquee-label">Trusted by ambitious Shopify brands</p>
-  </div>
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <div class="marquee-items">
-        <span class="marquee-brand">Gymshark</span>
-        <span class="marquee-brand">Allbirds</span>
-        <span class="marquee-brand">MVMT Watches</span>
-        <span class="marquee-brand">Kylie Cosmetics</span>
-        <span class="marquee-brand">Beardbrand</span>
-        <span class="marquee-brand">Chubbies</span>
-        <span class="marquee-brand">Death Wish Coffee</span>
-        <span class="marquee-brand">Pura Vida</span>
-        <span class="marquee-brand">Bulletproof</span>
-        <span class="marquee-brand">Liquid Death</span>
-        <span class="marquee-brand">Outer</span>
-        <span class="marquee-brand">Tushy</span>
-      </div>
-      <div class="marquee-items" aria-hidden="true">
-        <span class="marquee-brand">Gymshark</span>
-        <span class="marquee-brand">Allbirds</span>
-        <span class="marquee-brand">MVMT Watches</span>
-        <span class="marquee-brand">Kylie Cosmetics</span>
-        <span class="marquee-brand">Beardbrand</span>
-        <span class="marquee-brand">Chubbies</span>
-        <span class="marquee-brand">Death Wish Coffee</span>
-        <span class="marquee-brand">Pura Vida</span>
-        <span class="marquee-brand">Bulletproof</span>
-        <span class="marquee-brand">Liquid Death</span>
-        <span class="marquee-brand">Outer</span>
-        <span class="marquee-brand">Tushy</span>
-      </div>
-    </div>
-  </div>
-</div>
+  <div class="divider"><span class="dot tl"></span><span class="dot tr"></span><span class="dot bl"></span><span class="dot br"></span></div>
 
-<!-- STATS -->
-<div class="stats-sec">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <div class="stat-num"><span class="counter" data-target="50">0</span><span class="red">+</span></div>
-        <div class="stat-label">Shopify Plus Builds</div>
-        <div class="stat-sub">Storefronts &amp; checkout extensions</div>
-      </div>
-      <div class="stat-item reveal d1">
-        <div class="stat-num"><span class="counter" data-target="32">0</span><span class="red">%</span></div>
-        <div class="stat-label">Avg. Conversion Lift</div>
-        <div class="stat-sub">Across all CRO engagements</div>
-      </div>
-      <div class="stat-item reveal d2">
-        <div class="stat-num"><span class="red">$</span><span class="counter" data-target="100">0</span><span class="red">M+</span></div>
-        <div class="stat-label">GMV Supported</div>
-        <div class="stat-sub">Client revenue on our builds</div>
-      </div>
-      <div class="stat-item reveal d3">
-        <div class="stat-num"><span class="counter" data-target="98">0</span><span class="red">%</span></div>
-        <div class="stat-label">Client Retention</div>
-        <div class="stat-sub">Long-term engineering partners</div>
-      </div>
+  <!-- PROCESS -->
+  <section class="sec" id="process">
+    <h2 class="reveal">How we work</h2>
+    <div class="steps">
+      <div class="card step reveal"><span class="step-num">1</span><h3>Discovery call</h3><p>We look at your store, data and goals to find where Shopify work will move revenue the most.</p></div>
+      <div class="card step reveal"><span class="step-num">2</span><h3>90-day roadmap</h3><p>We agree a prioritised plan across development, testing and retention, with clear owners and dates.</p></div>
+      <div class="card step reveal"><span class="step-num">3</span><h3>Quick start</h3><p>A short agreement and one flat monthly fee. Work starts in days, not after weeks of scoping.</p></div>
+      <div class="card step reveal"><span class="step-num">4</span><h3>Compounding growth</h3><p>We ship, measure and iterate every month, with open reporting so you always see what changed.</p></div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- SERVICES -->
-<section class="services-sec" id="services">
-  <div class="container">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">What We Do</span>
-      <h2>Shopify engineering, end to end</h2>
-      <p>Every engagement is scoped around one outcome — a storefront that performs, converts, and holds up under real traffic.</p>
-    </div>
-    <div class="services-grid">
-      <div class="svc-card reveal d1">
-        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-        <h3>Shopify Plus Engineering</h3>
-        <p>Checkout UI extensions, Shopify Functions, B2B storefronts, and multi-store architecture for enterprise merchants.</p>
-        <div class="svc-tags"><span class="svc-tag">Functions</span><span class="svc-tag">B2B</span><span class="svc-tag">Multi-store</span></div>
-      </div>
-      <div class="svc-card reveal d2">
-        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <h3>Theme &amp; Storefront Development</h3>
-        <p>Custom Liquid and Hydrogen builds engineered for speed and flexibility — never a bloated third-party theme.</p>
-        <div class="svc-tags"><span class="svc-tag">Liquid</span><span class="svc-tag">Hydrogen</span><span class="svc-tag">Theme Dev</span></div>
-      </div>
-      <div class="svc-card reveal d3">
-        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-        <h3>Checkout &amp; Post-Purchase</h3>
-        <p>Custom checkout extensions, upsells, and payment customizations built directly on Shopify's checkout APIs.</p>
-        <div class="svc-tags"><span class="svc-tag">Extensions</span><span class="svc-tag">Upsells</span><span class="svc-tag">Payments</span></div>
-      </div>
-      <div class="svc-card reveal d1">
-        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <h3>Performance Engineering</h3>
-        <p>Sub-2-second load times. We audit, rebuild, and optimize for Core Web Vitals scores that beat the competition.</p>
-        <div class="svc-tags"><span class="svc-tag">Core Web Vitals</span><span class="svc-tag">Speed</span><span class="svc-tag">SEO</span></div>
-      </div>
-      <div class="svc-card reveal d2">
-        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
-        <h3>Conversion Engineering</h3>
-        <p>Structured experimentation — funnel instrumentation, hypothesis-driven testing, and disciplined iteration.</p>
-        <div class="svc-tags"><span class="svc-tag">A/B Testing</span><span class="svc-tag">Analytics</span><span class="svc-tag">Funnels</span></div>
-      </div>
-      <div class="svc-card reveal d3">
-        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-        <h3>Subscriptions &amp; Retention</h3>
-        <p>Recurring revenue infrastructure — subscription flows, loyalty systems, and retention mechanics built for LTV.</p>
-        <div class="svc-tags"><span class="svc-tag">Subscriptions</span><span class="svc-tag">Loyalty</span><span class="svc-tag">LTV</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="divider"><span class="dot tl"></span><span class="dot tr"></span><span class="dot bl"></span><span class="dot br"></span></div>
 
-<!-- CHECKOUT SHOWCASE -->
-<section class="showcase-sec">
-  <div class="container">
-    <div class="showcase-layout">
-      <div class="showcase-copy reveal">
-        <span class="eyebrow">Built on the platform</span>
-        <h2>Deep in Shopify's checkout, not around it</h2>
-        <p>Most agencies stop at the theme layer. We build inside Shopify's checkout extensibility APIs and Functions — the same infrastructure Shopify itself uses for Plus merchants.</p>
-        <ul class="showcase-list">
-          <li><span class="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Custom checkout UI extensions, not workarounds</li>
-          <li><span class="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Server-side discount &amp; shipping logic via Shopify Functions</li>
-          <li><span class="showcase-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>B2B pricing, payment terms, and multi-location checkout</li>
+  <!-- PRICING -->
+  <section class="sec" id="pricing">
+    <h2 class="reveal">Pricing</h2>
+    <p class="lead reveal">One flat monthly fee covers your Shopify development, CRO or retention work — no hourly billing and no scope haggling. Go month to month, or lock in a longer term for a lower rate.</p>
+
+    <div class="plans">
+      <article class="card plan reveal">
+        <h3>Build &amp; Optimise</h3>
+        <p>Development and conversion work in one stream, measured on revenue per visitor.</p>
+        <div class="price"><b>$6,500/mo</b></div>
+        <a href="#contact" class="btn btn-block">Book a call</a>
+        <ul class="feats">
+          <li><span><strong>Weekly A/B tests:</strong> at least one new test live every week, run to significance.</span></li>
+          <li><span><strong>Development sprints:</strong> test winners shipped, plus new sections, app integrations, fixes and upgrades.</span></li>
+          <li><span><strong>Theme builds:</strong> full custom theme design and build, typically in 8–10 weeks.</span></li>
+          <li><span><strong>Checkout &amp; Plus:</strong> checkout extensions and Shopify Functions included.</span></li>
+          <li><span><strong>Dedicated team:</strong> a project lead, CRO strategist, senior developer and designer.</span></li>
+          <li><span><strong>Fortnightly reporting:</strong> test results, total uplift and what shipped.</span></li>
         </ul>
-      </div>
-      <div class="reveal d1">
-        <div class="checkout-mock">
-          <div class="checkout-mock-bar">
-            <span></span><span></span><span></span>
-            <span class="checkout-mock-url">checkout.yourstore.com</span>
-          </div>
-          <div class="checkout-mock-body">
-            <div class="checkout-row"><span class="checkout-row-label">Subtotal</span><span class="checkout-row-value">$186.00</span></div>
-            <div class="checkout-row"><span class="checkout-row-label">Shipping</span><span class="checkout-row-value">Free</span></div>
-            <div class="checkout-row"><span class="checkout-row-label">Tier discount (VIP)</span><span class="checkout-row-value" style="color:var(--red)">−$18.60</span></div>
-            <div class="checkout-total"><span class="checkout-total-label">Total</span><span class="checkout-total-value">$167.40</span></div>
-            <div class="checkout-pay">Pay now</div>
-            <div class="checkout-badge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secured by Shopify</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </article>
 
-<!-- WORK -->
-<section class="work-sec" id="work">
-  <div class="container">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Featured Work</span>
-      <h2>Results that speak for themselves</h2>
-      <p>We don't just build storefronts — we engineer revenue-generating systems backed by data and disciplined design.</p>
-    </div>
-    <div class="work-grid">
-      <div class="case-card reveal d1">
-        <div class="case-thumb">
-          <div class="case-chips">
-            <span class="case-chip pos">+41% CVR</span>
-            <span class="case-chip pos">+28% AOV</span>
-            <span class="case-chip">Shopify Plus</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <div class="case-cat">Shopify Plus · CRO · Design</div>
-          <h3>Premium Apparel Replatform</h3>
-          <p>Full Shopify Plus migration and redesign for a 7-figure DTC apparel brand. Rebuilt checkout flow and product pages to crush conversion benchmarks.</p>
-        </div>
-      </div>
-      <div class="case-card reveal d2">
-        <div class="case-thumb">
-          <div class="case-chips">
-            <span class="case-chip pos">+63% Subscribers</span>
-            <span class="case-chip pos">2.1× LTV</span>
-            <span class="case-chip">Subscriptions</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <div class="case-cat">Subscriptions · UX · Retention</div>
-          <h3>Subscription Engine Overhaul</h3>
-          <p>Redesigned the entire subscription experience for a health &amp; wellness brand — from PDP to portal. Subscriber count doubled within 60 days of launch.</p>
-        </div>
-      </div>
-      <div class="case-card reveal d3">
-        <div class="case-thumb">
-          <div class="case-chips">
-            <span class="case-chip pos">1.4s Load Time</span>
-            <span class="case-chip pos">+22% Revenue</span>
-            <span class="case-chip">Performance</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <div class="case-cat">Performance · A/B Testing · Dev</div>
-          <h3>Speed &amp; Conversion Sprint</h3>
-          <p>Complete performance audit and rebuild for a luxury skincare brand. Achieved 1.4s load time and ran 12 successful A/B tests in 90 days.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="process-sec" id="process">
-  <div class="container">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">How We Work</span>
-      <h2>A structured process, built for growth</h2>
-      <p>From day one to scale — a disciplined engagement that delivers results without surprises.</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-step reveal d1">
-        <div class="process-num">01</div>
-        <h3>Discover</h3>
-        <p>Deep dive into your brand, customers, analytics, and technical stack to define the roadmap.</p>
-      </div>
-      <div class="process-step reveal d2">
-        <div class="process-num">02</div>
-        <h3>Design</h3>
-        <p>Conversion-first UX wireframes and precise UI design, built in Figma alongside your team.</p>
-      </div>
-      <div class="process-step reveal d3">
-        <div class="process-num">03</div>
-        <h3>Build</h3>
-        <p>Clean, performant code. Custom Shopify development with thorough QA and staging review.</p>
-      </div>
-      <div class="process-step reveal d4">
-        <div class="process-num">04</div>
-        <h3>Ship</h3>
-        <p>Launch, measure, and improve. We run experiments continuously until we find what moves the needle.</p>
-      </div>
-      <div class="process-step reveal d5">
-        <div class="process-num">05</div>
-        <h3>Scale</h3>
-        <p>Ongoing partnership — new features, seasonal campaigns, and infrastructure as your brand grows.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section class="why-sec" id="why">
-  <div class="container">
-    <div class="why-layout">
-      <div class="why-left reveal">
-        <span class="eyebrow">Why Checkout Masters</span>
-        <h2>The engineering partner, not another agency</h2>
-        <p>We don't do everything — we do Shopify exceptionally well. We're brought in after brands have outgrown freelancers and generalist agencies and need engineering that holds up at scale.</p>
-        <a href="#contact" class="btn btn-primary">Start a Project →</a>
-      </div>
-      <div class="why-right reveal d1">
-        <div class="why-item">
-          <div class="why-dot"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <div>
-            <h3>Senior Engineers Only</h3>
-            <p>Every project is staffed by Shopify Plus certified developers — no juniors learning on your codebase.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div>
-            <h3>Fast Execution</h3>
-            <p>We move quickly without sacrificing quality. Most projects launch in 6–10 weeks, not six months.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-dot"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div>
-            <h3>Direct Access</h3>
-            <p>You work with the engineers building your store — no account managers relaying messages.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-dot"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <div>
-            <h3>Fixed Scope, No Surprises</h3>
-            <p>Clear timelines and deliverables agreed upfront. What we scope is what we ship.</p>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-dot"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <div>
-            <h3>Post-Launch Support</h3>
-            <p>We stay on as long-term partners — monitoring, iterating, and scaling as your brand grows.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testi-sec">
-  <div class="container">
-    <div class="sec-head center reveal">
-      <span class="eyebrow">Testimonials</span>
-      <h2>What our partners are saying</h2>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal d1">
-        <div class="testi-quote-mark">"</div>
-        <blockquote>Checkout Masters completely transformed our Shopify store. Our conversion rate jumped 38% within the first month after launch. They think like engineering partners, not vendors.</blockquote>
-        <div class="testi-author">
-          <div class="testi-av">JM</div>
-          <div>
-            <div class="testi-name">James Mitchell</div>
-            <div class="testi-role">Founder — Apex Apparel Co.</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal d2">
-        <div class="testi-quote-mark">"</div>
-        <blockquote>The team built our entire subscription experience from scratch. We went from 800 to 2,100 active subscribers in 8 weeks. The ROI has been extraordinary.</blockquote>
-        <div class="testi-author">
-          <div class="testi-av">SK</div>
-          <div>
-            <div class="testi-name">Sarah Kim</div>
-            <div class="testi-role">CEO — Vital Wellness</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal d3">
-        <div class="testi-quote-mark">"</div>
-        <blockquote>I've worked with three Shopify agencies. Checkout Masters is the only one that understood both engineering and performance equally. Our site now scores 94 on PageSpeed.</blockquote>
-        <div class="testi-author">
-          <div class="testi-av">RN</div>
-          <div>
-            <div class="testi-name">Ryan Nakamura</div>
-            <div class="testi-role">Head of Ecommerce — LuxeSkin</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-sec" id="contact">
-  <div class="container">
-    <div class="cta-inner reveal">
-      <span class="eyebrow">Let's Work Together</span>
-      <h2>Ready to build something that holds up?</h2>
-      <p>Book a free 30-minute discovery call. We'll audit your current store, identify your biggest growth opportunities, and outline exactly how we'd approach your project.</p>
-      <div class="cta-actions">
-        <a href="mailto:bhupinder@checkoutmasters.com?subject=Discovery Call Request" class="btn btn-red" style="font-size:.95rem;padding:14px 28px">Book Discovery Call →</a>
-        <a href="mailto:bhupinder@checkoutmasters.com" class="btn btn-inv" style="font-size:.95rem;padding:13px 28px">Send a Message</a>
-      </div>
-      <p class="cta-note">No sales pressure. Just a genuine conversation about your brand.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-mark"></div>
-          Checkout Masters
-        </div>
-        <p>Shopify Plus engineering for ambitious brands. We build storefronts and checkout experiences engineered for speed, reliability, and scale.</p>
-        <div class="footer-socials">
-          <a href="#" class="footer-soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#" class="footer-soc" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
-          <a href="#" class="footer-soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">Shopify Plus</a></li>
-          <li><a href="#services">Theme Development</a></li>
-          <li><a href="#services">Checkout Extensions</a></li>
-          <li><a href="#services">Performance</a></li>
-          <li><a href="#services">CRO &amp; Testing</a></li>
-          <li><a href="#services">Subscriptions</a></li>
+      <article class="card plan reveal">
+        <h3>Retention Marketing</h3>
+        <p>Email, SMS and subscription programmes measured on customer lifetime value.</p>
+        <div class="price"><b>$5,500/mo</b></div>
+        <a href="#contact" class="btn btn-block">Book a call</a>
+        <ul class="feats">
+          <li><span><strong>Campaigns:</strong> weekly designed emails, plain-text sends and SMS.</span></li>
+          <li><span><strong>Flows:</strong> build and optimise every lifecycle and subscription flow.</span></li>
+          <li><span><strong>Segmentation:</strong> continuous testing of segments and offers.</span></li>
+          <li><span><strong>Creative included:</strong> all design and copywriting, no extra fees.</span></li>
+          <li><span><strong>Dedicated team:</strong> retention strategist, designer and copywriter.</span></li>
+          <li><span><strong>LTV reporting:</strong> cohort and revenue impact, not open rates.</span></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#why">Why Us</a></li>
-          <li><a href="#contact">Contact</a></li>
+      </article>
+
+      <article class="card plan reveal">
+        <h3>Convert + Retain</h3>
+        <p>Both programmes on one shared roadmap, so acquisition, on-site and retention work pull in the same direction.</p>
+        <div class="price"><b>$10,500/mo</b><s>$12,000/mo</s><small>Bundle</small></div>
+        <a href="#contact" class="btn btn-block">Book a call</a>
+        <p class="feats-label">Everything in both plans, plus:</p>
+        <ul class="feats">
+          <li><span><strong>One strategy:</strong> testing and retention calendars aligned to the same customer journey.</span></li>
+          <li><span><strong>One point of contact:</strong> a single lead coordinating both teams.</span></li>
+          <li><span><strong>One channel:</strong> direct access to everyone working on your account.</span></li>
+          <li><span><strong>Joined-up reporting:</strong> RPV and LTV tracked side by side.</span></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Get In Touch</h4>
-        <ul>
-          <li><a href="mailto:bhupinder@checkoutmasters.com">bhupinder@<br>checkoutmasters.com</a></li>
-          <li><a href="#contact">Book a Call</a></li>
-        </ul>
-      </div>
+      </article>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Checkout Masters. All rights reserved.</p>
-      <p>Built for brands that refuse to be average.</p>
+  </section>
+
+  <div class="divider"><span class="dot tl"></span><span class="dot tr"></span><span class="dot bl"></span><span class="dot br"></span></div>
+
+  <!-- TESTIMONIALS -->
+  <section class="sec" id="testimonials">
+    <h2 class="reveal">Trusted by growing Shopify brands</h2>
+    <p class="lead reveal">What founders and ecommerce leads say about working with us.</p>
+    <div class="quotes">
+      <figure class="card quote reveal">
+        <div class="who"><span class="av">JM</span><div><div class="who-name">James Mitchell</div><div class="who-co">Apex Apparel Co.</div></div></div>
+        <blockquote>“Checkout Masters completely transformed our Shopify store. Our conversion rate jumped 38% within the first month after launch. They think like engineering partners, not vendors.”</blockquote>
+      </figure>
+      <figure class="card quote reveal">
+        <div class="who"><span class="av">SK</span><div><div class="who-name">Sarah Kim</div><div class="who-co">Vital Wellness</div></div></div>
+        <blockquote>“The team built our entire subscription experience from scratch. We went from 800 to 2,100 active subscribers in 8 weeks. The ROI has been extraordinary.”</blockquote>
+      </figure>
+      <figure class="card quote reveal">
+        <div class="who"><span class="av">RN</span><div><div class="who-name">Ryan Nakamura</div><div class="who-co">LuxeSkin</div></div></div>
+        <blockquote>“I've worked with three Shopify agencies. Checkout Masters is the only one that understood both engineering and performance equally. Our site now scores 94 on PageSpeed.”</blockquote>
+      </figure>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <div class="divider"><span class="dot tl"></span><span class="dot tr"></span><span class="dot bl"></span><span class="dot br"></span></div>
+
+  <!-- CONTACT -->
+  <footer class="contact" id="contact">
+    <a class="contact-big" href="mailto:bhupinder@checkoutmasters.com?subject=Discovery%20Call%20Request">let's talk</a>
+    <p class="contact-sub">Book a free 30-minute discovery call — we'll review your store and outline where we'd start.</p>
+    <div class="foot">
+      <a href="mailto:bhupinder@checkoutmasters.com">bhupinder@checkoutmasters.com</a>
+      <span>© 2026 Checkout Masters. All rights reserved</span>
+    </div>
+  </footer>
+
+</main>
 
 <script>
-// Nav scroll
-const nav = document.getElementById('mainNav');
-const floatCta = document.getElementById('floatCta');
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  nav.classList.toggle('scrolled', y > 10);
-  floatCta.classList.toggle('show', y > 500);
-}, { passive: true });
-
-// Mobile nav
-document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
-document.getElementById('mobileNavClose').addEventListener('click', closeMobileNav);
-function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
-
-// Scroll reveal
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-if (prefersReducedMotion) {
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-} else {
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+// Service tabs
+const tabs = [...document.querySelectorAll('[role="tab"]')];
+function selectTab(tab) {
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.setAttribute('aria-selected', on);
+    t.tabIndex = on ? 0 : -1;
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+  });
 }
-
-// Counter animation
-function animateCount(el) {
-  const target = parseFloat(el.dataset.target);
-  const isDecimal = !!el.dataset.decimal;
-  const dur = 1400;
-  const start = performance.now();
-  (function update(now) {
-    const p = Math.min((now - start) / dur, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = isDecimal ? (target * ease).toFixed(1) : Math.floor(target * ease);
-    if (p < 1) requestAnimationFrame(update);
-    else el.textContent = isDecimal ? target.toFixed(1) : target;
-  })(start);
-}
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); } });
-}, { threshold: 0.5 });
-document.querySelectorAll('.counter').forEach(el => {
-  if (prefersReducedMotion) { el.textContent = el.dataset.target; } else { cio.observe(el); }
-});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' }); }
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => selectTab(t));
+  t.addEventListener('keydown', e => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    const next = tabs[(i + d + tabs.length) % tabs.length];
+    selectTab(next); next.focus();
   });
 });
+
+// Scroll reveal
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const els = document.querySelectorAll('.reveal');
+if (reduce || !('IntersectionObserver' in window)) {
+  els.forEach(el => el.classList.add('visible'));
+} else {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  els.forEach(el => io.observe(el));
+}
 </script>
 </body>
 </html>
